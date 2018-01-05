@@ -4,7 +4,7 @@ module.Building=true
 module.Decoration=true
 module.Equipment=true
 module.Fireworks=true
-module.Fruit=false
+module.Food=false
 module.Mechanical=true
 module.Storage=true
 module.Tweaks=true
@@ -64,7 +64,13 @@ option.enableHedges=true
 // Adds paper, gold, iron and soulforged steel lanterns
 option.enableLanterns=true
 
+// Adds wool carpets from wool blocks
 option.enableWoolCarpet=true
+
+FOOD:
+============================
+// Adds fruit, fruit trees and juices
+option.enableFruit=false
 
 MECHANICAL:
 ============================
