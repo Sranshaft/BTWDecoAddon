@@ -56,78 +56,75 @@ public class DecoAddonManager extends FCAddOn
 			return;
 		
 		FCAddOnHandler.LogMessage("[INFO]: BTW Deco Addon loading language...");
-    	
-    	for (Map.Entry<Object, String> entry : this.m_ModBlockList.entrySet())
-    	{
-    		if (entry.getKey() instanceof Block)
-    		{
-    			this.addBlockName(var1, (Block)entry.getKey(), entry.getValue());
-    		}
-    		else if (entry.getKey() instanceof Item)
-    		{
-    			this.addItemName(var1, (Item)entry.getKey(), entry.getValue());
-    		}
-    		else if (entry.getKey() instanceof ItemStack)
-    		{
-    			this.addItemStackName(var1, (ItemStack)entry.getKey(), entry.getValue());
-    		}
-    		else if (entry.getKey() instanceof String)
-    		{
-    			this.addStringName(var1, (String)entry.getKey(), (String)entry.getValue());
-    		}
-    	}
-    	
-    	if (this.getConfigOption("enableDiamondium"))
-    	{
-    		FCAddOnHandler.LogMessage("[INFO]: Modifying the names of blocks and items made with diamond ingots...");
-    		
-    		this.replaceBlockName(var1, Block.blockDiamond, "Block of Diamond");
-    		this.replaceItemName(var1, FCBetterThanWolves.fcItemIngotDiamond, "Diamondium Ingot");
-    		this.replaceItemName(var1, Item.pickaxeDiamond, "Diamondium Pickaxe");
-    		this.replaceItemName(var1, Item.axeDiamond, "Diamondium Axe");
-    		this.replaceItemName(var1, Item.shovelDiamond, "Diamondium Spade");
-    		this.replaceItemName(var1, Item.hoeDiamond, "Diamondium Hoe");
-    		this.replaceItemName(var1, Item.swordDiamond, "Diamondium Sword");
-    	}
-    	
-    	if (this.getConfigOption("enableFireproofBloodWood"))
-    	{
-    		FCAddOnHandler.LogMessage("[INFO]: Modifying bloodwood logs and leaves to make them fireproof...");
-    		FCBetterThanWolves.fcBloodWood.setStepSound(Block.soundWoodFootstep);
-    		FCBetterThanWolves.SetFirePropertiesOfBlock(FCBetterThanWolves.fcBloodWood.blockID, 0, 0);
-    		FCBetterThanWolves.SetFirePropertiesOfBlock(FCBetterThanWolves.fcLeaves.blockID, 0, 0);
-    	}
-    	
-    	// CHANGES BTW BLOCKS AND ITEMS
-    	FCAddOnHandler.LogMessage("[INFO]: Modifying the names of blocks and items from BTW...");
-    	
-    	this.replaceItemName(var1, FCBetterThanWolves.fcItemRottenArrow, "Rotten Arrow");
-    	this.addStringName(var1, "pottery.crucible", "Crucible");
-    	this.addStringName(var1, "pottery.planter", "Planter");
-    	this.addStringName(var1, "pottery.vase", "Vase");
-    	this.addStringName(var1, "pottery.urn", "Urn");
-    	this.addStringName(var1, "pottery.mould", "Mould");
-    	this.addStringName(var1, "planter.soil", "Soil");
-    	this.addStringName(var1, "planter.fertilizedSoil", "Fertilized Soil");
-    	this.addStringName(var1, "planter.soulsand", "Soul Sand");
-    	this.addStringName(var1, "planter.grass", "Grass");
-    	this.addStringName(var1, FCBetterThanWolves.fcAestheticOpaque.getUnlocalizedName() + ".whitecobble", "White Cobblestone");
-    	
-    	// CHANGES VANILLA BLOCKS AND ITEMS
-    	FCAddOnHandler.LogMessage("[INFO]: Modifying the names of blocks and items from vanilla...");
-    	
-    	this.replaceBlockName(var1, Block.cobblestoneMossy, "Mossy Cobblestone");
-    	this.replaceBlockName(var1, Block.netherBrick, "Nether Bricks");
-    	this.replaceBlockName(var1, Block.stairsCobblestone, "Cobblestone Stairs");
-    	this.replaceBlockName(var1, Block.trapdoor, "Oak Trapdoor");
-    	this.replaceItemName(var1, Item.doorWood, "Oak Door");
-    	
-    	this.addStringName(var1, "item.skull.spider.name", "Spider Head");
-    	this.addStringName(var1, "item.skull.enderman.name", "Enderman Head");
-    	this.addStringName(var1, "item.skull.pigzombie.name", "Zombie Pigman Head");
-    	this.addStringName(var1, "item.skull.fire.name", "Blaze Head");
-    	
-    	FCAddOnHandler.LogMessage("[INFO]: BTW Deco Addon language loaded...");
+		
+		for (Map.Entry<Object, String> entry : this.m_ModBlockList.entrySet())
+		{
+			if (entry.getKey() instanceof Block)
+			{
+				this.addBlockName(var1, (Block)entry.getKey(), entry.getValue());
+			}
+			else if (entry.getKey() instanceof Item)
+			{
+				this.addItemName(var1, (Item)entry.getKey(), entry.getValue());
+			}
+			else if (entry.getKey() instanceof ItemStack)
+			{
+				this.addItemStackName(var1, (ItemStack)entry.getKey(), entry.getValue());
+			}
+			else if (entry.getKey() instanceof String)
+			{
+				this.addStringName(var1, (String)entry.getKey(), (String)entry.getValue());
+			}
+		}
+		
+		if (this.getConfigOption("enableDiamondium"))
+		{
+			FCAddOnHandler.LogMessage("[INFO]: Modifying the names of blocks and items made with diamond ingots...");
+			this.replaceBlockName(var1, Block.blockDiamond, "Block of Diamond");
+			this.replaceItemName(var1, FCBetterThanWolves.fcItemIngotDiamond, "Diamondium Ingot");
+			this.replaceItemName(var1, Item.pickaxeDiamond, "Diamondium Pickaxe");
+			this.replaceItemName(var1, Item.axeDiamond, "Diamondium Axe");
+			this.replaceItemName(var1, Item.shovelDiamond, "Diamondium Spade");
+			this.replaceItemName(var1, Item.hoeDiamond, "Diamondium Hoe");
+			this.replaceItemName(var1, Item.swordDiamond, "Diamondium Sword");
+		}
+		
+		if (this.getConfigOption("enableFireproofBloodWood"))
+		{
+			FCAddOnHandler.LogMessage("[INFO]: Modifying bloodwood logs and leaves to make them fireproof...");
+			FCBetterThanWolves.fcBloodWood.setStepSound(Block.soundWoodFootstep);
+			FCBetterThanWolves.SetFirePropertiesOfBlock(FCBetterThanWolves.fcBloodWood.blockID, 0, 0);
+			FCBetterThanWolves.SetFirePropertiesOfBlock(FCBetterThanWolves.fcLeaves.blockID, 0, 0);
+		}
+		
+		// CHANGES BTW BLOCKS AND ITEMS
+		FCAddOnHandler.LogMessage("[INFO]: Modifying the names of blocks and items from BTW...");
+		this.replaceItemName(var1, FCBetterThanWolves.fcItemRottenArrow, "Rotten Arrow");
+		this.addStringName(var1, "pottery.crucible", "Crucible");
+		this.addStringName(var1, "pottery.planter", "Planter");
+		this.addStringName(var1, "pottery.vase", "Vase");
+		this.addStringName(var1, "pottery.urn", "Urn");
+		this.addStringName(var1, "pottery.mould", "Mould");
+		this.addStringName(var1, "planter.soil", "Soil");
+		this.addStringName(var1, "planter.fertilizedSoil", "Fertilized Soil");
+		this.addStringName(var1, "planter.soulsand", "Soul Sand");
+		this.addStringName(var1, "planter.grass", "Grass");
+		this.addStringName(var1, FCBetterThanWolves.fcAestheticOpaque.getUnlocalizedName() + ".whitecobble", "White Cobblestone");
+		
+		// CHANGES VANILLA BLOCKS AND ITEMS
+		FCAddOnHandler.LogMessage("[INFO]: Modifying the names of blocks and items from vanilla...");
+		this.replaceBlockName(var1, Block.cobblestoneMossy, "Mossy Cobblestone");
+		this.replaceBlockName(var1, Block.netherBrick, "Nether Bricks");
+		this.replaceBlockName(var1, Block.stairsCobblestone, "Cobblestone Stairs");
+		this.replaceBlockName(var1, Block.trapdoor, "Oak Trapdoor");
+		this.replaceItemName(var1, Item.doorWood, "Oak Door");
+		
+		this.addStringName(var1, "item.skull.spider.name", "Spider Head");
+		this.addStringName(var1, "item.skull.enderman.name", "Enderman Head");
+		this.addStringName(var1, "item.skull.pigzombie.name", "Zombie Pigman Head");
+		this.addStringName(var1, "item.skull.fire.name", "Blaze Head");
+		
+		FCAddOnHandler.LogMessage("[INFO]: BTW Deco Addon language loaded...");
 	}
 	
 	public void PostInitialize()
@@ -212,7 +209,7 @@ public class DecoAddonManager extends FCAddOn
 		register(Tag + ".corner" + ".name", localizedName + " Corner");
 		register(Tag + ".bench" + ".name", localizedName + " Bench");
 		register(Tag + ".fence" + ".name", localizedName + " Fence");
-
+	
 		Tag = mouldingAndDecorative.getUnlocalizedName();
 		register(Tag + ".moulding" + ".name", localizedName + " Moulding");
 		register(Tag + ".column" + ".name", localizedName + " Column");
@@ -256,12 +253,6 @@ public class DecoAddonManager extends FCAddOn
 		}
 	}
 	
-	public static void setFirePropertiesOfBlock(int blockID, int chance, int ability)
-    {
-        BlockFire.chanceToEncourageFire[blockID] = chance;
-        BlockFire.abilityToCatchFire[blockID] = ability;
-    }
-	
 	public static boolean isModuleLoaded(String name)
 	{
 		return m_LoadedModules.contains(name);
@@ -283,7 +274,7 @@ public class DecoAddonManager extends FCAddOn
 	}
 	
 	private void addBlockName(StringTranslate var1, Block block, String name)
-    {
+	{
 		try
 		{
 			String var4 = block.getUnlocalizedName() + ".name";
@@ -292,56 +283,56 @@ public class DecoAddonManager extends FCAddOn
 			if (DEBUG_ADDON_LOAD) FCAddOnHandler.LogMessage("[INFO]: Adding block - " + var4 + " : " + name);
 		}
 		catch (Exception ex) 
-    	{
-    		System.out.println("[WARN]: Problem adding block name: " + name);
-			if (DEBUG_ADDON_LOAD) ex.printStackTrace();
-    	}
-    }
-
-    private void addItemName(StringTranslate var1, Item item, String name)
-    {
-    	try
 		{
-    		String var4 = item.getUnlocalizedName() + ".name";
-    		var1.GetTranslateTable().put(var4, name);
-    		
-    		if (DEBUG_ADDON_LOAD) FCAddOnHandler.LogMessage("[INFO]: Adding item - " + var4 + " : " + name);
-		}
-    	catch (Exception ex) 
-    	{
-    		System.out.println("[WARN]: Problem adding item name: " + name);
+			System.out.println("[WARN]: Problem adding block name: " + name);
 			if (DEBUG_ADDON_LOAD) ex.printStackTrace();
-    	}
-    }
-    
-    private void addItemStackName(StringTranslate var1, ItemStack item, String name)
-    {
-    	try
+		}
+	}
+	
+	private void addItemName(StringTranslate var1, Item item, String name)
+	{
+		try
 		{
-    		String var4 = Item.itemsList[item.itemID].getUnlocalizedName(item) + ".name";
-    		var1.GetTranslateTable().put(var4, name);
-    		
-    		if (DEBUG_ADDON_LOAD) FCAddOnHandler.LogMessage("[INFO]: Adding itemstack - " + var4 + " : " + name);
+			String var4 = item.getUnlocalizedName() + ".name";
+			var1.GetTranslateTable().put(var4, name);
+			
+			if (DEBUG_ADDON_LOAD) FCAddOnHandler.LogMessage("[INFO]: Adding item - " + var4 + " : " + name);
 		}
-    	catch (Exception ex) 
-    	{
-    		System.out.println("[WARN]: Problem adding itemstack name: " + name);
-			if (DEBUG_ADDON_LOAD) ex.printStackTrace();
-    	}
-    }
-    
-    private void addStringName(StringTranslate var1, String string, String name)
-    {
-    	try
+		catch (Exception ex) 
 		{
-    		var1.GetTranslateTable().put(string, name);
-		}
-    	catch (Exception ex) 
-    	{
-    		System.out.println("[WARN]: Problem adding string name: " + name);
+			System.out.println("[WARN]: Problem adding item name: " + name);
 			if (DEBUG_ADDON_LOAD) ex.printStackTrace();
-    	}
-    }
+		}
+	}
+	
+	private void addItemStackName(StringTranslate var1, ItemStack item, String name)
+	{
+		try
+		{
+			String var4 = Item.itemsList[item.itemID].getUnlocalizedName(item) + ".name";
+			var1.GetTranslateTable().put(var4, name);
+			
+			if (DEBUG_ADDON_LOAD) FCAddOnHandler.LogMessage("[INFO]: Adding itemstack - " + var4 + " : " + name);
+		}
+		catch (Exception ex) 
+		{
+			System.out.println("[WARN]: Problem adding itemstack name: " + name);
+			if (DEBUG_ADDON_LOAD) ex.printStackTrace();
+		}
+	}
+	
+	private void addStringName(StringTranslate var1, String string, String name)
+	{
+		try
+		{
+			var1.GetTranslateTable().put(string, name);
+		}
+		catch (Exception ex) 
+		{
+			System.out.println("[WARN]: Problem adding string name: " + name);
+			if (DEBUG_ADDON_LOAD) ex.printStackTrace();
+		}
+	}
 	
 	private void replaceBlockName(StringTranslate var1, Block block, String name)
 	{
@@ -355,7 +346,7 @@ public class DecoAddonManager extends FCAddOn
 		var1.GetTranslateTable().put(var4, name);
 	}
 	
-    private void readModConfigFile()
+	private void readModConfigFile()
 	{
 		File var0 = new File(Minecraft.getMinecraftDir(), "DecoAddonConfig.txt");
 		
@@ -372,12 +363,12 @@ public class DecoAddonManager extends FCAddOn
 			
 			FCAddOnHandler.LogMessage("[INFO]: Reading the config file...");
 			BufferedReader var1 = new BufferedReader(new FileReader(var0));
-            String var2 = "";
-            
-            while ((var2 = var1.readLine()) != null)
-            {
-            	if (!var2.startsWith("//"))
-            	{
+	        String var2 = "";
+	        
+	        while ((var2 = var1.readLine()) != null)
+	        {
+	        	if (!var2.startsWith("//"))
+	        	{
 	            	if (var2.contains("=") && var2.startsWith("module"))
 	            	{
 	            		String[] var3 = var2.split("=");
@@ -416,16 +407,16 @@ public class DecoAddonManager extends FCAddOn
 	            		
 	            		addBlockID(var3[0], Integer.valueOf(var3[1]));
 	            	}
-            	}
-            }
-            
-            var1.close();
-        }
-        catch (Exception var5)
-        {
-            System.out.println("[WARN]: Failed to load DecoAddonConfig.txt...");
-            var5.printStackTrace();
-        }
+	        	}
+	        }
+	        
+	        var1.close();
+	    }
+	    catch (Exception var5)
+	    {
+	        System.out.println("[WARN]: Failed to load DecoAddonConfig.txt...");
+	        var5.printStackTrace();
+	    }
 	}
 	
 	private boolean loadModule(String name)

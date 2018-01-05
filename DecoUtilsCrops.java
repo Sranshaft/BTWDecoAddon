@@ -4,6 +4,54 @@ import java.util.Random;
 
 public class DecoUtilsCrops 
 {
+	/**
+	 * returns true if the block below the crop is suitable for planting
+	 */
+	private static boolean isBlockSuitable(World world, int x, int y, int z)
+	{
+		int blockID = world.getBlockId(x, y, z);
+		int blockMetadata = world.getBlockMetadata(x, y, z);
+		
+		return blockID == Block.tilledField.blockID || blockID == FCBetterThanWolves.fcPlanter.blockID && blockMetadata == 1 || blockID == Block.grass.blockID;
+	}
+	
+	/**
+	 * returns true if item can be used as bonemeal
+	 */
+	public static boolean isBonemeal(ItemStack itemStack)
+	{
+		if ((itemStack.itemID == Item.dyePowder.itemID && itemStack.getItemDamage() == 15) 
+				|| itemStack.itemID == FCBetterThanWolves.fcPotash.itemID 
+				|| itemStack.itemID == DecoSubModuleFlowers.decoItemFertilizerID)
+	    	 return true;
+		else 
+			return false;
+	}
+	
+	/**
+	 * returns true if there is at least one cropblock nearby (x-1 to x+1, y+1, z-1 to z+1)
+	 */
+	public static boolean isCropsNearby(World world, int x, int y, int z)
+	{
+		byte var5 = 0;
+	
+	    for (int indexX = x - var5; indexX <= x + var5; ++indexX)
+	    {
+	        for (int indexY = z - var5; indexY <= z + var5; ++indexY)
+	        {
+	            int blockID = world.getBlockId(indexX, y + 1, indexY);
+	
+	            if (blockID == Block.crops.blockID || blockID == Block.melonStem.blockID || blockID == Block.pumpkinStem.blockID || blockID == Block.potato.blockID || blockID == Block.carrot.blockID)
+	                return true;
+	        }
+	    }
+	
+	    return false;
+	}
+	
+	/**
+	 * returns true if the item is a plantable seed
+	 */
 	public static boolean isPlantableSeed(ItemStack itemStack)
 	{
 		if (itemStack.itemID == Item.seeds.itemID 
@@ -15,6 +63,29 @@ public class DecoUtilsCrops
 			return false;
 	}
 	
+	/**
+	 * returns true if there's water nearby (x-4 to x+4, y to y+1, k-4 to k+4)
+	 */
+	public static boolean isWaterNearby(World world, int x, int y, int z)
+	{
+		for (int indexX = x - 4; indexX <= x + 4; indexX++)
+	    {
+	        for (int indexY = y; indexY <= y + 1; indexY++)
+	        {
+	            for (int indexZ = z - 4; indexZ <= z + 4; indexZ++)
+	            {
+	                if (world.getBlockMaterial(indexX, indexY, indexZ) == Material.water)
+	                    return true;
+	            }
+	        }
+	    }
+	
+	    return false;
+	}
+	
+	/**
+	 * returns the crop ID from the supplied seed item's id
+	 */
 	public static int getCropIDFromSeedItem(ItemStack itemStack)
 	{
 		int cropID = itemStack.itemID == Item.seeds.itemID ? Block.crops.blockID
@@ -26,16 +97,9 @@ public class DecoUtilsCrops
 		return cropID;
 	}
 	
-	public static boolean isBonemeal(ItemStack itemStack)
-	{
-		if ((itemStack.itemID == Item.dyePowder.itemID && itemStack.getItemDamage() == 15) 
-				|| itemStack.itemID == FCBetterThanWolves.fcPotash.itemID 
-				|| itemStack.itemID == DecoSubModuleFlowers.decoItemFertilizerID)
-	    	 return true;
-		else 
-			return false;
-	}
-	
+	/**
+	 * returns true if bonemeal has been applied to the block below the crop
+	 */
 	public static boolean hasAppliedBonemeal(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int var7, float var8, float var9, float var10)
 	{
 		if (!isBlockSuitable(world, x, y, z))
@@ -68,14 +132,6 @@ public class DecoUtilsCrops
 		}
 		else 
 			return false;
-	}
-	
-	private static boolean isBlockSuitable(World world, int x, int y, int z)
-	{
-		int blockID = world.getBlockId(x, y, z);
-		int blockMetadata = world.getBlockMetadata(x, y, z);
-		
-		return blockID == Block.tilledField.blockID || blockID == FCBetterThanWolves.fcPlanter.blockID && blockMetadata == 1 || blockID == Block.grass.blockID;
 	}
 	
 	private static void growTallGrassAndFlowers(World World, int x, int y, int z)

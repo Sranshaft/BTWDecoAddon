@@ -102,45 +102,4 @@ public class DecoUtils
         BlockFire.chanceToEncourageFire[blockID] = chance;
         BlockFire.abilityToCatchFire[blockID] = ability;
     }
-	
-	/**
-	 * returns true if there is at least one cropblock nearby (x-1 to x+1, y+1, z-1 to z+1)
-	 */
-	public static boolean isCropsNearby(World world, int x, int y, int z)
-	{
-		byte var5 = 0;
-	
-	    for (int indexX = x - var5; indexX <= x + var5; ++indexX)
-	    {
-	        for (int indexY = z - var5; indexY <= z + var5; ++indexY)
-	        {
-	            int blockID = world.getBlockId(indexX, y + 1, indexY);
-	
-	            if (blockID == Block.crops.blockID || blockID == Block.melonStem.blockID || blockID == Block.pumpkinStem.blockID || blockID == Block.potato.blockID || blockID == Block.carrot.blockID)
-	                return true;
-	        }
-	    }
-	
-	    return false;
-	}
-	
-	/**
-	 * returns true if there's water nearby (x-4 to x+4, y to y+1, k-4 to k+4)
-	 */
-	public static boolean isWaterNearby(World world, int x, int y, int z)
-	{
-		for (int indexX = x - 4; indexX <= x + 4; indexX++)
-	    {
-	        for (int indexY = y; indexY <= y + 1; indexY++)
-	        {
-	            for (int indexZ = z - 4; indexZ <= z + 4; indexZ++)
-	            {
-	                if (world.getBlockMaterial(indexX, indexY, indexZ) == Material.water)
-	                    return true;
-	            }
-	        }
-	    }
-	
-	    return false;
-	}
 }

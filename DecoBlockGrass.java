@@ -178,9 +178,9 @@ public class DecoBlockGrass extends FCBlockGrass
         int skylightValue = lightValue - world.skylightSubtracted;
         int metadata = world.getBlockMetadata(x, y, z);
     	
-        if (DecoUtils.isWaterNearby(world, x, y, z) && metadata != 1)
+        if (DecoUtilsCrops.isWaterNearby(world, x, y, z) && metadata != 1)
         	world.setBlockAndMetadataWithNotify(x, y, z, this.blockID, 3);
-        else if (!DecoUtils.isWaterNearby(world, x, y, z) && metadata == 3)
+        else if (!DecoUtilsCrops.isWaterNearby(world, x, y, z) && metadata == 3)
         	world.setBlockAndMetadataWithNotify(x, y, z, this.blockID, 0);
 
         if (lightValue >= 9 && Block.lightOpacity[world.getBlockId(x, y + 1, z)] <= 2)

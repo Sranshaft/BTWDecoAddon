@@ -110,9 +110,9 @@ public class DecoBlockFarmland extends FCBlockFarmland
     {
     	int metadata = world.getBlockMetadata(x, y, z);
     	
-        if (!DecoUtils.isWaterNearby(world, x, y, z) && !world.canLightningStrikeAt(x, y + 1, z))
+        if (!DecoUtilsCrops.isWaterNearby(world, x, y, z) && !world.canLightningStrikeAt(x, y + 1, z))
         {
-            if (!DecoUtils.isCropsNearby(world, x, y, z) && random.nextInt(100) <= 50)
+            if (!DecoUtilsCrops.isCropsNearby(world, x, y, z) && random.nextInt(100) <= 50)
                 world.setBlockAndMetadataWithNotify(x, y, z, DecoSubModuleExtendedDirtAndGrassBlocks.decoBlockDirt.blockID, this.getMetadata(metadata));
         }
         else

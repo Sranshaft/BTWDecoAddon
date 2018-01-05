@@ -93,9 +93,9 @@ public class DecoBlockDirt extends BlockDirt
     {
     	int metadata = world.getBlockMetadata(x, y, z);
     	
-    	if (DecoUtils.isWaterNearby(world, x, y, z) && metadata != 1)
+    	if (DecoUtilsCrops.isWaterNearby(world, x, y, z) && metadata != 1)
         	world.setBlockAndMetadataWithNotify(x, y, z, this.blockID, 3);
-        else if (!DecoUtils.isWaterNearby(world, x, y, z) && metadata != 1)
+        else if (!DecoUtilsCrops.isWaterNearby(world, x, y, z) && metadata != 1)
         	world.setBlockAndMetadataWithNotify(x, y, z, this.blockID, 0);
     }
 }
