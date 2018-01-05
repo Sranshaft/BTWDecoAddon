@@ -60,8 +60,8 @@ public class DecoBlockTableStone extends Block implements FCIBlockSolidTop
 		
 		for (int index = 0; index < this.STONE_TYPES.length; index++)
 		{
-			this.m_IconByMetadataArray[index] = register.registerIcon("decoBlock" + this.STONE_TYPES[index]);
-			this.m_SideIconByMetadataArray[index] = register.registerIcon("decoBlock" + this.STONE_TYPES[index]);
+			this.m_IconByMetadataArray[index] = register.registerIcon("decoBlockFurniture_" + this.STONE_TYPES[index]);
+			this.m_SideIconByMetadataArray[index] = register.registerIcon("decoBlockFurniture_" + this.STONE_TYPES[index]);
 		}
 	}
 	

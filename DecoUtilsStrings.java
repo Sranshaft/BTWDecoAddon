@@ -17,13 +17,13 @@ public class DecoUtilsStrings
 	public static final String[] STONE_BRICK_TAGS = new String[] { "normal", "chiseled", "cracked", "mossy", "pillar", "polished", "tiled", "large" };
 	public static final String[] STONE_BRICK_NAMES = new String[] { "", "Chiseled", "Cracked", "Mossy", "Pillared", "Polished", "Tiled", "Large" };
 	
-	public static final String[] STONE_TAGS = new String[] { "Brick", "BlackStone", "BlackStoneBrick", "Brimstone", "CharredNetherBrick", "Cobblestone", "Duskbound", "Ebonstone", "EbonstoneBrick", "Endstone", "EndstoneBrick", "Froststone", "HardenedClay", "HardenedNetherSludge", "MossyCobblestone", "Mudstone" };
+	public static final String[] STONE_TAGS = new String[] { "brick", "blackStone", "blackStoneBrick", "brimstone", "charredNetherBrick", "cobblestone", "duskbound", "ebonstone", "ebonstoneBrick", "endstone", "endstoneBrick", "froststone", "hardenedClay", "hardenedNetherSludge", "mossyCobblestone", "mudstone" };
 	public static final String[] STONE_NAMES = new String[] { "Brick", "Black Stone", "Black Stone Brick", "Brimstone", "Charred Nether Brick", "Cobblestone", "Duskbound", "Ebonstone", "Ebonstone Brick", "Endstone", "Endstone Brick", "Froststone", "Hardened Clay", "Hardened Nether Sludge", "Mossy Cobblestone", "Mudstone" };
 	
-	public static final String[] STONE_TAGS2 = new String[] { "MudstoneBrick", "NetherBrick", "Netherrack", "NetherWroughtStone", "Obsidian", "Prismarine", "RedSandstone", "RedSandstoneBrick", "Saguarostone", "Sandstone", "SandstoneBrick", "SandyBrick", "SoulSandstone", "SoulSandstoneBrick", "Stone", "StoneBrick" };
+	public static final String[] STONE_TAGS2 = new String[] { "mudstoneBrick", "netherBrick", "netherrack", "netherWroughtStone", "obsidian", "prismarine", "redSandstone", "redSandstoneBrick", "saguarostone", "sandstone", "sandstoneBrick", "sandyBrick", "soulSandstone", "soulSandstoneBrick", "stone", "stoneBrick" };
 	public static final String[] STONE_NAMES2 = new String[] { "Mudstone Brick", "Nether Brick", "Netherrack", "Nether Wrought Stone", "Obsidian", "Prismarine", "Red Sandstone", "Red Sandstone Brick", "Saguarostone", "Sandstone", "Sandstone Brick", "Sandy Brick", "Soul Sandstone", "Soul Sandstone Brick", "Stone", "Stone Brick" };
 	
-	public static final String[] STONE_TAGS3 = new String[] { "WhiteStone", "WhiteStoneBrick" };
+	public static final String[] STONE_TAGS3 = new String[] { "whiteStone", "whiteStoneBrick" };
 	public static final String[] STONE_NAMES3 = new String[] { "White Stone", "White Stone Brick" };
 	
 	public static final String[] STORAGE_TAGS = new String[] { "blazeRod", "brimstone", "charcoal", "coal", "netherCoal", "netherWart" };

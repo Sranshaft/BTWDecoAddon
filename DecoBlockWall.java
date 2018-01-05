@@ -105,11 +105,11 @@ public class DecoBlockWall extends BlockWall
 		IBlockAccess bAccess = render.blockAccess;
 		int metadata = bAccess.getBlockMetadata(x, y, z);
 
-		return RenderFence(render, bAccess, x, y, z, this);
+		return RenderWall(render, bAccess, x, y, z, this);
 
 	}
 	
-	public boolean RenderFence(RenderBlocks render, IBlockAccess bAccess, int x, int y, int z, Block block)
+	public boolean RenderWall(RenderBlocks render, IBlockAccess bAccess, int x, int y, int z, Block block)
 	{
 		boolean isBlockWest = canConnectWallTo(bAccess, x - 1, y, z);
 		boolean isBlockEast = canConnectWallTo(bAccess, x + 1, y, z);
