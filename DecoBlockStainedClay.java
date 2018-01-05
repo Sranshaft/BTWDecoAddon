@@ -4,9 +4,6 @@ import java.util.List;
 
 public class DecoBlockStainedClay extends FCBlockStone
 {
-	public static final String[] COLOUR_TYPES = new String[] { "black", "red", "green", "brown", "blue", "purple", "cyan", "silver", "grey", "pink", "lime", "yellow", "lightBlue", "magenta", "orange", "white" };
-	public static final String[] COLOUR_NAMES = new String[] { "Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Silver", "Grey", "Pink", "Lime", "Yellow", "Light Blue", "Magenta", "Orange", "White" };
-	
 	private Icon[] m_IconByMetadataArray = new Icon[16];
 	
 	public DecoBlockStainedClay(int id, Material material)
@@ -17,7 +14,7 @@ public class DecoBlockStainedClay extends FCBlockStone
 		setResistance(10.0F);
 		setStepSound(Block.soundStoneFootstep);
 		
-		DecoAddonManager.register(this, this.COLOUR_TYPES, this.COLOUR_NAMES, " Stained Clay");
+		DecoAddonManager.register(this, DecoUtilsStrings.COLOUR_TAGS, DecoUtilsStrings.COLOUR_NAMES, " Stained Clay");
 	}
 	
 	/**
@@ -36,14 +33,14 @@ public class DecoBlockStainedClay extends FCBlockStone
      */
 	public void registerIcons(IconRegister register)
 	{
-		for (int index = 0; index < this.COLOUR_TYPES.length; index++)
+		for (int index = 0; index < DecoUtilsStrings.COLOUR_TAGS.length; index++)
 		{
-			this.m_IconByMetadataArray[index] = register.registerIcon("decoBlockStainedClay_" + this.COLOUR_TYPES[index]);
+			this.m_IconByMetadataArray[index] = register.registerIcon("decoBlockStainedClay_" + DecoUtilsStrings.COLOUR_TAGS[index]);
 		}
 		
-		if (this.COLOUR_TYPES.length < 16)
+		if (DecoUtilsStrings.COLOUR_TAGS.length < 16)
 		{
-			for (int index = this.COLOUR_TYPES.length; index < 16; index++)
+			for (int index = DecoUtilsStrings.COLOUR_TAGS.length; index < 16; index++)
 				this.m_IconByMetadataArray[index] = this.blockIcon;
 		}
 	}
@@ -61,7 +58,7 @@ public class DecoBlockStainedClay extends FCBlockStone
      */
     public void getSubBlocks(int var1, CreativeTabs var2, List var3)
     {
-    	for (int index = 0; index < this.COLOUR_TYPES.length; index++)
+    	for (int index = 0; index < DecoUtilsStrings.COLOUR_TAGS.length; index++)
     	{
     		var3.add(new ItemStack(var1, 1, index));
     	}

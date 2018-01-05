@@ -24,8 +24,14 @@ public class DecoSubModuleStainedClay implements DecoISubModule
 		FCAddOnHandler.LogMessage("[INFO]: Loading submodule: Stained Clay");
 		
 		this.decoBlockStainedClay = new DecoBlockStainedClay(this.decoBlockStainedClayID, Material.rock);
+		
+		this.decoBlockStainedClaySlab = new DecoBlockSlab(this.decoBlockStainedClaySlabID, this.decoBlockStainedClay, false, this.decoBlockStainedClaySlabID, this.decoBlockStainedClaySlabTopID, 
+				DecoUtilsStrings.COLOUR_TAGS, DecoUtilsStrings.COLOUR_NAMES, "decoBlockStainedClay_", DecoUtilsStrings.COLOUR_TAGS);
+		this.decoBlockStainedClaySlabTop = new DecoBlockSlab(this.decoBlockStainedClaySlabTopID, this.decoBlockStainedClay, true, this.decoBlockStainedClaySlabID, this.decoBlockStainedClaySlabTopID, 
+				DecoUtilsStrings.COLOUR_TAGS, DecoUtilsStrings.COLOUR_NAMES, "decoBlockStainedClay_", DecoUtilsStrings.COLOUR_TAGS);
+		
 		//this.decoBlockStainedClayStairs = new DecoBlockStair(this.decoBlockStainedClayStairsID, this.decoBlockStainedClay, 0);
-		//this.decoBlockStainedClayWall = new DecoBlockWall(this.decoBlockStainedClayWallID, this.decoBlockStainedClay);
+		this.decoBlockStainedClayWall = new DecoBlockWall(this.decoBlockStainedClayWallID, this.decoBlockStainedClay);
 
 		this.registerBlocks();
 		this.addRecipes();

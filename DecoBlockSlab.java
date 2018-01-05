@@ -12,24 +12,30 @@ public class DecoBlockSlab extends Block
 	private String[] m_TexturePaths;
 	private String[] m_SubTypes;
 	private String[] m_SubNames;
+	private String m_TexturePrefix;
 	private Icon[] m_IconByMetadataArray;
 	
 	public DecoBlockSlab(int id, Block parentBlock, boolean isDoubleSlab, int bottomSlabID, int topSlabID)
 	{
-		this(id, parentBlock, isDoubleSlab, bottomSlabID, topSlabID, 0, null, null, null);
+		this(id, parentBlock, isDoubleSlab, bottomSlabID, topSlabID, 0, null, null, null, null);
 	}
 	
 	public DecoBlockSlab(int id, Block parentBlock, boolean isDoubleSlab, int bottomSlabID, int topSlabID, int metadata)
 	{
-		this(id, parentBlock, isDoubleSlab, bottomSlabID, topSlabID, metadata, null, null, null);
+		this(id, parentBlock, isDoubleSlab, bottomSlabID, topSlabID, metadata, null, null, null, null);
 	}
 	
 	public DecoBlockSlab(int id, Block parentBlock, boolean isDoubleSlab, int bottomSlabID, int topSlabID, String[] subTypes, String[] subNames, String[] texturePaths)
 	{
-		this(id, parentBlock, isDoubleSlab, bottomSlabID, topSlabID, 0, subTypes, subNames, texturePaths);
+		this(id, parentBlock, isDoubleSlab, bottomSlabID, topSlabID, 0, subTypes, subNames, null, texturePaths);
 	}
 	
-	public DecoBlockSlab(int id, Block parentBlock, boolean isDoubleSlab, int bottomSlabID, int topSlabID, int metadata, String[] subTypes, String[] subNames, String[] texturePaths)
+	public DecoBlockSlab(int id, Block parentBlock, boolean isDoubleSlab, int bottomSlabID, int topSlabID, String[] subTypes, String[] subNames, String texturePrefix, String[] texturePaths)
+	{
+		this(id, parentBlock, isDoubleSlab, bottomSlabID, topSlabID, 0, subTypes, subNames, texturePrefix, texturePaths);
+	}
+	
+	public DecoBlockSlab(int id, Block parentBlock, boolean isDoubleSlab, int bottomSlabID, int topSlabID, int metadata, String[] subTypes, String[] subNames, String texturePrefix, String[] texturePaths)
 	{
 		super(id, parentBlock.blockMaterial);
 		this.setUnlocalizedName(parentBlock.getUnlocalizedName2() + ".slab");
@@ -52,8 +58,9 @@ public class DecoBlockSlab extends Block
     		this.m_SubTypes = subTypes;
     		this.m_SubNames = subNames;
     		this.m_TexturePaths = texturePaths;
+    		this.m_TexturePrefix = texturePrefix;
     	
-    		DecoAddonManager.register(this, this.m_SubTypes, this.m_SubNames, " Slab");
+    		DecoAddonManager.register(this, this.m_SubTypes, this.m_SubNames, " " + parentBlock.getLocalizedName() + " Slab");
         }
 	}
 	
@@ -169,9 +176,9 @@ public class DecoBlockSlab extends Block
     public Icon getIcon(int side, int metadata)
     {
     	if (this.m_SubTypes == null)
-    		return this.m_ParentBlock.getBlockTextureFromSide(side);
+    		return this.m_ParentBlock.getIcon(side, this.m_Metadata);
     	else
-    		return this.m_IconByMetadataArray[metadata & 7];
+    		return this.m_IconByMetadataArray[metadata];
     }
 
     /**
@@ -182,9 +189,9 @@ public class DecoBlockSlab extends Block
     { 
     	if (this.m_SubTypes != null)
 		{
-			for (int index = 0; index < this.m_TexturePaths.length; index++)
+			for (int index = 0; index < this.m_SubTypes.length; index++)
 			{
-				this.m_IconByMetadataArray[index] = register.registerIcon(this.m_TexturePaths[index]);
+				this.m_IconByMetadataArray[index] = register.registerIcon(this.m_TexturePrefix + this.m_TexturePaths[index]);
 			}
 		}
     	else this.blockIcon = this.m_ParentBlock.getIcon(0, this.m_Metadata);
