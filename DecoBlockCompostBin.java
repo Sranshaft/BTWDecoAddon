@@ -2,10 +2,10 @@ package net.minecraft.src;
 
 import java.util.Random;
 
-public class DecoBlockCompostBin extends BlockContainer implements FCIBlockMechanical, FCIBlock
+public class DecoBlockCompostBin extends BlockContainer implements FCIBlockMechanical
 {
 	private static int m_TickRate = 10;
-	private Icon[] m_IconBySideArray = new Icon[7];
+	private Icon m_IconBottom, m_IconSide, m_IconTop;
 	
 	public static int currentState = 0;
 	
@@ -26,6 +26,57 @@ public class DecoBlockCompostBin extends BlockContainer implements FCIBlockMecha
     public int tickRate(World world)
     {
         return m_TickRate;
+    }
+
+    /**
+     * Ticks the block if it's been scheduled
+     */
+    public void updateTick(World world, int x, int y, int z, Random random)
+    {
+        boolean var6 = this.IsInputtingMechanicalPower(world, x, y, z);
+        boolean var7 = this.IsBlockMechanicalOn(world, x, y, z);
+
+        if (var7 != var6)
+        {
+            this.SetMechanicalOn(world, x, y, z, var6);
+        }
+    }
+
+    public void RandomUpdateTick(World world, int x, int y, int z, Random random)
+    {
+        if (!this.IsCurrentStateValid(world, x, y, z) && !world.IsUpdateScheduledForBlock(x, y, z, this.blockID))
+        {
+            world.scheduleBlockUpdate(x, y, z, this.blockID, this.tickRate(world));
+        }
+    }
+
+    /**
+     * A randomly called display update to be able to add particles or other items for display
+     */
+    public void randomDisplayTick(World world, int x, int y, int z, Random random)
+    {
+        if (this.IsBlockMechanicalOn(world, x, y, z) && this.currentState > 0)
+        {
+            for (int index = 0; index < 5; ++index)
+            {
+                float var7 = (float)x + random.nextFloat();
+                float var8 = (float)y + random.nextFloat() * 0.5F + 1.0F;
+                float var9 = (float)z + random.nextFloat();
+                world.spawnParticle("townaura", (double)var7, (double)var8, (double)var9, 0.0D, 0.0D, 0.0D);
+            }
+        }
+    }
+
+    /**
+     * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
+     * their own) Args: x, y, z, neighbor blockID
+     */
+    public void onNeighborBlockChange(World world, int x, int y, int z, int neighbourID)  
+    {
+        if (!this.IsCurrentStateValid(world, x, y, z))
+        {
+            world.scheduleBlockUpdate(x, y, z, this.blockID, this.tickRate(world));
+        }
     }
 
     /**
@@ -57,15 +108,6 @@ public class DecoBlockCompostBin extends BlockContainer implements FCIBlockMecha
     }
 
     /**
-     * ejects contained items into the world, and notifies neighbours of an update, as appropriate
-     */
-    public void breakBlock(World world, int x, int y, int z, int neighbourID, int flags)
-    {
-        FCUtilsInventory.EjectInventoryContents(world, x, y, z, (IInventory)world.getBlockTileEntity(x, y, z));
-        super.breakBlock(world, x, y, z, neighbourID, flags);
-    }
-
-    /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
     public TileEntity createNewTileEntity(World world)
@@ -74,88 +116,19 @@ public class DecoBlockCompostBin extends BlockContainer implements FCIBlockMecha
     }
 
     /**
-     * Ticks the block if it's been scheduled
+     * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
-    public void updateTick(World world, int x, int y, int z, Random random)
+    public void breakBlock(World world, int x, int y, int z, int neighbourID, int flags)
     {
-        boolean var6 = this.IsInputtingMechanicalPower(world, x, y, z);
-        boolean var7 = this.IsBlockMechanicalOn(world, x, y, z);
-
-        if (var7 != var6)
-        {
-            this.SetMechanicalOn(world, x, y, z, var6);
-        }
+        FCUtilsInventory.EjectInventoryContents(world, x, y, z, (IInventory)world.getBlockTileEntity(x, y, z));
+        super.breakBlock(world, x, y, z, neighbourID, flags);
     }
 
-    public void RandomUpdateTick(World world, int x, int y, int z, Random random)
-    {
-        if (!this.IsCurrentStateValid(world, x, y, z) && !world.IsUpdateScheduledForBlock(x, y, z, this.blockID))
-        {
-            world.scheduleBlockUpdate(x, y, z, this.blockID, this.tickRate(world));
-        }
-    }
-    
-    /**
-     * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
-     * their own) Args: x, y, z, neighbor blockID
-     */
-    public void onNeighborBlockChange(World world, int x, int y, int z, int neighbourID)  
-    {
-        if (!this.IsCurrentStateValid(world, x, y, z))
-        {
-            world.scheduleBlockUpdate(x, y, z, this.blockID, this.tickRate(world));
-        }
-    }
-    
     public boolean IsCurrentStateValid(World world, int x, int y, int z)
     {
         boolean var5 = this.IsInputtingMechanicalPower(world, x, y, z);
         boolean var6 = this.IsBlockMechanicalOn(world, x, y, z);
         return var6 == var5;
-    }
-
-	public int GetFacing(IBlockAccess bAccess, int x, int y, int z) 
-	{
-		return 0;
-	}
-
-	public void SetFacing(World world, int x, int y, int z, int side) {}
-
-	public int GetFacingFromMetadata(int side) 
-	{
-		return 0;
-	}
-
-	public int SetFacingInMetadata(int side, int metadata) 
-	{
-		return side;
-	}
-
-	public boolean CanRotateOnTurntable(IBlockAccess bAccess, int x, int y, int z) 
-	{
-		return false;
-	}
-
-	public boolean CanTransmitRotationHorizontallyOnTurntable(IBlockAccess bAccess, int x, int y, int z) 
-	{
-		return false;
-	}
-
-	public boolean CanTransmitRotationVerticallyOnTurntable(IBlockAccess bAccess, int x, int y, int z) 
-	{
-		return false;
-	}
-
-	public void RotateAroundJAxis(World world, int x, int y, int z, boolean isRotated) {}
-
-	public int RotateMetadataAroundJAxis(int metatdata, boolean isRotated) 
-	{
-		return 0;
-	}
-
-	public boolean ToggleFacing(World world, int x, int y, int z, boolean isRotated)
-    {
-        return false;
     }
 
     public boolean CanOutputMechanicalPower()
@@ -232,52 +205,35 @@ public class DecoBlockCompostBin extends BlockContainer implements FCIBlockMecha
     }
 
     /**
-     * When this method is called, your block should register all the icons it needs with the given IconRegister. This
-     * is the only chance you get to register icons.
-     */
-    public void registerIcons(IconRegister register)
-    {
-        this.blockIcon = register.registerIcon("wood");
-        this.m_IconBySideArray[0] = register.registerIcon("decoBlockCompostBin_bottom");
-        this.m_IconBySideArray[1] = register.registerIcon("decoBlockCompostBin_top");
-        this.m_IconBySideArray[2] = register.registerIcon("decoBlockCompostBin_side");
-    }
-
-    /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
     public Icon getIcon(int side, int metadata)
     {
         switch (side)
         {
-        	case 0:
-        		return this.m_IconBySideArray[0];
-        	case 1:
-        		return this.m_IconBySideArray[1];
-        	case 2:
-        	case 3:
-        	case 4:
-        	case 5:
-        		return this.m_IconBySideArray[2];
-        	default:
-        		return this.blockIcon;
+            case 0:
+                return this.m_IconBottom;
+            case 1:
+                return this.m_IconTop;
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+                return this.m_IconSide;
+            default:
+                return this.blockIcon;
         }
     }
-    
+
     /**
-     * A randomly called display update to be able to add particles or other items for display
+     * When this method is called, your block should register all the icons it needs with the given IconRegister. This
+     * is the only chance you get to register icons.
      */
-    public void randomDisplayTick(World world, int x, int y, int z, Random random)
+    public void registerIcons(IconRegister register)
     {
-        if (this.IsBlockMechanicalOn(world, x, y, z) && this.currentState > 0)
-        {
-        	for (int index = 0; index < 5; ++index)
-            {
-                float var7 = (float)x + random.nextFloat();
-                float var8 = (float)y + random.nextFloat() * 0.5F + 1.0F;
-                float var9 = (float)z + random.nextFloat();
-                world.spawnParticle("townaura", (double)var7, (double)var8, (double)var9, 0.0D, 0.0D, 0.0D);
-            }
-        }
+        this.blockIcon = register.registerIcon("wood");
+        this.m_IconBottom = register.registerIcon("decoBlockCompostBin_bottom");
+        this.m_IconTop = register.registerIcon("decoBlockCompostBin_top");
+        this.m_IconSide = register.registerIcon("decoBlockCompostBin_side");
     }
 }

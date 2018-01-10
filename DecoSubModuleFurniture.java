@@ -187,13 +187,13 @@ public class DecoSubModuleFurniture implements DecoISubModule
 	{
 		FCAddOnHandler.LogMessage("[INFO]: Loading submodule: Furniture");
 		
-		this.decoBlockBookcaseBirch = new DecoBlockBookcase(this.decoBlockBookcaseBirchID, Material.wood, "birch", Block.soundWoodFootstep);
-		this.decoBlockBookcaseBloodwood = new DecoBlockBookcase(this.decoBlockBookcaseBloodwoodID, Material.wood, "bloodwood", Block.soundWoodFootstep);
-		this.decoBlockBookcaseEbonwood = new DecoBlockBookcase(this.decoBlockBookcaseEbonwoodID, Material.wood, "ebonwood", Block.soundWoodFootstep);
-		this.decoBlockBookcaseIronwood = new DecoBlockBookcase(this.decoBlockBookcaseIronwoodID, Material.wood, "ironwood", Block.soundWoodFootstep);
-		this.decoBlockBookcaseJungle = new DecoBlockBookcase(this.decoBlockBookcaseJungleID, Material.wood, "jungle", Block.soundWoodFootstep);
-		this.decoBlockBookcaseOak = new DecoBlockBookcase(this.decoBlockBookcaseOakID, Material.wood, "oak", Block.soundWoodFootstep);
-		this.decoBlockBookcaseSpruce = new DecoBlockBookcase(this.decoBlockBookcaseSpruceID, Material.wood, "spruce", Block.soundWoodFootstep);
+		this.decoBlockBookcaseBirch = new DecoBlockBookcase(this.decoBlockBookcaseBirchID, Material.wood, "birch");
+		this.decoBlockBookcaseBloodwood = new DecoBlockBookcase(this.decoBlockBookcaseBloodwoodID, Material.wood, "bloodwood");
+		this.decoBlockBookcaseEbonwood = new DecoBlockBookcase(this.decoBlockBookcaseEbonwoodID, Material.wood, "ebonwood");
+		this.decoBlockBookcaseIronwood = new DecoBlockBookcase(this.decoBlockBookcaseIronwoodID, Material.wood, "ironwood");
+		this.decoBlockBookcaseJungle = new DecoBlockBookcase(this.decoBlockBookcaseJungleID, Material.wood, "jungle");
+		this.decoBlockBookcaseOak = new DecoBlockBookcase(this.decoBlockBookcaseOakID, Material.wood, "oak");
+		this.decoBlockBookcaseSpruce = new DecoBlockBookcase(this.decoBlockBookcaseSpruceID, Material.wood, "spruce");
 		
 		this.decoBlockCabinetBirch = new DecoBlockCabinet(this.decoBlockCabinetBirchID, "birch");
 		this.decoBlockCabinetBloodwood = new DecoBlockCabinet(this.decoBlockCabinetBloodwoodID, "bloodwood");
@@ -203,13 +203,13 @@ public class DecoSubModuleFurniture implements DecoISubModule
 		this.decoBlockCabinetOak = new DecoBlockCabinet(this.decoBlockCabinetOakID, "oak");
 		this.decoBlockCabinetSpruce = new DecoBlockCabinet(this.decoBlockCabinetSpruceID, "spruce");
 		
-		this.decoBlockChairBirch = new DecoBlockChairWood(this.decoBlockChairBirchID, Material.wood, "birch", Block.soundWoodFootstep);
-		this.decoBlockChairBloodwood = new DecoBlockChairWood(this.decoBlockChairBloodwoodID, Material.wood, "bloodwood", Block.soundWoodFootstep);
-		this.decoBlockChairEbonwood = new DecoBlockChairWood(this.decoBlockChairEbonwoodID, Material.wood, "ebonwood", Block.soundWoodFootstep);
-		this.decoBlockChairIronwood = new DecoBlockChairWood(this.decoBlockChairIronwoodID, Material.wood, "ironwood", Block.soundWoodFootstep);
-		this.decoBlockChairJungle = new DecoBlockChairWood(this.decoBlockChairJungleID, Material.wood, "jungle", Block.soundWoodFootstep);
-		this.decoBlockChairOak = new DecoBlockChairWood(this.decoBlockChairOakID, Material.wood, "oak", Block.soundWoodFootstep);
-		this.decoBlockChairSpruce = new DecoBlockChairWood(this.decoBlockChairSpruceID, Material.wood, "spruce", Block.soundWoodFootstep);
+		this.decoBlockChairBirch = new DecoBlockChairWood(this.decoBlockChairBirchID, Material.wood, "birch");
+		this.decoBlockChairBloodwood = new DecoBlockChairWood(this.decoBlockChairBloodwoodID, Material.wood, "bloodwood");
+		this.decoBlockChairEbonwood = new DecoBlockChairWood(this.decoBlockChairEbonwoodID, Material.wood, "ebonwood");
+		this.decoBlockChairIronwood = new DecoBlockChairWood(this.decoBlockChairIronwoodID, Material.wood, "ironwood");
+		this.decoBlockChairJungle = new DecoBlockChairWood(this.decoBlockChairJungleID, Material.wood, "jungle");
+		this.decoBlockChairOak = new DecoBlockChairWood(this.decoBlockChairOakID, Material.wood, "oak");
+		this.decoBlockChairSpruce = new DecoBlockChairWood(this.decoBlockChairSpruceID, Material.wood, "spruce");
 		
 		this.decoBlockChairBlackStone = new DecoBlockChairStone(this.decoBlockChairBlackStoneID, Block.blockNetherQuartz);
 		this.decoBlockChairBlackStoneBrick = new DecoBlockChairStone(this.decoBlockChairBlackStoneBrickID, DecoModuleBuilding.decoSubModuleBlackStoneBrick.decoBlockBlackStoneBrick);
@@ -231,8 +231,8 @@ public class DecoSubModuleFurniture implements DecoISubModule
 		
 		this.decoBlockTableWood = new DecoBlockTableWood(this.decoBlockTableWoodID);
 		this.decoBlockTableStone = new DecoBlockTableStone(this.decoBlockTableStoneID, DecoUtilsStrings.STONE_TAGS, DecoUtilsStrings.STONE_NAMES);
-		this.decoBlockTableStone2 = new DecoBlockTableStone(this.decoBlockTableStone2ID, DecoUtilsStrings.STONE_TAGS2, DecoUtilsStrings.STONE_NAMES2);
-		this.decoBlockTableStone3 = new DecoBlockTableStone(this.decoBlockTableStone3ID, DecoUtilsStrings.STONE_TAGS3, DecoUtilsStrings.STONE_NAMES3);
+		this.decoBlockTableStone2 = new DecoBlockTableStone(this.decoBlockTableStone2ID, DecoUtilsStrings.STONE_TAGS_2, DecoUtilsStrings.STONE_NAMES_2);
+		this.decoBlockTableStone3 = new DecoBlockTableStone(this.decoBlockTableStone3ID, DecoUtilsStrings.STONE_TAGS_3, DecoUtilsStrings.STONE_NAMES_3);
 		
 		this.decoBlockWardrobeBirch = new DecoBlockWardrobe(this.decoBlockWardrobeBirchID, "birch");
 		this.decoBlockWardrobeBloodwood = new DecoBlockWardrobe(this.decoBlockWardrobeBloodwoodID, "bloodwood");

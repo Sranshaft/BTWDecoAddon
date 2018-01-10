@@ -20,11 +20,11 @@ public class DecoUtilsStrings
 	public static final String[] STONE_TAGS = new String[] { "brick", "blackStone", "blackStoneBrick", "brimstone", "charredNetherBrick", "cobblestone", "duskbound", "ebonstone", "ebonstoneBrick", "endstone", "endstoneBrick", "froststone", "hardenedClay", "hardenedNetherSludge", "mossyCobblestone", "mudstone" };
 	public static final String[] STONE_NAMES = new String[] { "Brick", "Black Stone", "Black Stone Brick", "Brimstone", "Charred Nether Brick", "Cobblestone", "Duskbound", "Ebonstone", "Ebonstone Brick", "Endstone", "Endstone Brick", "Froststone", "Hardened Clay", "Hardened Nether Sludge", "Mossy Cobblestone", "Mudstone" };
 	
-	public static final String[] STONE_TAGS2 = new String[] { "mudstoneBrick", "netherBrick", "netherrack", "netherWroughtStone", "obsidian", "prismarine", "redSandstone", "redSandstoneBrick", "saguarostone", "sandstone", "sandstoneBrick", "sandyBrick", "soulSandstone", "soulSandstoneBrick", "stone", "stoneBrick" };
-	public static final String[] STONE_NAMES2 = new String[] { "Mudstone Brick", "Nether Brick", "Netherrack", "Nether Wrought Stone", "Obsidian", "Prismarine", "Red Sandstone", "Red Sandstone Brick", "Saguarostone", "Sandstone", "Sandstone Brick", "Sandy Brick", "Soul Sandstone", "Soul Sandstone Brick", "Stone", "Stone Brick" };
+	public static final String[] STONE_TAGS_2 = new String[] { "mudstoneBrick", "netherBrick", "netherrack", "netherWroughtStone", "obsidian", "prismarine", "redSandstone", "redSandstoneBrick", "saguarostone", "sandstone", "sandstoneBrick", "sandyBrick", "soulSandstone", "soulSandstoneBrick", "stone", "stoneBrick" };
+	public static final String[] STONE_NAMES_2 = new String[] { "Mudstone Brick", "Nether Brick", "Netherrack", "Nether Wrought Stone", "Obsidian", "Prismarine", "Red Sandstone", "Red Sandstone Brick", "Saguarostone", "Sandstone", "Sandstone Brick", "Sandy Brick", "Soul Sandstone", "Soul Sandstone Brick", "Stone", "Stone Brick" };
 	
-	public static final String[] STONE_TAGS3 = new String[] { "whiteStone", "whiteStoneBrick" };
-	public static final String[] STONE_NAMES3 = new String[] { "White Stone", "White Stone Brick" };
+	public static final String[] STONE_TAGS_3 = new String[] { "whiteStone", "whiteStoneBrick" };
+	public static final String[] STONE_NAMES_3 = new String[] { "White Stone", "White Stone Brick" };
 	
 	public static final String[] STORAGE_TAGS = new String[] { "blazeRod", "brimstone", "charcoal", "coal", "netherCoal", "netherWart" };
 	public static final String[] STORAGE_NAMES = new String[] { "Blaze Rod", "Brimstone", "Charcoal", "Coal", "Nether Coal", "Nether Wart" };
@@ -35,7 +35,7 @@ public class DecoUtilsStrings
 	public static final String[] STORAGE_POWDER_TAGS = new String[] { "ash", "blazePowder", "bonemeal", "coalDust", "cocoaPowder", "fertilizer", "flour", "groundNetherrack", "gunpowder", "hellfireDust", "nitre", "potash", "sawdust", "souldust", "sugar"};
 	public static final String[] STORAGE_POWDER_NAMES = new String[] { "Ash", "Blaze Powder", "Bonemeal", "Coal Dust", "Cocoa Powder", "Fertilizer", "Flour", "Ground Netherrack", "Gunpowder", "Hellfire Dust", "Nitre", "Potash", "Sawdust", "Soul Dust", "Sugar" };
 	
-	public static final String[] TREE_TYPES = new String[] { "oak", "spruce", "birch", "jungle", "ebonwood", "ironwood" };
+	public static final String[] TREE_TAGS = new String[] { "oak", "spruce", "birch", "jungle", "ebonwood", "ironwood" };
 	public static final String[] TREE_NAMES = new String[] { "Oak", "Spruce", "Birch", "Jungle", "Ebonwood", "Ironwood" };
 	
 	public static final String[] TREE_SIDE_TEXTURE_PATHS = new String[] {"tree_side", "tree_spruce", "tree_birch", "tree_jungle", "tree_ebonwood", "tree_ironwood" };
@@ -44,8 +44,8 @@ public class DecoUtilsStrings
 	public static final String[] TRUNK_SIDE_TEXTURE_PATHS = new String[] {"fcBlockTrunkOak", "fcBlockTrunkSpruce", "fcBlockTrunkJungle", "fcBlockTrunkBirch", "decoBlockTrunkEbonwood", "decoBlockTrunkIronwood" };
 	public static final String[] TRUNK_TOP_TEXTURE_PATHS = new String[] {"fcBlockTrunkTop", "trunk_top_spruce", "trunk_top_jungle", "trunk_top_birch", "trunk_top_ebonwood", "trunk_top_ironwood" };
 	
-	public static final String[] WOOD_PLANK_TEXTURE_PATHS = new String[] { "wood", "wood_spruce", "wood_birch", "wood_jungle", "wood_bloodwood", "wood_ebonwood", "wood_ironwood" };
+	public static final String[] WOOD_TEXTURE_PATHS = new String[] { "wood", "wood_spruce", "wood_birch", "wood_jungle", "wood_bloodwood", "wood_ebonwood", "wood_ironwood" };
 	
-	public static final String[] WOOD_PLANK_TYPES = new String[] { "oak", "spruce", "birch", "jungle", "bloodwood", "ebonwood", "ironwood" };
-	public static final String[] WOOD_PLANK_NAMES = new String[] { "Oak", "Spruce", "Birch", "Jungle", "Bloodwood", "Ebonwood", "Ironwood" };
+	public static final String[] WOOD_TAGS = new String[] { "oak", "spruce", "birch", "jungle", "bloodwood", "ebonwood", "ironwood" };
+	public static final String[] WOOD_NAMES = new String[] { "Oak", "Spruce", "Birch", "Jungle", "Bloodwood", "Ebonwood", "Ironwood" };
 }

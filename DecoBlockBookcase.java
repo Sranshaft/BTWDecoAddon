@@ -1,10 +1,10 @@
 package net.minecraft.src;
 
-public class DecoBlockBookcase extends Block implements FCIBlock 
+public class DecoBlockBookcase extends Block implements DecoIBlock, FCIBlock 
 {
 	private String m_Tag;
 
-	public DecoBlockBookcase(int id, Material material, String tag, StepSound sound)
+	public DecoBlockBookcase(int id, Material material, String tag)
 	{
 		super(id, material);
 		this.setUnlocalizedName("decoBlockBookcase." + tag);
@@ -17,6 +17,46 @@ public class DecoBlockBookcase extends Block implements FCIBlock
 		Block.lightOpacity[id] = 255;
 
 		this.m_Tag = tag;
+	}
+
+	/**
+	 * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
+	 */
+	public int idPicked(World world, int x, int y, int z)
+	{
+		return world.getBlockId(x, y, z);
+	}
+
+	/**
+	 * Get the block's damage value (for use with pick block).
+	 */
+	public int getDamageValue(World world, int x, int y, int z)
+	{
+		return world.getBlockMetadata(x, y, z);
+	}
+
+	/**
+	 * Determines the damage on the item the block drops. Used in cloth and wood.
+	 */
+	public int damageDropped(int metadata) 
+	{
+		return metadata;
+	}
+	public int onBlockPlaced(World world, int x, int y, int z, int direction, float hitX, float hitY, float hitZ, int metadata)
+	{
+		if (direction < 2)
+			direction = 2;
+		else
+			direction = FCUtilsMisc.GetOppositeFacing(direction);
+
+		return SetFacingInMetadata(metadata, direction);
+	}
+	
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entity, ItemStack itemStack)
+	{
+		int var7 = FCUtilsMisc.ConvertPlacingEntityOrientationToBlockFacing(entity);
+		this.SetFacing(world, x, y, z, var7);
+		
 	}
 	
 	public boolean DoesBlockHaveSolidTop(IBlockAccess bAccess, int x, int y, int z) 
@@ -75,23 +115,40 @@ public class DecoBlockBookcase extends Block implements FCIBlock
 		return true;
 	}
 	
-	public int onBlockPlaced(World world, int x, int y, int z, int direction, float hitX, float hitY, float hitZ, int metadata)
+	/**
+	 * Is this block (a) opaque and (b) a full 1m cube? This determines whether or
+	 * not to render the shared face of two adjacent blocks and also whether the
+	 * player can attach torches, redstone wire, etc to this block.
+	 */
+	public boolean isOpaqueCube() 
 	{
-		if (direction < 2)
-			direction = 2;
-		else
-			direction = FCUtilsMisc.GetOppositeFacing(direction);
+		return false;
+	}
 
-		return SetFacingInMetadata(metadata, direction);
-	}
-	
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entity, ItemStack itemStack)
+	/**
+	 * If this block doesn't render as an ordinary block it will return False
+	 * (examples: signs, buttons, stairs, etc)
+	 */
+	public boolean renderAsNormalBlock() 
 	{
-		int var7 = FCUtilsMisc.ConvertPlacingEntityOrientationToBlockFacing(entity);
-		this.SetFacing(world, x, y, z, var7);
-		
+		return false;
 	}
-	
+
+	public boolean shouldSideBeRendered(IBlockAccess bAccess, int x, int y, int z, int side)
+	{
+		return true;
+	}
+
+	/**
+	 * When this method is called, your block should register all the icons it needs
+	 * with the given IconRegister. This is the only chance you get to register
+	 * icons.
+	 */
+	public void registerIcons(IconRegister register) 
+	{
+		this.blockIcon = register.registerIcon("decoBlockFurniture_" + this.m_Tag);
+	}
+
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
 		int direction = this.GetFacing(world, x, y, z);
@@ -187,48 +244,6 @@ public class DecoBlockBookcase extends Block implements FCIBlock
 		}
 		
 		setBlockBounds(rotatedMinX, minY, rotatedMinZ, rotatedMaxX, maxY, rotatedMaxZ);
-	}
-	
-	public boolean shouldSideBeRendered(IBlockAccess bAccess, int x, int y, int z, int side)
-	{
-		return true;
-	}
-	
-	/**
-	 * When this method is called, your block should register all the icons it needs
-	 * with the given IconRegister. This is the only chance you get to register
-	 * icons.
-	 */
-	public void registerIcons(IconRegister register) 
-	{
-		this.blockIcon = register.registerIcon("decoBlockFurniture_" + this.m_Tag);
-	}
-	
-	/**
-	 * Determines the damage on the item the block drops. Used in cloth and wood.
-	 */
-	public int damageDropped(int metadata) 
-	{
-		return metadata;
-	}
-
-	/**
-	 * Is this block (a) opaque and (b) a full 1m cube? This determines whether or
-	 * not to render the shared face of two adjacent blocks and also whether the
-	 * player can attach torches, redstone wire, etc to this block.
-	 */
-	public boolean isOpaqueCube() 
-	{
-		return false;
-	}
-
-	/**
-	 * If this block doesn't render as an ordinary block it will return False
-	 * (examples: signs, buttons, stairs, etc)
-	 */
-	public boolean renderAsNormalBlock() 
-	{
-		return false;
 	}
 	
 	public void SetRenderBoundsRotatedAboutJToFacing(RenderBlocks render, float minX, float minY, float minZ, float maxX, float maxY, float maxZ, int direction)

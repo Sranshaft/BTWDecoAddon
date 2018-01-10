@@ -7,7 +7,7 @@ public class DecoUtilsCrops
 	/**
 	 * returns true if the block below the crop is suitable for planting
 	 */
-	private static boolean isBlockSuitable(World world, int x, int y, int z)
+	public static boolean isBlockSuitable(World world, int x, int y, int z)
 	{
 		int blockID = world.getBlockId(x, y, z);
 		int blockMetadata = world.getBlockMetadata(x, y, z);
@@ -20,11 +20,25 @@ public class DecoUtilsCrops
 	 */
 	public static boolean isBonemeal(ItemStack itemStack)
 	{
-		if ((itemStack.itemID == Item.dyePowder.itemID && itemStack.getItemDamage() == 15) 
-				|| itemStack.itemID == FCBetterThanWolves.fcPotash.itemID 
-				|| itemStack.itemID == DecoSubModuleFlowers.decoItemFertilizerID)
+		if (itemStack.itemID == FCBetterThanWolves.fcPotash.itemID 
+				|| itemStack.itemID == DecoSubModuleFlowers.decoItemFertilizer.itemID
+				|| (itemStack.itemID == Item.dyePowder.itemID && itemStack.getItemDamage() == 15))
 	    	 return true;
 		else 
+			return false;
+	}
+	
+	/**
+	 * returns true if the item is a plantable seed
+	 */
+	public static boolean isPlantableSeed(ItemStack itemStack)
+	{
+		if (itemStack.itemID == Item.seeds.itemID 
+				|| itemStack.itemID == Item.pumpkinSeeds.itemID
+				|| itemStack.itemID == Item.melonSeeds.itemID
+				|| itemStack.itemID == FCBetterThanWolves.fcHempSeeds.itemID)
+			return true;
+		else
 			return false;
 	}
 	
@@ -47,20 +61,6 @@ public class DecoUtilsCrops
 	    }
 	
 	    return false;
-	}
-	
-	/**
-	 * returns true if the item is a plantable seed
-	 */
-	public static boolean isPlantableSeed(ItemStack itemStack)
-	{
-		if (itemStack.itemID == Item.seeds.itemID 
-				|| itemStack.itemID == Item.pumpkinSeeds.itemID
-				|| itemStack.itemID == Item.melonSeeds.itemID
-				|| itemStack.itemID == FCBetterThanWolves.fcHempSeeds.itemID)
-			return true;
-		else
-			return false;
 	}
 	
 	/**
@@ -134,7 +134,7 @@ public class DecoUtilsCrops
 			return false;
 	}
 	
-	private static void growTallGrassAndFlowers(World World, int x, int y, int z)
+	public static void growTallGrassAndFlowers(World World, int x, int y, int z)
 	{
 		int index = 0;
 		while (index < 128)

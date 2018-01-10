@@ -3,7 +3,7 @@ package net.minecraft.src;
 import java.util.List;
 import java.util.Random;
 
-public class DecoBlockBookshelf extends Block
+public class DecoBlockBookshelf extends Block implements DecoIBlock
 {
 	private static String[] m_BookshelfSides = new String[] { "bookshelf", "bookshelf_spruce", "bookshelf_birch", "bookshelf_jungle", "bookshelf_bloodwood", "bookshelf_ebonwood", "bookshelf_ironwood" };
 	private Icon[] m_IconByMetadataArray;
@@ -18,8 +18,32 @@ public class DecoBlockBookshelf extends Block
 		this.setStepSound(Block.soundWoodFootstep);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
         
-        DecoAddonManager.register(this, DecoUtilsStrings.WOOD_PLANK_TYPES, DecoUtilsStrings.WOOD_PLANK_NAMES, " Bookshelf");
+        DecoAddonManager.register(this, DecoUtilsStrings.WOOD_TAGS, DecoUtilsStrings.WOOD_NAMES, " Bookshelf");
     }
+
+    /**
+	 * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
+	 */
+	public int idPicked(World world, int x, int y, int z)
+	{
+		return world.getBlockId(x, y, z);
+	}
+
+	/**
+	 * Get the block's damage value (for use with pick block).
+	 */
+	public int getDamageValue(World world, int x, int y, int z)
+	{
+		return world.getBlockMetadata(x, y, z);
+	}
+
+	/**
+	 * Determines the damage on the item the block drops. Used in cloth and wood.
+	 */
+	public int damageDropped(int metadata) 
+	{
+		return metadata;
+	}
     
     /**
      * Returns the ID of the items to drop on destruction.
@@ -34,15 +58,7 @@ public class DecoBlockBookshelf extends Block
      */
     public int quantityDropped(Random random)
     {
-        return 3;
-    }
-
-    /**
-     * Determines the damage on the item the block drops. Used in cloth and wood.
-     */
-    public int damageDropped(int metadata)
-    {
-        return metadata;
+        return random.nextInt(3);
     }
 
     /**
