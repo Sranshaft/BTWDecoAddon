@@ -1,10 +1,10 @@
 package net.minecraft.src;
 
-public class DecoBlockChairWood extends Block implements DecoIBlock, FCIBlock 
+public class DecoBlockChairWood extends Block implements FCIBlock 
 {
 	private String m_Tag;
 
-	public DecoBlockChairWood(int id, Material material, String tag)
+	public DecoBlockChairWood(int id, Material material, String tag, StepSound sound)
 	{
 		super(id, material);
 		
@@ -18,28 +18,6 @@ public class DecoBlockChairWood extends Block implements DecoIBlock, FCIBlock
 		Block.lightOpacity[id] = 255;
 
 		this.m_Tag = tag;
-	}
-
-	/**
-	 * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
-	 */
-	public int idPicked(World world, int x, int y, int z)
-	{
-		return world.getBlockId(x, y, z);
-	}
-
-	public int onBlockPlaced(World world, int x, int y, int z, int direction, float hitX, float hitY, float hitZ, int metadata)
-	{
-		if (direction < 2) direction = 2;
-		else direction = FCUtilsMisc.GetOppositeFacing(direction);
-
-		return SetFacingInMetadata(metadata, direction);
-	}
-	
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entity, ItemStack itemStack)
-	{
-		int var7 = FCUtilsMisc.ConvertPlacingEntityOrientationToBlockFacing(entity);
-		this.SetFacing(world, x, y, z, var7);
 	}
 	
 	public int GetFacing(IBlockAccess bAccess, int x, int y, int z)
@@ -93,6 +71,59 @@ public class DecoBlockChairWood extends Block implements DecoIBlock, FCIBlock
 		return true;
 	}
 	
+	public int onBlockPlaced(World world, int x, int y, int z, int direction, float hitX, float hitY, float hitZ, int metadata)
+	{
+		if (direction < 2)
+			direction = 2;
+		else
+			direction = FCUtilsMisc.GetOppositeFacing(direction);
+
+		return SetFacingInMetadata(metadata, direction);
+	}
+	
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entity, ItemStack itemStack)
+	{
+		int var7 = FCUtilsMisc.ConvertPlacingEntityOrientationToBlockFacing(entity);
+		this.SetFacing(world, x, y, z, var7);
+	}
+	
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
+	{
+		int direction = this.GetFacing(world, x, y, z);
+		return direction != 2 && direction != 3 ? AxisAlignedBB.getAABBPool().getAABB((double) ((float) x), (double) ((float) y), (double) ((float) z + 0.5F - 0.25F), 
+																				      (double) ((float) x + 1.0F), (double) ((float) y + 1.0F), (double) ((float) z + 0.5F + 0.25F)) 
+												: AxisAlignedBB.getAABBPool().getAABB((double) ((float) x + 0.5F - 0.25F), (double) ((float) y), (double) ((float) z), 
+																					  (double) ((float) x + 0.5F + 0.25F), (double) ((float) y + 1.0F), (double) ((float) z + 1.0F));
+	}
+	
+	public void setBlockBoundsBasedOnState(IBlockAccess bAccess, int x, int y, int z)
+	{
+		setBlockBounds(.0625F, 0.0F, .0625F, .9375F, 1.25F, .9375F);
+	}
+	
+	public boolean shouldSideBeRendered(IBlockAccess bAccess, int x, int y, int z, int side)
+	{
+		return true;
+	}
+	
+	/**
+	 * When this method is called, your block should register all the icons it needs
+	 * with the given IconRegister. This is the only chance you get to register
+	 * icons.
+	 */
+	public void registerIcons(IconRegister register) 
+	{
+		this.blockIcon = register.registerIcon("decoBlockFurniture_" + this.m_Tag);
+	}
+	
+	/**
+	 * Determines the damage on the item the block drops. Used in cloth and wood.
+	 */
+	public int damageDropped(int metadata) 
+	{
+		return metadata;
+	}
+
 	/**
 	 * Is this block (a) opaque and (b) a full 1m cube? This determines whether or
 	 * not to render the shared face of two adjacent blocks and also whether the
@@ -110,35 +141,6 @@ public class DecoBlockChairWood extends Block implements DecoIBlock, FCIBlock
 	public boolean renderAsNormalBlock() 
 	{
 		return false;
-	}
-
-	public boolean shouldSideBeRendered(IBlockAccess bAccess, int x, int y, int z, int side)
-	{
-		return true;
-	}
-
-	/**
-	 * When this method is called, your block should register all the icons it needs
-	 * with the given IconRegister. This is the only chance you get to register
-	 * icons.
-	 */
-	public void registerIcons(IconRegister register) 
-	{
-		this.blockIcon = register.registerIcon("decoBlockFurniture_" + this.m_Tag);
-	}
-
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
-	{
-		int direction = this.GetFacing(world, x, y, z);
-		return direction != 2 && direction != 3 ? AxisAlignedBB.getAABBPool().getAABB((double) ((float) x), (double) ((float) y), (double) ((float) z + 0.5F - 0.25F), 
-																				      (double) ((float) x + 1.0F), (double) ((float) y + 1.0F), (double) ((float) z + 0.5F + 0.25F)) 
-												: AxisAlignedBB.getAABBPool().getAABB((double) ((float) x + 0.5F - 0.25F), (double) ((float) y), (double) ((float) z), 
-																					  (double) ((float) x + 0.5F + 0.25F), (double) ((float) y + 1.0F), (double) ((float) z + 1.0F));
-	}
-	
-	public void setBlockBoundsBasedOnState(IBlockAccess bAccess, int x, int y, int z)
-	{
-		this.setBlockBounds(.0625F, 0.0F, .0625F, .9375F, 1.25F, .9375F);
 	}
 	
 	public void SetRenderBoundsRotatedAboutJToFacing(RenderBlocks render, float minX, float minY, float minZ, float maxX, float maxY, float maxZ, int direction)
@@ -213,27 +215,21 @@ public class DecoBlockChairWood extends Block implements DecoIBlock, FCIBlock
 	
 	public void RenderBlockAsItem(RenderBlocks render, int var2, float var3)
 	{
-		// LEG: NW
+		//Legs
 		render.setRenderBounds(0.025F, 0.0F, 0.025F, 0.15F, 0.5F, 0.15F);
 		FCClientUtilsRender.RenderInvBlockWithTexture(render, this, -0.5F, -0.5F, -0.5F, blockIcon);
-
-		// LEG: SW
 		render.setRenderBounds(0.025F, 0.0F, 0.85F, 0.15F, 0.5F, 0.975F);
 		FCClientUtilsRender.RenderInvBlockWithTexture(render, this, -0.5F, -0.5F, -0.5F, blockIcon);
-
-		// LEG: NE
 		render.setRenderBounds(0.85F, 0.0F, 0.025F, 0.975F, 0.5F, 0.15F);
 		FCClientUtilsRender.RenderInvBlockWithTexture(render, this, -0.5F, -0.5F, -0.5F, blockIcon);
-
-		// LEG: SW
 		render.setRenderBounds(0.85F, 0.0F, 0.85F, 0.975F, 0.5F, 0.975F);
 		FCClientUtilsRender.RenderInvBlockWithTexture(render, this, -0.5F, -0.5F, -0.5F, blockIcon);
 		
-		// SEAT
+		//Seat
 		render.setRenderBounds(0.025F, 0.5F, 0.025F, 0.975F, 0.65F, 0.975F);
 		FCClientUtilsRender.RenderInvBlockWithTexture(render, this, -0.5F, -0.5F, -0.5F, blockIcon);
 		
-		// BACK
+		//Back
 		render.setRenderBounds(0.025F, 0.65F, 0.025F, 0.15F, 1.5F, 0.975F);
 		FCClientUtilsRender.RenderInvBlockWithTexture(render, this, -0.5F, -0.5F, -0.5F, blockIcon);
 	}

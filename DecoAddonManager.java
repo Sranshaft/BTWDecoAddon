@@ -118,7 +118,6 @@ public class DecoAddonManager extends FCAddOn
 		this.replaceBlockName(var1, Block.stairsCobblestone, "Cobblestone Stairs");
 		this.replaceBlockName(var1, Block.trapdoor, "Oak Trapdoor");
 		this.replaceItemName(var1, Item.doorWood, "Oak Door");
-		this.replaceItemName(var1, Item.seeds, "Wheat Seeds");
 		
 		this.addStringName(var1, "item.skull.spider.name", "Spider Head");
 		this.addStringName(var1, "item.skull.enderman.name", "Enderman Head");

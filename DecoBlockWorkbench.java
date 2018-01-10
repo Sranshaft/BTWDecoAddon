@@ -19,7 +19,7 @@ public class DecoBlockWorkbench extends FCBlockWorkbench
 		this.setStepSound(Block.soundWoodFootstep);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
 		
-		DecoAddonManager.register(this, DecoUtilsStrings.WOOD_TAGS, DecoUtilsStrings.WOOD_NAMES, " Workbench");
+		DecoAddonManager.register(this, DecoUtilsStrings.WOOD_PLANK_TYPES, DecoUtilsStrings.WOOD_PLANK_NAMES, " Workbench");
 	}
 	
 	/**

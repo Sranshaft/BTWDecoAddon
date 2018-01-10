@@ -131,12 +131,12 @@ public class DecoBlockWildgrass extends FCBlockTallGrass
     	float growthMultiplier = 0.025F * FCUtilsMisc.GetBlockGrowthMultiplier(world, x, y - 1, z, this);
 		
 		if (random.nextFloat() <= growthMultiplier && canThisPlantGrowOnThisBlockID(world, x, y - 1, z, false))
-    		this.growPlant(world, x, y, z, random);
+    		growGrass(world, x, y, z, random);
     	
         super.updateTick(world, x, y, z, random);
     }
 
-    private void growPlant(World world, int x, int y, int z, Random random)
+    private void growGrass(World world, int x, int y, int z, Random random)
 	{
     	int metadata = world.getBlockMetadata(x, y, z);
 		int allowedPlantHeight = DecoUtilsWorld.GetHeightForBiome(world.getWorldChunkManager().getBiomeGenAt(x, z));
@@ -155,11 +155,11 @@ public class DecoBlockWildgrass extends FCBlockTallGrass
 			}
 		
 			if (world.getBlockId(x, y - 1, z) != FCBetterThanWolves.fcPlanter.blockID)
-				this.spreadPlant(world, x, y, z, random);
+				spreadGrass(world, x, y, z, random);
     	}
 	}
 
-	private void spreadPlant(World world, int x, int y, int z, Random random)
+	private void spreadGrass(World world, int x, int y, int z, Random random)
 	{
 		float growthMultiplier = 0.025F * FCUtilsMisc.GetBlockGrowthMultiplier(world, x, y - 1, z, this);
 		

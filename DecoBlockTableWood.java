@@ -9,56 +9,37 @@ public class DecoBlockTableWood extends Block implements FCIBlockSolidTop
 	public DecoBlockTableWood(int id)
 	{
 		super(id, Material.wood);
-		
-		this.setUnlocalizedName("decoBlockTableWood");
-		this.setHardness(Block.wood.blockHardness);
-		this.setResistance(Block.wood.blockResistance);
-		this.setStepSound(Block.soundWoodFootstep);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		setUnlocalizedName("decoBlockTableWood");
+		setHardness(Block.wood.blockHardness);
+		setResistance(Block.wood.blockResistance);
+		setStepSound(Block.soundWoodFootstep);
+		setCreativeTab(CreativeTabs.tabDecorations);
 		
 		Block.useNeighborBrightness[id] = true;
 		Block.lightOpacity[id] = 255;
 		
-		DecoAddonManager.register(this, DecoUtilsStrings.WOOD_TAGS, DecoUtilsStrings.WOOD_NAMES, " Table");
+		DecoAddonManager.register(this, DecoUtilsStrings.WOOD_PLANK_TYPES, DecoUtilsStrings.WOOD_PLANK_NAMES, " Table");
 	}
-	
-	//CLIENT ONLY
-
-    /**
-     * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
-     */
-    public int idPicked(World world, int x, int y, int z)
-    {
-        return world.getBlockId(x, y, z);
-    }
-
-    /**
-     * Get the block's damage value (for use with pick block).
-     */
-    public int getDamageValue(World world, int x, int y, int z)
-    {
-        return world.getBlockMetadata(x, y, z);
-    }
-    
-    /**
-     * Determines the damage on the item the block drops. Used in cloth and wood.
-     */
-    public int damageDropped(int metadata)
-    {
-        return metadata;
-    }
 
 	public boolean DoesBlockHaveSolidTop(IBlockAccess bAccess, int x, int y, int z) 
 	{
 		return true;
 	}
 	
-	/**
-	 * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
-	 */
-	public Icon getIcon(int side, int metadata)
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		return this.m_IconByMetadataArray[metadata];
+		return AxisAlignedBB.getAABBPool().getAABB((double) ((float) x), (double) ((float) y), (double) ((float) z), 
+												   (double) ((float) x + 1.0F), (double) ((float) y + 1.0F), (double) ((float) z + 1.0F));
+	}
+	
+	public void setBlockBoundsBasedOnState(IBlockAccess bAccess, int x, int y, int z)
+	{
+		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+	}
+	
+	public boolean shouldSideBeRendered(IBlockAccess bAccess, int x, int y, int z, int side)
+	{
+		return true;
 	}
 	
 	/**
@@ -68,12 +49,17 @@ public class DecoBlockTableWood extends Block implements FCIBlockSolidTop
 	 */
 	public void registerIcons(IconRegister register) 
 	{
-		this.m_IconByMetadataArray = new Icon[DecoUtilsStrings.WOOD_TAGS.length];
+		this.m_IconByMetadataArray = new Icon[DecoUtilsStrings.WOOD_PLANK_TYPES.length];
 		
-		for (int index = 0; index < DecoUtilsStrings.WOOD_TAGS.length; index++)
+		for (int index = 0; index < DecoUtilsStrings.WOOD_PLANK_TYPES.length; index++)
 		{
-			this.m_IconByMetadataArray[index] = register.registerIcon("decoBlockFurniture_" + DecoUtilsStrings.WOOD_TAGS[index]);
+			this.m_IconByMetadataArray[index] = register.registerIcon("decoBlockFurniture_" + DecoUtilsStrings.WOOD_PLANK_TYPES[index]);
 		}
+	}
+	
+	public Icon getIcon(int side, int metadata)
+	{
+		return this.m_IconByMetadataArray[metadata];
 	}
 	
 	/**
@@ -81,11 +67,19 @@ public class DecoBlockTableWood extends Block implements FCIBlockSolidTop
      */
     public void getSubBlocks(int var1, CreativeTabs var2, List var3)
     {
-    	for (int index = 0; index < DecoUtilsStrings.WOOD_TAGS.length; index++)
+    	for (int index = 0; index < DecoUtilsStrings.WOOD_PLANK_TYPES.length; index++)
     	{
     		var3.add(new ItemStack(var1, 1, index));
     	}
     }
+	
+	/**
+	 * Determines the damage on the item the block drops. Used in cloth and wood.
+	 */
+	public int damageDropped(int metadata)
+	{
+		return metadata;
+	}
 
 	/**
 	 * Is this block (a) opaque and (b) a full 1m cube? This determines whether or
@@ -106,11 +100,6 @@ public class DecoBlockTableWood extends Block implements FCIBlockSolidTop
 		return false;
 	}
 	
-	public boolean shouldSideBeRendered(IBlockAccess bAccess, int x, int y, int z, int side)
-	{
-		return true;
-	}
-	
 	/**
      * Return whether an adjacent block can connect to a wall.
      */
@@ -120,24 +109,13 @@ public class DecoBlockTableWood extends Block implements FCIBlockSolidTop
         
         return var5 != this.blockID ? false : true;
     }
-    
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
-	{
-		return AxisAlignedBB.getAABBPool().getAABB((double) ((float) x), (double) ((float) y), (double) ((float) z), 
-												   (double) ((float) x + 1.0F), (double) ((float) y + 1.0F), (double) ((float) z + 1.0F));
-	}
-	
-	public void setBlockBoundsBasedOnState(IBlockAccess bAccess, int x, int y, int z)
-	{
-		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-	}
 
 	public boolean RenderBlock(RenderBlocks render, int x, int y, int z)
 	{
-		boolean isBlockWest = this.canConnectTo(render.blockAccess, x - 1, y, z);
-		boolean isBlockEast = this.canConnectTo(render.blockAccess, x + 1, y, z);
-		boolean isBlockNorth = this.canConnectTo(render.blockAccess, x, y, z - 1);
-		boolean isBlockSouth = this.canConnectTo(render.blockAccess, x, y, z + 1);
+		boolean isBlockWest = canConnectTo(render.blockAccess, x - 1, y, z);
+		boolean isBlockEast = canConnectTo(render.blockAccess, x + 1, y, z);
+		boolean isBlockNorth = canConnectTo(render.blockAccess, x, y, z - 1);
+		boolean isBlockSouth = canConnectTo(render.blockAccess, x, y, z + 1);
 		boolean isBlockNorthAndSouth = isBlockNorth && isBlockSouth;
 		boolean isBlockEastAndWest = isBlockWest && isBlockEast;
 		

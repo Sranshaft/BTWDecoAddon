@@ -13,7 +13,6 @@ public class DecoModuleDecoration implements DecoIModule
 	public static DecoSubModuleHedge decoSubModuleHedge;
 	public static DecoSubModuleLantern decoSubModuleLantern;
 	
-	public static Block decoBlockBamboo;
 	public static Block decoBlockCrate;
 	public static Block decoBlockPaperWall;
 	public static Block decoBlockWoolCarpet;
@@ -24,7 +23,6 @@ public class DecoModuleDecoration implements DecoIModule
 	
 	public static Item decoItemBottleHempOil;
 	
-	public static final int decoBlockBambooID = DecoAddonManager.getBlockID("decoBlockBambooID");
 	public static final int decoBlockCrateID = DecoAddonManager.getBlockID("decoBlockCrateID");
 	public static final int decoBlockPaperWallID = DecoAddonManager.getBlockID("decoBlockPaperWallID");
 	public static final int decoBlockWoolCarpetID = DecoAddonManager.getBlockID("decoBlockWoolCarpetID");
@@ -59,8 +57,6 @@ public class DecoModuleDecoration implements DecoIModule
 		if (DecoAddonManager.getConfigOption("enableWoolCarpet"))
 			this.decoBlockWoolCarpet = new DecoBlockWoolCarpet(this.decoBlockWoolCarpetID);
 		
-		this.decoBlockBamboo = new DecoBlockBamboo(this.decoBlockBambooID);
-		
 		TileEntity.addMapping(DecoTileEntityCrate.class, "Crate");
 		this.decoBlockCrate = new DecoBlockCrate(this.decoBlockCrateID);
 
@@ -81,7 +77,6 @@ public class DecoModuleDecoration implements DecoIModule
 	
 	public void registerBlocks() 
 	{
-		DecoAddonManager.register(this.decoBlockBamboo, "Bamboo");
 		DecoAddonManager.register(this.decoBlockPaperWall, "Paper Wall");
 		DecoAddonManager.register(this.decoBlockPanePaperWall, "Paper Wall");
 		DecoAddonManager.register(this.decoBlockPaneSoulforgedSteelFence, "Soulforge Steel Fence");

@@ -15,29 +15,8 @@ public class DecoBlockCrate extends BlockContainer
         this.setStepSound(soundWoodFootstep);
         this.setCreativeTab(CreativeTabs.tabDecorations);
         
-        DecoAddonManager.register(this, DecoUtilsStrings.WOOD_TAGS, DecoUtilsStrings.WOOD_NAMES, " Crate");
+        DecoAddonManager.register(this, DecoUtilsStrings.WOOD_PLANK_TYPES, DecoUtilsStrings.WOOD_PLANK_NAMES, " Crate");
 	}
-
-    public int idPicked(World world, int x, int y, int z) 
-    {
-        return world.getBlockId(x, y, z);
-    }
-
-    /**
-     * Get the block's damage value (for use with pick block).
-     */
-    public int getDamageValue(World world, int x, int y, int z)
-    {
-        return world.getBlockMetadata(x, y, z);
-    }
-
-    /**
-     * Determines the damage on the item the block drops. Used in cloth and wood.
-     */
-    public int damageDropped(int metadata)
-    {
-        return metadata;
-    }
 	
 	/**
      * Called when the block is placed in the world.
@@ -70,7 +49,7 @@ public class DecoBlockCrate extends BlockContainer
 
         return true;
     }
-
+    
     /**
      * Called when the player destroys a block with an item that can harvest it. (i, j, k) are the coordinates of the
      * block and l is the block's subtype/damage.
@@ -118,12 +97,20 @@ public class DecoBlockCrate extends BlockContainer
         }
     }
 
-    public TileEntity createNewTileEntity(World world) 
-    {
-        return new DecoTileEntityCrate();
-    }
+	public TileEntity createNewTileEntity(World world) 
+	{
+		return new DecoTileEntityCrate();
+	}
 
 	/**
+     * Determines the damage on the item the block drops. Used in cloth and wood.
+     */
+    public int damageDropped(int metadata)
+    {
+        return metadata;
+    }
+
+    /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
     public Icon getIcon(int side, int metadata)
@@ -137,11 +124,11 @@ public class DecoBlockCrate extends BlockContainer
      */
     public void registerIcons(IconRegister register)
     {
-        this.m_IconByMetadataArray = new Icon[DecoUtilsStrings.WOOD_TAGS.length];
+        this.m_IconByMetadataArray = new Icon[DecoUtilsStrings.WOOD_PLANK_TYPES.length];
         
-        for (int index = 0; index < DecoUtilsStrings.WOOD_TAGS.length; index++)
+        for (int index = 0; index < DecoUtilsStrings.WOOD_PLANK_TYPES.length; index++)
         {
-        	this.m_IconByMetadataArray[index] = register.registerIcon("decoBlockCrate_" + DecoUtilsStrings.WOOD_TAGS[index]);
+        	this.m_IconByMetadataArray[index] = register.registerIcon("decoBlockCrate_" + DecoUtilsStrings.WOOD_PLANK_TYPES[index]);
         }
     }
     
@@ -150,7 +137,7 @@ public class DecoBlockCrate extends BlockContainer
      */
     public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
     {
-    	for (int index = 0; index < DecoUtilsStrings.WOOD_TAGS.length; index++)
+    	for (int index = 0; index < DecoUtilsStrings.WOOD_PLANK_TYPES.length; index++)
         {
     		par3List.add(new ItemStack(par1, 1, index));
         }

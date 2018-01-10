@@ -1,6 +1,6 @@
 package net.minecraft.src;
 
-public class DecoBlockBone extends Block implements DecoIBlock
+public class DecoBlockBone extends Block
 {
 	private Icon m_IconSide;
 	private Icon m_IconTop;
@@ -14,11 +14,6 @@ public class DecoBlockBone extends Block implements DecoIBlock
 		this.setResistance(2.0F);
 		this.setStepSound(Block.soundStoneFootstep);
 		this.setCreativeTab(CreativeTabs.tabBlock);
-	}
-
-	public int idPicked(World world, int x, int y, int z) 
-	{
-		return world.getBlockId(x, y, z);
 	}
 	
 	/**
@@ -54,7 +49,7 @@ public class DecoBlockBone extends Block implements DecoIBlock
      */
     public int getRenderType()
     {
-        return DecoEnumRenderType.LOG.getRenderType();
+        return 31;
     }
 
     /**
@@ -82,7 +77,6 @@ public class DecoBlockBone extends Block implements DecoIBlock
     {
         this.setBlockBoundsBasedOnState(var1.blockAccess, var2, var3, var4);
         var1.setRenderBoundsFromBlock(this);
-
         return var1.renderBlockLog(this, var2, var3, var4);
     }
 }

@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.Random;
 
-public class DecoBlockGlass extends BlockGlass implements DecoIBlock
+public class DecoBlockGlass extends BlockGlass
 {
 	public DecoBlockGlass(int id)
 	{
@@ -16,25 +16,22 @@ public class DecoBlockGlass extends BlockGlass implements DecoIBlock
 		ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
 	}
 	
-	public void onFallenUpon(World world, int x, int y, int z, Entity entity, float var6)
+	public void registerIcons(IconRegister register)
 	{
-		if (!world.isRemote && entity.fallDistance > 3.0F && DecoAddonManager.getConfigOption("enableGlassBreaking"))
-		{
-			world.playAuxSFX(2001, x, y, z, this.blockID);
-			world.destroyBlock(x, y, z, true);
-		}
+		super.registerIcons(register);
+		Block.glass.registerIcons(register);
 	}
 	
 	public int idDropped(int metadata, Random random, int fortune)
 	{
 		if (DecoModuleTweaks.decoItemGlassShard == null) return 0;
-		return DecoModuleTweaks.decoItemGlassShard.itemID;
+		return DecoModuleTweaks.decoItemGlassShardID;
 	}
 	
 	public int quantityDropped(Random random)
 	{
 		if (DecoModuleTweaks.decoItemGlassShard == null) return 0;
-		return random.nextInt(3);
+		return 2 + random.nextInt(3);
 	}
 	
 	public int quantityDroppedWithBonus(int fortune, Random random)
@@ -43,15 +40,16 @@ public class DecoBlockGlass extends BlockGlass implements DecoIBlock
 		return Math.min(4, this.quantityDropped(random) + random.nextInt(fortune + 1));
 	}
 	
-	/**
-	 * When this method is called, your block should register all the icons it needs
-	 * with the given IconRegister. This is the only chance you get to register
-	 * icons.
-	 */
-	public void registerIcons(IconRegister register)
+	public void onFallenUpon(World world, int x, int y, int z, Entity entity, float var6)
 	{
-		super.registerIcons(register);
-		Block.glass.registerIcons(register);
+		if (!DecoAddonManager.getConfigOption("enableGlassBreaking"))
+			return;
+		
+		if (!world.isRemote && entity.fallDistance > 3.0F)
+		{
+			world.playAuxSFX(2001, x, y, z, Block.glass.blockID);
+			world.destroyBlock(x, y, z, true);
+		}
 	}
 	
 	public boolean CanContainPistonPackingToFacing(World world, int x, int y, int z, int side)

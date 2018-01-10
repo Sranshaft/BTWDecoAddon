@@ -29,9 +29,6 @@ public class DecoSubModuleTools implements DecoISubModule
 	public static final int decoItemScytheIronID = DecoAddonManager.getBlockID("decoItemScytheIronID");
 	public static final int decoItemScytheSoulforgedSteelID = DecoAddonManager.getBlockID("decoItemScytheSoulforgedSteelID");
 	public static final int decoItemSpyglassID = DecoAddonManager.getBlockID("decoItemSpyglassID");
-	
-	public static Item decoItemDebugStick;
-	public static final int decoItemDebugStickID = DecoAddonManager.getBlockID("decoItemDebugStickID");
 
 	public DecoSubModuleTools()
 	{
@@ -40,13 +37,13 @@ public class DecoSubModuleTools implements DecoISubModule
 		// REPLACE VANILLA ITEMS
 		Item.m_bSuppressConflictWarnings = true;
 		
-		Item.hoeDiamond = new DecoItemHoe(Item.hoeDiamond.itemID - 256, EnumToolMaterial.EMERALD).setUnlocalizedName("hoeDiamond");
-		Item.hoeGold = new DecoItemHoe(Item.hoeGold.itemID - 256, EnumToolMaterial.GOLD).setUnlocalizedName("hoeGold");
-		Item.hoeIron = new DecoItemHoe(Item.hoeIron.itemID - 256, EnumToolMaterial.IRON).setUnlocalizedName("hoeIron");
+		Item.hoeDiamond = new DecoItemHoe(Item.hoeDiamond.itemID, EnumToolMaterial.EMERALD).setUnlocalizedName("hoeDiamond");
+		Item.hoeGold = new DecoItemHoe(Item.hoeGold.itemID, EnumToolMaterial.GOLD).setUnlocalizedName("hoeGold");
+		Item.hoeIron = new DecoItemHoe(Item.hoeIron.itemID, EnumToolMaterial.IRON).setUnlocalizedName("hoeIron");
 		
-		Item.shovelDiamond = new DecoItemSpade(Item.shovelDiamond.itemID - 256, EnumToolMaterial.EMERALD).setUnlocalizedName("shovelDiamond");
-		Item.shovelGold = new DecoItemSpade(Item.shovelGold.itemID - 256, EnumToolMaterial.GOLD).setUnlocalizedName("shovelGold");
-		Item.shovelIron = new DecoItemSpade(Item.shovelIron.itemID - 256, EnumToolMaterial.IRON).setUnlocalizedName("shovelIron");
+		Item.shovelDiamond = new DecoItemSpade(Item.shovelDiamond.itemID, EnumToolMaterial.EMERALD).setUnlocalizedName("shovelDiamond");
+		Item.shovelGold = new DecoItemSpade(Item.shovelGold.itemID, EnumToolMaterial.GOLD).setUnlocalizedName("shovelGold");
+		Item.shovelIron = new DecoItemSpade(Item.shovelIron.itemID, EnumToolMaterial.IRON).setUnlocalizedName("shovelIron");
 		
 		Item.m_bSuppressConflictWarnings = false;
 		
@@ -67,11 +64,9 @@ public class DecoSubModuleTools implements DecoISubModule
 		
 		this.decoItemSpyglass = new DecoItemSpyglass(this.decoItemSpyglassID);
 		
-		this.decoItemDebugStick = new DecoItemDebugStick(this.decoItemDebugStickID);
-		
 		this.registerBlocks();
-		this.changeVanillaItems();
 		this.addRecipes();
+		this.changeVanillaItems();
 		this.setupCustomToolProperties();
 	}
 	
@@ -90,12 +85,6 @@ public class DecoSubModuleTools implements DecoISubModule
 		DecoAddonManager.register(this.decoItemScytheIron, "Iron Scythe");
 		DecoAddonManager.register(this.decoItemScytheSoulforgedSteel, "Soulforged Steel Scythe");
 		DecoAddonManager.register(this.decoItemSpyglass, "Spyglass");
-		
-		DecoAddonManager.register(this.decoItemDebugStick, "Debug stick");
-	}
-	
-	public void changeVanillaItems() 
-	{
 	}
 	
 	public void addRecipes() 
@@ -131,5 +120,7 @@ public class DecoSubModuleTools implements DecoISubModule
 				new Object[] { "#X#", "F F", "DXD", '#', Item.ingotGold, 'X', Block.thinGlass, 'F', new ItemStack(FCBetterThanWolves.fcBlockWoodSidingItemStubID, 1, 1), 'D', Item.goldNugget });
 	}
 
+	public void changeVanillaItems() {}
+	
 	public void setupCustomToolProperties() {}
 }

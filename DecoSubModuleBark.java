@@ -33,7 +33,7 @@ public class DecoSubModuleBark implements DecoISubModule
 		this.decoBlockBark = new DecoBlockBark(this.decoBlockBarkID);
 		
 		this.decoBlockBarkWall = new DecoBlockWall(this.decoBlockBarkWallID, this.decoBlockBark, 
-				DecoUtilsStrings.TREE_TAGS, DecoUtilsStrings.TREE_NAMES, DecoUtilsStrings.TREE_SIDE_TEXTURE_PATHS);
+				DecoUtilsStrings.TREE_TYPES, DecoUtilsStrings.TREE_NAMES, DecoUtilsStrings.TREE_SIDE_TEXTURE_PATHS);
 		
 		this.decoBlockBarkOakStairs = new DecoBlockStair(this.decoBlockBarkOakStairsID, this.decoBlockBark, "oak", 0);
 		this.decoBlockBarkSpruceStairs = new DecoBlockStair(this.decoBlockBarkSpruceStairsID, this.decoBlockBark, "spruce", 1);

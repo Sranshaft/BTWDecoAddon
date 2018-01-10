@@ -40,9 +40,5 @@ public enum DecoEnumRenderType
 	BEACON(34),
 	ANVIL(35);
 	
-	private int m_RenderType;
-	
-	DecoEnumRenderType(int type) { this.m_RenderType = type; }
-	
-	public int getRenderType() { return this.m_RenderType; }
+	DecoEnumRenderType(int i) {}
 }

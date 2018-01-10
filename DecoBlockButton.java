@@ -10,39 +10,30 @@ public class DecoBlockButton extends Block
 	public DecoBlockButton(int id, boolean isWooden)
 	{
 		super(id, Material.circuits);
-		
 		this.setTickRandomly(true);
 		this.setCreativeTab(CreativeTabs.tabRedstone);
 		
 		this.m_IsWooden = isWooden;
 	}
 	
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
+	{
+		return null;
+	}
+
 	public int tickRate(World world)
 	{
 		return this.m_IsWooden ? 30 : 20;
 	}
 
-	public void updateTick(World world, int x, int y, int z, Random random)
+	public boolean isOpaqueCube()
 	{
-		if (!world.isRemote)
-		{
-			int meta = world.getBlockMetadata(x, y, z);
-			if ((meta & 8) != 0)
-			{
-				if (this.m_IsWooden)
-				{
-					this.checkForArrows(world, x, y, z);
-				}
-				else
-				{
-					world.setBlockMetadataWithNotify(x, y, z, meta & 7, 3);
-					int orientation = meta & 7;
-					notifyNeighbor(world, x, y, z, orientation);
-					world.playSoundEffect((double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D, "random.click", 0.3F, 0.5F);
-					world.markBlockRangeForRenderUpdate(x, y, z, x, y, z);
-				}
-			}
-		}
+		return false;
+	}
+
+	public boolean renderAsNormalBlock()
+	{
+		return false;
 	}
 
 	public boolean canPlaceBlockAt(World world, int x, int y, int z)
@@ -123,6 +114,34 @@ public class DecoBlockButton extends Block
 		}
 	}
 
+	public void setBlockBoundsBasedOnState(IBlockAccess b, int x, int y, int z)
+	{
+		int meta = b.getBlockMetadata(x, y, z);
+		setButtonBounds(meta);
+	}
+
+	private void setButtonBounds(int metadata)
+	{
+		int orientation = metadata & 7;
+		boolean isPressed = (metadata & 8) > 0;
+		float topY = 6 / 16F;
+		float bottomY = 10 / 16F;
+		float halfWidth = 3 / 16F;
+		float depth = 2 / 16F;
+		
+		if (isPressed) depth = 1 / 16F;
+		
+		switch (orientation)
+		{
+			case 0: this.setBlockBounds(0.5F - halfWidth, 1.0F - depth, 0.5F - halfWidth, 0.5F + halfWidth, 1.0F, 0.5F + halfWidth); break;
+			case 1: this.setBlockBounds(0.0F, topY, 0.5F - halfWidth, depth, bottomY, 0.5F + halfWidth); break;
+			case 2: this.setBlockBounds(1.0F - depth, topY, 0.5F - halfWidth, 1.0F, bottomY, 0.5F + halfWidth); break;
+			case 3: this.setBlockBounds(0.5F - halfWidth, topY, 0.0F, 0.5F + halfWidth, bottomY, depth); break;
+			case 4: this.setBlockBounds(0.5F - halfWidth, topY, 1.0F - depth, 0.5F + halfWidth, bottomY, 1.0F); break;
+			default: this.setBlockBounds(0.5F - halfWidth, 0.0F, 0.5F - halfWidth, 0.5F + halfWidth, depth  , 0.5F + halfWidth);
+		}
+	}
+
 	public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player) {}
 
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float xOffset, float yOffset, float zOffset)
@@ -186,11 +205,42 @@ public class DecoBlockButton extends Block
 		return true;
 	}
 
+	public void updateTick(World world, int x, int y, int z, Random random)
+	{
+		if (!world.isRemote)
+		{
+			int meta = world.getBlockMetadata(x, y, z);
+			if ((meta & 8) != 0)
+			{
+				if (this.m_IsWooden)
+				{
+					checkForArrows(world, x, y, z);
+				}
+				else
+				{
+					world.setBlockMetadataWithNotify(x, y, z, meta & 7, 3);
+					int orientation = meta & 7;
+					notifyNeighbor(world, x, y, z, orientation);
+					world.playSoundEffect((double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D, "random.click", 0.3F, 0.5F);
+					world.markBlockRangeForRenderUpdate(x, y, z, x, y, z);
+				}
+			}
+		}
+	}
+
+	public void setBlockBoundsForItemRender()
+	{
+		float dx = 3/16F;
+		float dy = 2/16F;
+		float dz = 2/16F;
+		setBlockBounds(0.5F - dx, 0.5F - dy, 0.5F - dz, 0.5F + dx, 0.5F + dy, 0.5F + dz);
+	}
+
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
 	{
 		if (!world.isRemote && this.m_IsWooden && (world.getBlockMetadata(x, y, z) & 8) == 0)
 		{
-			this.checkForArrows(world, x, y, z);
+			checkForArrows(world, x, y, z);
 		}
 	}
 
@@ -240,16 +290,6 @@ public class DecoBlockButton extends Block
 		}
 	}
 	
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
-
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-
 	/**
      * Returns true if the given side of this block type should be rendered, if the adjacent block is at the given
      * coordinates.  Args: blockAccess, x, y, z, side
@@ -268,47 +308,4 @@ public class DecoBlockButton extends Block
     }
     
 	public void registerIcons(IconRegister register) {}
-
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
-	{
-		return null;
-	}
-
-	public void setBlockBoundsBasedOnState(IBlockAccess b, int x, int y, int z)
-	{
-		int meta = b.getBlockMetadata(x, y, z);
-
-		this.setButtonBounds(meta);
-	}
-
-	public void setBlockBoundsForItemRender()
-	{
-		float dx = 3/16F;
-		float dy = 2/16F;
-		float dz = 2/16F;
-
-		this.setBlockBounds(0.5F - dx, 0.5F - dy, 0.5F - dz, 0.5F + dx, 0.5F + dy, 0.5F + dz);
-	}
-
-	private void setButtonBounds(int metadata)
-	{
-		int orientation = metadata & 7;
-		boolean isPressed = (metadata & 8) > 0;
-		float topY = 6 / 16F;
-		float bottomY = 10 / 16F;
-		float halfWidth = 3 / 16F;
-		float depth = 2 / 16F;
-		
-		if (isPressed) depth = 1 / 16F;
-		
-		switch (orientation)
-		{
-			case 0: this.setBlockBounds(0.5F - halfWidth, 1.0F - depth, 0.5F - halfWidth, 0.5F + halfWidth, 1.0F, 0.5F + halfWidth); break;
-			case 1: this.setBlockBounds(0.0F, topY, 0.5F - halfWidth, depth, bottomY, 0.5F + halfWidth); break;
-			case 2: this.setBlockBounds(1.0F - depth, topY, 0.5F - halfWidth, 1.0F, bottomY, 0.5F + halfWidth); break;
-			case 3: this.setBlockBounds(0.5F - halfWidth, topY, 0.0F, 0.5F + halfWidth, bottomY, depth); break;
-			case 4: this.setBlockBounds(0.5F - halfWidth, topY, 1.0F - depth, 0.5F + halfWidth, bottomY, 1.0F); break;
-			default: this.setBlockBounds(0.5F - halfWidth, 0.0F, 0.5F - halfWidth, 0.5F + halfWidth, depth  , 0.5F + halfWidth);
-		}
-	}
 }
