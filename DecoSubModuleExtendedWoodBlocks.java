@@ -58,10 +58,10 @@ public class DecoSubModuleExtendedWoodBlocks implements DecoISubModule
 		
 		this.decoBlockWood = new DecoBlockWood(this.decoBlockWoodID);
 		
-		this.decoBlockDoors = new Block[DecoUtilsStrings.WOOD_PLANK_TYPES.length];
-		for (int index = 0; index < DecoUtilsStrings.WOOD_PLANK_TYPES.length; index++)
+		this.decoBlockDoors = new Block[DecoUtilsStrings.WOOD_TAGS.length];
+		for (int index = 0; index < DecoUtilsStrings.WOOD_TAGS.length; index++)
 		{
-			this.decoBlockDoors[index] = new DecoBlockDoor(this.decoBlockDoorOakID + index, Material.wood, DecoUtilsStrings.WOOD_PLANK_TYPES[index], index);
+			this.decoBlockDoors[index] = new DecoBlockDoor(this.decoBlockDoorOakID + index, Material.wood, DecoUtilsStrings.WOOD_TAGS[index], index);
 		}
 		
 		this.decoBlockTrapDoorSpruce = new DecoBlockTrapDoor(this.decoBlockTrapDoorSpruceID, Block.planks, "spruce");
@@ -90,9 +90,9 @@ public class DecoSubModuleExtendedWoodBlocks implements DecoISubModule
 	
 	public void registerBlocks() 
 	{
-		for (int index = 0; index < DecoUtilsStrings.WOOD_PLANK_TYPES.length; index++)
+		for (int index = 0; index < DecoUtilsStrings.WOOD_TAGS.length; index++)
 		{
-			DecoAddonManager.register(this.decoBlockDoors[index], DecoUtilsStrings.WOOD_PLANK_NAMES[index] + " Door");
+			DecoAddonManager.register(this.decoBlockDoors[index], DecoUtilsStrings.WOOD_NAMES[index] + " Door");
 		}
 		
 		DecoAddonManager.register(this.decoBlockTrapDoorBirch, "Birch Trapdoor");
@@ -193,7 +193,7 @@ public class DecoSubModuleExtendedWoodBlocks implements DecoISubModule
 	
 	public void setupCustomToolProperties() 
 	{
-		for (int index = 1; index < DecoUtilsStrings.WOOD_PLANK_TYPES.length; index++)
+		for (int index = 1; index < DecoUtilsStrings.WOOD_TAGS.length; index++)
 		{
 			ItemAxe.SetAllAxesToBeEffectiveVsBlock(this.decoBlockDoors[index - 1]);
 		}

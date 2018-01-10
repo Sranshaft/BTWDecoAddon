@@ -11,7 +11,7 @@ public class DecoBlockWood extends BlockWood
 		super(id);
 		this.setCreativeTab(CreativeTabs.tabBlock);
 		
-		DecoAddonManager.register(this, DecoUtilsStrings.WOOD_PLANK_TYPES, DecoUtilsStrings.WOOD_PLANK_NAMES, " Planks");
+		DecoAddonManager.register(this, DecoUtilsStrings.WOOD_TAGS, DecoUtilsStrings.WOOD_NAMES, " Planks");
 	}
 	
 	/**
@@ -36,11 +36,11 @@ public class DecoBlockWood extends BlockWood
      */
     public void registerIcons(IconRegister register)
     {
-        this.m_IconByMetadataArray = new Icon[DecoUtilsStrings.WOOD_PLANK_TEXTURE_PATHS.length];
+        this.m_IconByMetadataArray = new Icon[DecoUtilsStrings.WOOD_TEXTURE_PATHS.length];
         
         for (int index = 0; index < this.m_IconByMetadataArray.length; index++)
         {
-        	this.m_IconByMetadataArray[index] = register.registerIcon(DecoUtilsStrings.WOOD_PLANK_TEXTURE_PATHS[index]);
+        	this.m_IconByMetadataArray[index] = register.registerIcon(DecoUtilsStrings.WOOD_TEXTURE_PATHS[index]);
         }
     }
     

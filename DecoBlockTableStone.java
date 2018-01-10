@@ -2,52 +2,69 @@ package net.minecraft.src;
 
 import java.util.List;
 
-public class DecoBlockTableStone extends Block implements FCIBlockSolidTop
+public class DecoBlockTableStone extends Block implements DecoIBlock, FCIBlockSolidTop
 {
-	public String[] STONE_TYPES;
-	public String[] STONE_NAMES;
+	public String[] m_Tags, m_Names;
 	private Icon[] m_IconByMetadataArray;
-	private Icon[] m_SideIconByMetadataArray;
 
-	public DecoBlockTableStone(int id, String[] stoneTags, String[] stoneNames)
+	public DecoBlockTableStone(int id, String[] tags, String[] names)
 	{
 		super(id, Material.rock);
-		setUnlocalizedName("decoBlockTableStone");
-		setHardness(2.0F);
-		setResistance(5.0F);
-		setStepSound(Block.soundStoneFootstep);
-		setCreativeTab(CreativeTabs.tabDecorations);
 		
+		this.setUnlocalizedName("decoBlockTableStone");
+		this.setHardness(2.0F);
+		this.setResistance(5.0F);
+		this.setStepSound(Block.soundStoneFootstep);
+		this.setCreativeTab(CreativeTabs.tabDecorations);
+
 		Block.useNeighborBrightness[id] = true;
 		Block.lightOpacity[id] = 255;
-		
-		this.STONE_TYPES = stoneTags;
-		this.STONE_NAMES = stoneNames;
-		
-		DecoAddonManager.register(this, this.STONE_TYPES, this.STONE_NAMES, " Plinth");
+
+		this.m_Tags = tags;
+		this.m_Names = names;
+
+		DecoAddonManager.register(this, this.m_Tags, this.m_Names, " Plinth");
 	}
-	
+
+	//CLIENT ONLY
+
+    /**
+     * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
+     */
+    public int idPicked(World world, int x, int y, int z)
+    {
+        return world.getBlockId(x, y, z);
+    }
+
+    /**
+     * Get the block's damage value (for use with pick block).
+     */
+    public int getDamageValue(World world, int x, int y, int z)
+    {
+        return world.getBlockMetadata(x, y, z);
+    }
+    
+    /**
+     * Determines the damage on the item the block drops. Used in cloth and wood.
+     */
+    public int damageDropped(int metadata)
+    {
+        return metadata;
+    }
+
 	public boolean DoesBlockHaveSolidTop(IBlockAccess bAccess, int x, int y, int z) 
 	{
 		return true;
 	}
-	
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
+
+	/**
+	 * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
+	 */
+	public Icon getIcon(int side, int metadata)
 	{
-		return AxisAlignedBB.getAABBPool().getAABB((double) ((float) x), (double) ((float) y), (double) ((float) z), 
-												   (double) ((float) x + 1.0F), (double) ((float) y + 1.0F), (double) ((float) z + 1.0F));
+		return this.m_IconByMetadataArray[metadata];
 	}
-	
-	public void setBlockBoundsBasedOnState(IBlockAccess bAccess, int x, int y, int z)
-	{
-		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-	}
-	
-	public boolean shouldSideBeRendered(IBlockAccess bAccess, int x, int y, int z, int side)
-	{
-		return true;
-	}
-	
+
 	/**
 	 * When this method is called, your block should register all the icons it needs
 	 * with the given IconRegister. This is the only chance you get to register
@@ -55,41 +72,23 @@ public class DecoBlockTableStone extends Block implements FCIBlockSolidTop
 	 */
 	public void registerIcons(IconRegister register) 
 	{
-		this.m_IconByMetadataArray = new Icon[this.STONE_TYPES.length];
-		this.m_SideIconByMetadataArray = new Icon[this.STONE_TYPES.length];
-		
-		for (int index = 0; index < this.STONE_TYPES.length; index++)
+		this.m_IconByMetadataArray = new Icon[this.m_Tags.length];
+
+		for (int index = 0; index < this.m_Tags.length; index++)
 		{
-			this.m_IconByMetadataArray[index] = register.registerIcon("decoBlockFurniture_" + this.STONE_TYPES[index]);
-			this.m_SideIconByMetadataArray[index] = register.registerIcon("decoBlockFurniture_" + this.STONE_TYPES[index]);
+			this.m_IconByMetadataArray[index] = register.registerIcon("decoBlockFurniture_" + this.m_Tags[index]);
 		}
 	}
-	
-	public Icon getIcon(int side, int metadata)
-	{
-		if (side < 2)
-			return this.m_IconByMetadataArray[metadata];
-		else
-			return this.m_SideIconByMetadataArray[metadata];
-	}
-	
+
 	/**
-     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-     */
-    public void getSubBlocks(int var1, CreativeTabs var2, List var3)
-    {
-    	for (int index = 0; index < this.STONE_TYPES.length; index++)
-    	{
-    		var3.add(new ItemStack(var1, 1, index));
-    	}
-    }
-	
-	/**
-	 * Determines the damage on the item the block drops. Used in cloth and wood.
+	 * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
 	 */
-	public int damageDropped(int metadata)
+	public void getSubBlocks(int var1, CreativeTabs var2, List var3)
 	{
-		return metadata;
+		for (int index = 0; index < this.m_Tags.length; index++)
+		{
+			var3.add(new ItemStack(var1, 1, index));
+		}
 	}
 
 	/**
@@ -110,148 +109,113 @@ public class DecoBlockTableStone extends Block implements FCIBlockSolidTop
 	{
 		return false;
 	}
-	
+
+	public boolean shouldSideBeRendered(IBlockAccess bAccess, int x, int y, int z, int side)
+	{
+		return true;
+	}
+
 	/**
-     * Return whether an adjacent block can connect to a wall.
-     */
-    public boolean canConnectTo(IBlockAccess bAccess, int x, int y, int z)
-    {
-        int var5 = bAccess.getBlockId(x, y, z);
-        
-        return var5 != this.blockID ? false : true;
-    }
+	 * Return whether an adjacent block can connect to a wall.
+	 */
+	public boolean canConnectTo(IBlockAccess bAccess, int x, int y, int z)
+	{
+		int blockID = bAccess.getBlockId(x, y, z);
+		return blockID != this.blockID ? false : true;
+	}
+
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
+	{
+		return AxisAlignedBB.getAABBPool().getAABB((double) ((float) x), (double) ((float) y), (double) ((float) z), 
+				(double) ((float) x + 1.0F), (double) ((float) y + 1.0F), (double) ((float) z + 1.0F));
+	}
+
+	public void setBlockBoundsBasedOnState(IBlockAccess bAccess, int x, int y, int z)
+	{
+		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+	}
 
 	public boolean RenderBlock(RenderBlocks render, int x, int y, int z)
 	{
-		boolean isBlockWest = canConnectTo(render.blockAccess, x - 1, y, z);
-		boolean isBlockEast = canConnectTo(render.blockAccess, x + 1, y, z);
-		boolean isBlockNorth = canConnectTo(render.blockAccess, x, y, z - 1);
-		boolean isBlockSouth = canConnectTo(render.blockAccess, x, y, z + 1);
-		boolean isBlockNorthAndSouth = isBlockNorth && isBlockSouth && !isBlockWest && !isBlockEast;
-		boolean isBlockEastAndWest = !isBlockNorth && !isBlockSouth && isBlockWest && isBlockEast;
-		
-		if (isBlockNorthAndSouth || isBlockEastAndWest)
+		boolean isBlockWest = this.canConnectTo(render.blockAccess, x - 1, y, z);
+		boolean isBlockEast = this.canConnectTo(render.blockAccess, x + 1, y, z);
+		boolean isBlockNorth = this.canConnectTo(render.blockAccess, x, y, z - 1);
+		boolean isBlockSouth = this.canConnectTo(render.blockAccess, x, y, z + 1);
+
+		render.setRenderBounds(0.1875F, 0.0F, 0.1875F, 0.8125F, 0.25F, 0.8125F);
+		render.renderStandardBlock(this, x, y, z);
+
+		render.setRenderBounds(0.25F, 0.25F, 0.25F, 0.75F, 0.375F, 0.75F);
+		render.renderStandardBlock(this, x, y, z);
+
+		render.setRenderBounds(0.1875F, 0.375F, 0.1875F, 0.8125F, 0.6875F, 0.8125F);
+		render.renderStandardBlock(this, x, y, z);
+
+		render.setRenderBounds(0.0F, 0.6875F, 0.0F, 1.0F, 1.0F, 1.0F);
+		render.renderStandardBlock(this, x, y, z);
+
+		if (isBlockNorth)
 		{
-			if (isBlockNorthAndSouth)
-			{
-				render.setRenderBounds(0.1875F, 0.0F, 0.0F, 0.8125F, 0.25F, 1.0F);
-				render.renderStandardBlock(this, x, y, z);
-				
-				render.setRenderBounds(0.25F, 0.25F, 0.0F, 0.75F, 0.375F, 1.0F);
-				render.renderStandardBlock(this, x, y, z);
-				
-				render.setRenderBounds(0.1875F, 0.375F, 0.0F, 0.8125F, 0.6875F, 1.0F);
-				render.renderStandardBlock(this, x, y, z);
-				
-				render.setRenderBounds(0.0F, 0.6875F, 0.0F, 1.0F, 1.0F, 1.0F);
-				render.renderStandardBlock(this, x, y, z);
-			}
-			else
-			{
-				render.setRenderBounds(0.0F, 0.0F, 0.1875F, 1.0F, 0.25F, 0.8125F);
-				render.renderStandardBlock(this, x, y, z);
-				
-				render.setRenderBounds(0.0F, 0.25F, 0.25F, 1.0F, 0.375F, 0.75F);
-				render.renderStandardBlock(this, x, y, z);
-				
-				render.setRenderBounds(0.0F, 0.375F, 0.1875F, 1.0F, 0.6875F, 0.8125F);
-				render.renderStandardBlock(this, x, y, z);
-				
-				render.setRenderBounds(0.0F, 0.6875F, 0.0F, 1.0F, 1.0F, 1.0F);
-				render.renderStandardBlock(this, x, y, z);
-			}	
-		}
-		else if ((isBlockWest || isBlockEast || isBlockNorth || isBlockSouth) && !(isBlockNorthAndSouth || isBlockEastAndWest))
-		{
-			if (isBlockWest)
-			{
-				render.setRenderBounds(0.0F, 0.0F, 0.1875F, 0.8125F, 0.25F, 0.8125F);
-				render.renderStandardBlock(this, x, y, z);
-				
-				render.setRenderBounds(0.0F, 0.25F, 0.25F, 0.75F, 0.375F, 0.75F);
-				render.renderStandardBlock(this, x, y, z);
-				
-				render.setRenderBounds(0.0F, 0.375F, 0.1875F, 0.8125F, 0.6875F, 0.8125F);
-				render.renderStandardBlock(this, x, y, z);
-				
-				render.setRenderBounds(0.0F, 0.6875F, 0.0F, 1.0F, 1.0F, 1.0F);
-				render.renderStandardBlock(this, x, y, z);
-			}
-			
-			if (isBlockEast)
-			{
-				render.setRenderBounds(0.1875F, 0.0F, 0.1875F, 1.0F, 0.25F, 0.8125F);
-				render.renderStandardBlock(this, x, y, z);
-				
-				render.setRenderBounds(0.25F, 0.25F, 0.25F, 1.0F, 0.375F, 0.75F);
-				render.renderStandardBlock(this, x, y, z);
-				
-				render.setRenderBounds(0.1875F, 0.375F, 0.1875F, 1.0F, 0.6875F, 0.8125F);
-				render.renderStandardBlock(this, x, y, z);
-				
-				render.setRenderBounds(0.0F, 0.6875F, 0.0F, 1.0F, 1.0F, 1.0F);
-				render.renderStandardBlock(this, x, y, z);
-			}
-			
-			if (isBlockNorth)
-			{
-				render.setRenderBounds(0.1875F, 0.0F, 0.0F, 0.8125F, 0.25F, 0.8125F);
-				render.renderStandardBlock(this, x, y, z);
-				
-				render.setRenderBounds(0.25F, 0.25F, 0.0F, 0.75F, 0.375F, 0.75F);
-				render.renderStandardBlock(this, x, y, z);
-				
-				render.setRenderBounds(0.1875F, 0.375F, 0.0F, 0.8125F, 0.6875F, 0.8125F);
-				render.renderStandardBlock(this, x, y, z);
-				
-				render.setRenderBounds(0.0F, 0.6875F, 0.0F, 1.0F, 1.0F, 1.0F);
-				render.renderStandardBlock(this, x, y, z);
-			}
-			
-			if (isBlockSouth)
-			{
-				render.setRenderBounds(0.1875F, 0.0F, 0.1875F, 0.8125F, 0.25F, 1.0F);
-				render.renderStandardBlock(this, x, y, z);
-				
-				render.setRenderBounds(0.25F, 0.25F, 0.25F, 0.75F, 0.375F, 1.0F);
-				render.renderStandardBlock(this, x, y, z);
-				
-				render.setRenderBounds(0.1875F, 0.375F, 0.1875F, 0.8125F, 0.6875F, 1.0F);
-				render.renderStandardBlock(this, x, y, z);
-				
-				render.setRenderBounds(0.0F, 0.6875F, 0.0F, 1.0F, 1.0F, 1.0F);
-				render.renderStandardBlock(this, x, y, z);
-			}
-		}
-		else
-		{
-			render.setRenderBounds(0.1875F, 0.0F, 0.1875F, 0.8125F, 0.25F, 0.8125F);
+			render.setRenderBounds(0.1875F, 0.0F, 0.0F, 0.8125F, 0.25F, 0.1875F);
 			render.renderStandardBlock(this, x, y, z);
-			
-			render.setRenderBounds(0.25F, 0.25F, 0.25F, 0.75F, 0.375F, 0.75F);
+
+			render.setRenderBounds(0.25F, 0.25F, 0.0F, 0.75F, 0.375F, 0.25F);
 			render.renderStandardBlock(this, x, y, z);
-			
-			render.setRenderBounds(0.1875F, 0.375F, 0.1875F, 0.8125F, 0.6875F, 0.8125F);
-			render.renderStandardBlock(this, x, y, z);
-			
-			render.setRenderBounds(0.0F, 0.6875F, 0.0F, 1.0F, 1.0F, 1.0F);
+
+			render.setRenderBounds(0.1875F, 0.375F, 0.0F, 0.8125F, 0.6875F, 0.1875F);
 			render.renderStandardBlock(this, x, y, z);
 		}
-		
+
+		if (isBlockSouth)
+		{
+			render.setRenderBounds(0.1875F, 0.0F, 0.8125F, 0.8125F, 0.25F, 1.0F);
+			render.renderStandardBlock(this, x, y, z);
+
+			render.setRenderBounds(0.25F, 0.25F, 0.75F, 0.75F, 0.375F, 1.0F);
+			render.renderStandardBlock(this, x, y, z);
+
+			render.setRenderBounds(0.1875F, 0.375F, 0.8125F, 0.8125F, 0.6875F, 1.0F);
+			render.renderStandardBlock(this, x, y, z);
+		}
+
+		if (isBlockEast)
+		{
+			render.setRenderBounds(0.8125F, 0.0F, 0.1875F, 1.0F, 0.25F, 0.8125F);
+			render.renderStandardBlock(this, x, y, z);
+
+			render.setRenderBounds(0.75F, 0.25F, 0.25F, 1.0F, 0.375F, 0.75F);
+			render.renderStandardBlock(this, x, y, z);
+
+			render.setRenderBounds(0.8125F, 0.375F, 0.1875F, 1.0F, 0.6875F, 0.8125F);
+			render.renderStandardBlock(this, x, y, z);
+		}
+
+		if (isBlockWest)
+		{
+			render.setRenderBounds(0.0F, 0.0F, 0.1875F, 0.1875F, 0.25F, 0.8125F);
+			render.renderStandardBlock(this, x, y, z);
+
+			render.setRenderBounds(0.0F, 0.25F, 0.25F, 0.25F, 0.375F, 0.75F);
+			render.renderStandardBlock(this, x, y, z);
+
+			render.setRenderBounds(0.0F, 0.375F, 0.1875F, 0.1875F, 0.6875F, 0.8125F);
+			render.renderStandardBlock(this, x, y, z);
+		}
+
 		return true;
 	}
-	
+
 	public void RenderBlockAsItem(RenderBlocks render, int var2, float var3)
 	{
 		render.setRenderBounds(0.1875F, 0.0F, 0.1875F, 0.8125F, 0.25F, 0.8125F);
 		FCClientUtilsRender.RenderInvBlockWithMetadata(render, this, -0.5F, -0.5F, -0.5F, var2);
-		
+
 		render.setRenderBounds(0.25F, 0.25F, 0.25F, 0.75F, 0.375F, 0.75F);
 		FCClientUtilsRender.RenderInvBlockWithMetadata(render, this, -0.5F, -0.5F, -0.5F, var2);
-		
+
 		render.setRenderBounds(0.1875F, 0.375F, 0.1875F, 0.8125F, 0.6875F, 0.8125F);
 		FCClientUtilsRender.RenderInvBlockWithMetadata(render, this, -0.5F, -0.5F, -0.5F, var2);
-		
+
 		render.setRenderBounds(0.0F, 0.6875F, 0.0F, 1.0F, 1.0F, 1.0F);
 		FCClientUtilsRender.RenderInvBlockWithMetadata(render, this, -0.5F, -0.5F, -0.5F, var2);
 	}
