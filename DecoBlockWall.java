@@ -14,7 +14,8 @@ public class DecoBlockWall extends BlockWall
 	public DecoBlockWall(int id, Block parentBlock)
 	{
 		super(id, parentBlock);
-		setUnlocalizedName(parentBlock.getUnlocalizedName2() + ".wall");
+		
+		this.setUnlocalizedName(parentBlock.getUnlocalizedName2() + ".wall");
         this.setHardness(parentBlock.blockHardness);
         this.setResistance(parentBlock.blockResistance / 3.0F);
         this.setStepSound(parentBlock.stepSound);
@@ -26,7 +27,8 @@ public class DecoBlockWall extends BlockWall
 	public DecoBlockWall(int id, Block parentBlock, String[] subTypes, String[] subNames, String[] texturePaths)
 	{
 		super(id, parentBlock);
-		setUnlocalizedName(parentBlock.getUnlocalizedName2() + ".wall");
+		
+		this.setUnlocalizedName(parentBlock.getUnlocalizedName2() + ".wall");
         this.setHardness(parentBlock.blockHardness);
         this.setResistance(parentBlock.blockResistance / 3.0F);
         this.setStepSound(parentBlock.stepSound);
@@ -97,7 +99,8 @@ public class DecoBlockWall extends BlockWall
     {
         this.setBlockBoundsBasedOnState(world, x, y, z);
         this.maxY = 1.0D;
-        return super.getCollisionBoundingBoxFromPool(world, x, y, z);
+		
+		return super.getCollisionBoundingBoxFromPool(world, x, y, z);
     }
 
 	public boolean RenderBlock(RenderBlocks render, int x, int y, int z)
@@ -106,7 +109,6 @@ public class DecoBlockWall extends BlockWall
 		int metadata = bAccess.getBlockMetadata(x, y, z);
 
 		return RenderWall(render, bAccess, x, y, z, this);
-
 	}
 	
 	public boolean RenderWall(RenderBlocks render, IBlockAccess bAccess, int x, int y, int z, Block block)

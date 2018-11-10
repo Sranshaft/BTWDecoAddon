@@ -6,7 +6,7 @@ import java.util.Random;
 public class DecoBlockBamboo extends Block implements DecoIBlock, DecoILiving, DecoIPlant
 {
 	private Icon m_IconSide, m_IconTop, m_IconLeaves;
-	private static int m_GrowthChance = 5;
+	private static int m_GrowthChance = 50;
 	private static int m_MaxHeight = 30;
 
 	public DecoBlockBamboo(int id)
@@ -36,7 +36,9 @@ public class DecoBlockBamboo extends Block implements DecoIBlock, DecoILiving, D
 	 */
 	public void updateTick(World world, int x, int y, int z, Random random)
 	{
-		if (random.nextFloat() <= this.m_GrowthChance && canThisPlantGrowOnThisBlockID(world, x, y - 1, z, true))
+		float growthMultiplier = 0.025F * FCUtilsMisc.GetBlockGrowthMultiplier(world, x, y - 1, z, this);
+		
+		if (random.nextFloat() <= growthMultiplier && canThisPlantGrowOnThisBlockID(world, x, y - 1, z, true))
     		this.growPlant(world, x, y, z, random);
     	
         super.updateTick(world, x, y, z, random);

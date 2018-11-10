@@ -99,7 +99,7 @@ public class DecoBlockGrassPath extends Block
      */
     public Icon getIcon(int side, int metadata)
     {
-        return side == 1 ? this.iconPathTop : (side == 0 ? DecoSubModuleExtendedDirtAndGrassBlocks.decoBlockDirt.getIcon(side, metadata) : this.m_IconPathSideByMetadataArray[metadata]);
+        return side == 1 ? this.iconPathTop : (side == 0 ? Block.dirt.getIcon(side, metadata) : this.m_IconPathSideByMetadataArray[metadata]);
     }
     
     /**
@@ -108,7 +108,7 @@ public class DecoBlockGrassPath extends Block
     public Icon getBlockTexture(IBlockAccess bAccess, int x, int y, int z, int side)
     {
     	int metadata = bAccess.getBlockMetadata(x, y, z);
-        return side == 1 ? this.iconPathTop : (side == 0 ? DecoSubModuleExtendedDirtAndGrassBlocks.decoBlockDirt.getIcon(side, metadata) : this.m_IconPathSideByMetadataArray[metadata]);
+        return side == 1 ? this.iconPathTop : (side == 0 ? Block.dirt.getIcon(side, metadata) : this.m_IconPathSideByMetadataArray[metadata]);
     }
 
     /**
@@ -128,8 +128,8 @@ public class DecoBlockGrassPath extends Block
     
     public int getBlockColor()
     {
-        double temp = 1.0D;
-        double humidity = 0.0D;
+        double temp = 0.5D;
+        double humidity = 1.0D;
         return ColorizerGrass.getGrassColor(temp, humidity);
     }
 
@@ -147,11 +147,22 @@ public class DecoBlockGrassPath extends Block
      */
     public int colorMultiplier(IBlockAccess bAccess, int x, int y, int z)
     {
-    	int tintRed = 192;
-	    int tintGreen = 192;
-	    int tintBlue = 77;
-	
-	    return (tintRed & 255) << 16 | (tintGreen & 255) << 8 | tintBlue & 255;
+    	int tintRed = 0;
+	    int tintGreen = 0;
+	    int tintBlue = 0;
+
+	    for (int var8 = -1; var8 <= 1; ++var8)
+        {
+            for (int var9 = -1; var9 <= 1; ++var9)
+            {
+                int var10 = bAccess.getBiomeGenForCoords(x + var9, z + var8).getBiomeGrassColor();
+                tintRed += (var10 & 16711680) >> 16;
+            	tintGreen += (var10 & 65280) >> 8;
+    			tintBlue += var10 & 255;
+            }
+        }
+	    
+	    return (tintRed / 9 & 255) << 16 | (tintGreen / 9 & 255) << 8 | tintBlue / 9 & 255;
     }
     
     public boolean RenderBlock(RenderBlocks render, int x, int y, int z)

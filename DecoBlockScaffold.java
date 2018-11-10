@@ -1,6 +1,6 @@
 package net.minecraft.src;
 
-public class DecoBlockScaffold extends Block implements FCIBlockSolidTop, FCIBlockClimbable
+public class DecoBlockScaffold extends Block
 {
 	private Icon m_IconTop, m_IconSide;
 	private String m_Tag;
@@ -69,8 +69,8 @@ public class DecoBlockScaffold extends Block implements FCIBlockSolidTop, FCIBlo
     		int blockSouthID = world.getBlockId(x, y, z - 1);
     		int blockNorthID = world.getBlockId(x, y, z + 1);
     		int blockBelowID = world.getBlockId(x, y - 1, z);
-    		return this.blockID == blockBelowID || this.blockID == blockWestID || this.blockID == blockEastID || this.blockID == blockSouthID || this.blockID == blockNorthID 
-    				|| world.doesBlockHaveSolidTopSurface(x, y - 1, z);
+    		return this.blockID == blockBelowID || world.doesBlockHaveSolidTopSurface(x, y - 1, z) || 
+    				(this.blockID == blockWestID && this.blockID == blockEastID) || (this.blockID == blockSouthID && this.blockID == blockNorthID);
     	}
     	
     	return false;
@@ -79,7 +79,7 @@ public class DecoBlockScaffold extends Block implements FCIBlockSolidTop, FCIBlo
     /**
      * Called upon block activation (right click on the block.)
      */
-    public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player)
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
     {
         if (player.getCurrentEquippedItem() != null)
         {
@@ -99,7 +99,7 @@ public class DecoBlockScaffold extends Block implements FCIBlockSolidTop, FCIBlo
 	                    if (currentItem.stackSize <= 0)
 	                        player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
 	        			
-	        			break;
+	        			return true;
 	        		}
 	        	}
 	        }
@@ -117,29 +117,13 @@ public class DecoBlockScaffold extends Block implements FCIBlockSolidTop, FCIBlo
 	                    if (currentItem.stackSize <= 0)
 	                        player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
 	        			
-	        			break;
-	        		}
-	        	}
-	        }
-	        else if (currentItem.itemID == new ItemStack(Block.ladder).itemID)
-	        {
-	        	for (int yIndex = y; yIndex < 255; yIndex++)
-	        	{
-	        		if (world.isAirBlock(x, yIndex, z))
-	        		{
-	        			FCUtilsMisc.PlayPlaceSoundForBlock(world, x, y, z); 
-	        			world.setBlock((int)player.posX, yIndex, (int)player.posZ, Block.ladder.blockID);
-	        			
-	        			currentItem.stackSize--;
-
-	                    if (currentItem.stackSize <= 0)
-	                        player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
-	                    
-	        			break;
+	        			return true;
 	        		}
 	        	}
 	        }
         }
+        
+        return false;
     }
     
     /**
@@ -155,26 +139,6 @@ public class DecoBlockScaffold extends Block implements FCIBlockSolidTop, FCIBlo
         }
 
         super.onNeighborBlockChange(world, x, y, z, neighbourBlockID);
-    }
-    
-    /**
-     * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
-     */
-    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
-    {
-        if (entity.IsAffectedByMovementModifiers() && entity.onGround)
-        {
-            boolean isClimbing = false;
-
-            if (entity instanceof EntityLiving)
-            	entity.motionY *= 2.0D;
-            
-            if (!isClimbing)
-            {
-                entity.motionX *= 0.8D;
-                entity.motionZ *= 0.8D;
-            }
-        }
     }
     
     /**
@@ -215,7 +179,16 @@ public class DecoBlockScaffold extends Block implements FCIBlockSolidTop, FCIBlo
      */
     public boolean shouldSideBeRendered(IBlockAccess bAccess, int x, int y, int z, int side)
     {
-    	return side >= 1 ? true : bAccess.getBlockId(x, y - 1, z) == 0 ? true : false;
+    	switch (side)
+    	{
+    		case 0 : return bAccess.isAirBlock(x, y, z);
+    		case 2 : return !bAccess.isBlockOpaqueCube(x + 1, y, z);
+    		case 3 : return !bAccess.isBlockOpaqueCube(x - 1, y, z);
+    		case 4 : return !bAccess.isBlockOpaqueCube(x, y, z - 1);
+    		case 5 : return !bAccess.isBlockOpaqueCube(x, y, z + 1);
+    	}
+    	
+    	return true;
     }
 	
 	/**

@@ -275,6 +275,11 @@ public class DecoModuleFireworks {
 		{
 			return this.field_92102_a;
 		}
+		
+		public boolean HasSecondaryOutput()
+		{
+			return false;
+		}
 
 		public boolean matches(IRecipe var1)
 		{

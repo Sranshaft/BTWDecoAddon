@@ -6,22 +6,20 @@ import java.util.Random;
 
 public class DecoSubModuleFlowers implements DecoISubModule
 {
-	public static Block decoBlockFlowerExtended;
-	public static Block decoBlockFlowerTulip;
-	
-	public static Item decoItemFertilizer;
+	public static DecoBlockFlower decoBlockFlowerExtended;
+	public static DecoBlockTulip decoBlockFlowerTulip;
 	
 	public static final int decoBlockFlowerExtendedID = DecoAddonManager.getBlockID("decoBlockFlowerExtendedID");
 	public static final int decoBlockFlowerTulipID = DecoAddonManager.getBlockID("decoBlockFlowerTulipID");
 	
-	public static final int decoItemFertilizerID = 30003;
+	public static final int decoItemFertilizerID = DecoAddonManager.getBlockID("decoItemFertilizerID");
 	
 	public DecoSubModuleFlowers()
 	{
 		FCAddOnHandler.LogMessage("[INFO]: Loading submodule: Flowers");
 		
 		Item.m_bSuppressConflictWarnings=true;
-		Item.dyePowder = new DecoItemDyeExtended(Item.dyePowder.itemID);
+		Item.dyePowder = new DecoItemDyeExtended(Item.dyePowder.itemID - 256);
 		Item.m_bSuppressConflictWarnings=false;
 
 		FCBetterThanWolves.fcPlanter = new DecoBlockPlanter(DecoAddonManager.replaceBlockID(FCBetterThanWolves.fcPlanter));
@@ -29,18 +27,13 @@ public class DecoSubModuleFlowers implements DecoISubModule
 		this.decoBlockFlowerExtended = new DecoBlockFlower(this.decoBlockFlowerExtendedID);
 		this.decoBlockFlowerTulip = new DecoBlockTulip(this.decoBlockFlowerTulipID);
 		
-		this.decoItemFertilizer = new DecoItemFertilizer(this.decoItemFertilizerID);
-		
 		this.registerBlocks();
 		this.addRecipes();
 		this.changeVanillaItems();
 		this.setupCustomToolProperties();
 	}
 	
-	public void registerBlocks()
-	{
-		DecoAddonManager.register(this.decoItemFertilizer, "Fertilizer");
-	}
+	public void registerBlocks() {}
 	
 	public void addRecipes()
 	{
@@ -48,10 +41,6 @@ public class DecoSubModuleFlowers implements DecoISubModule
 			FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Block.cloth, 1, BlockCloth.getDyeFromBlock(Index)), 
 				new Object[] { new ItemStack(Item.dyePowder, 1, Index + 16), new ItemStack(Item.itemsList[Block.cloth.blockID], 1, 0)});
 		
-		//Fertilizer
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(this.decoItemFertilizer, 2),
-				new ItemStack[] { new ItemStack(Item.dyePowder, 1, 15), new ItemStack(FCBetterThanWolves.fcDung) });
-
 		//New millstone recipes, flowers
 		FCRecipes.AddMillStoneRecipe(new ItemStack[] { new ItemStack(Item.dyePowder, 1, 31), new ItemStack(Item.dyePowder, 1, 11)}, 
 				new ItemStack[] { new ItemStack(this.decoBlockFlowerExtended, 1, 6)});

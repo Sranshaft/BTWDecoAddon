@@ -95,16 +95,16 @@ public class DecoBlockFoliage extends BlockFlower
 
 	public ArrayList<ItemStack> onSheared(ItemStack item, World world, int x, int y, int z, int fortune)
 	{
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		ArrayList<ItemStack> returnedItemStack = new ArrayList<ItemStack>();
 
 		if (world.getBlockMetadata(x, y, z) == this.m_TallGrassTop) 
-			ret.add(new ItemStack(Block.tallGrass, 1, 1));
+			returnedItemStack.add(new ItemStack(Block.tallGrass, 1, 1));
 		else if (world.getBlockMetadata(x, y, z) == this.m_TallFernTop) 
-			ret.add(new ItemStack(Block.tallGrass, 1, 2));
+			returnedItemStack.add(new ItemStack(Block.tallGrass, 1, 2));
 		else 
-			ret.add(new ItemStack(this, 1, world.getBlockMetadata(x, y, z)));
+			returnedItemStack.add(new ItemStack(this, 1, world.getBlockMetadata(x, y, z)));
 		
-		return ret;
+		return returnedItemStack;
 	}
 
 	public boolean isBlockFoliage(World world, int x, int y, int z)
@@ -206,6 +206,9 @@ public class DecoBlockFoliage extends BlockFlower
 		
 		if (world.getBlockMetadata(x, y, z) == this.m_TallGrassBottom && world.getBlockId(x, y + 1, z) != blockID)
 			world.setBlock(x, y, z, Block.tallGrass.blockID, 1, 2);
+		
+		if (world.getBlockMetadata(x, y, z) == this.m_TallFernBottom && world.getBlockId(x, y + 1, z) != blockID)
+			world.setBlock(x, y, z, Block.tallGrass.blockID, 2, 2);
 	}
 
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity par5Entity)

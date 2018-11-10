@@ -5,8 +5,9 @@ public class DecoItemPileRedSand extends Item
 	public DecoItemPileRedSand(int id)
     {
         super(id);
+        
         this.setUnlocalizedName("decoItemPileRedSand");
-        setCreativeTab(CreativeTabs.tabMaterials);
+        this.setCreativeTab(CreativeTabs.tabMaterials);
     }
 
     public boolean IsPistonPackable(ItemStack var1)

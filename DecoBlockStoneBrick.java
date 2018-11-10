@@ -60,6 +60,8 @@ public class DecoBlockStoneBrick extends FCBlockStoneBrick
 	{
 		switch (metadata)
         {
+			case 0:
+				return this.blockIcon;
         	case 1:
         		return this.m_IconChiseled;
         	case 2:
@@ -126,7 +128,7 @@ public class DecoBlockStoneBrick extends FCBlockStoneBrick
     
     private boolean isHoldingChisel(Item currentItem)
     {
-    	if (currentItem == DecoSubModuleTools.decoItemChiselDiamond || currentItem == DecoSubModuleTools.decoItemChiselGold || currentItem == DecoSubModuleTools.decoItemChiselIron || currentItem == DecoSubModuleTools.decoItemChiselSoulforgedSteel)
+    	if (currentItem == FCBetterThanWolves.fcItemChiselIron)
     		return true;
     	else
     		return false;

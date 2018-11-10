@@ -1,6 +1,6 @@
 package net.minecraft.src;
 
-public class DecoBlockShelf extends Block implements FCIBlock 
+public class DecoBlockShelf extends Block 
 {
 	private String m_Tag;
 	private Boolean m_IsTopShelf = false;
@@ -21,9 +21,36 @@ public class DecoBlockShelf extends Block implements FCIBlock
 		this.m_Tag = tag;
 	}
 	
+	/**
+	 * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
+	 */
+	public int idPicked(World world, int x, int y, int z)
+	{
+		return world.getBlockId(x, y, z);
+	}
+	
 	public boolean DoesBlockHaveSolidTop(IBlockAccess bAccess, int x, int y, int z) 
 	{
 		return true;
+	}
+	
+	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
+	{
+		this.m_IsTopShelf = hitY > 0.5F;
+		
+		if (side < 2)
+			side = 2;
+		else
+			side = FCUtilsMisc.GetOppositeFacing(side);
+
+		return SetFacingInMetadata(metadata, side);
+	}
+	
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entity, ItemStack itemStack)
+	{
+		int var7 = FCUtilsMisc.ConvertOrientationToFlatBlockFacingReversed(entity);
+		this.SetFacing(world, x, y, z, var7);
+		
 	}
 	
 	public int GetFacing(IBlockAccess bAccess, int x, int y, int z)
@@ -61,9 +88,9 @@ public class DecoBlockShelf extends Block implements FCIBlock
 		return false;
 	}
 	
-	public void RotateAroundJAxis(World world, int x, int y, int z, boolean var5)
+	public boolean RotateAroundJAxis(World world, int x, int y, int z, boolean var5)
 	{
-		FCUtilsMisc.StandardRotateAroundJ(this, world, x, y, z, var5);
+		return FCUtilsMisc.StandardRotateAroundJ(this, world, x, y, z, var5);
 	}
 	
 	public int RotateMetadataAroundJAxis(int metadata, boolean var2)
@@ -75,25 +102,6 @@ public class DecoBlockShelf extends Block implements FCIBlock
 	{
 		this.RotateAroundJAxis(world, x, y, z, var5);
 		return true;
-	}
-	
-	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
-	{
-		this.m_IsTopShelf = hitY > 0.5F;
-		
-		if (side < 2)
-			side = 2;
-		else
-			side = FCUtilsMisc.GetOppositeFacing(side);
-
-		return SetFacingInMetadata(metadata, side);
-	}
-	
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entity, ItemStack itemStack)
-	{
-		int var7 = FCUtilsMisc.ConvertPlacingEntityOrientationToBlockFacing(entity);
-		this.SetFacing(world, x, y, z, var7);
-		
 	}
 	
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)

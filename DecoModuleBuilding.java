@@ -18,6 +18,12 @@ public class DecoModuleBuilding implements DecoIModule
 	public static DecoSubModuleStainedGlass decoSubModuleStainedGlass;
 	public static DecoSubModuleWhiteStoneBrick decoSubModuleWhiteStoneBrick;
 	
+	public static Block decoBlockAestheticWood;
+	public static Block decoBlockBrimstone;
+	
+	public static final int decoBlockAestheticWoodID = DecoAddonManager.getBlockID("decoBlockAestheticWoodID");
+	public static final int decoBlockBrimstoneID = DecoAddonManager.getBlockID("decoBlockBrimstoneID");
+	
 	public DecoModuleBuilding()
 	{
 		FCAddOnHandler.LogMessage("[INFO]: Loading module: Building");
@@ -66,6 +72,9 @@ public class DecoModuleBuilding implements DecoIModule
 		
 		if (DecoAddonManager.getConfigOption("enableWhiteStoneBricks"))
 			this.decoSubModuleWhiteStoneBrick = new DecoSubModuleWhiteStoneBrick();
+		
+		this.decoBlockAestheticWood = new DecoBlockAestheticWood(this.decoBlockAestheticWoodID);
+		this.decoBlockBrimstone = new DecoBlockBrimstone(this.decoBlockBrimstoneID);
 		
 		this.registerBlocks();
 		this.addRecipes();

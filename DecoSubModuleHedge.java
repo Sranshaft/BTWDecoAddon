@@ -7,10 +7,10 @@ public class DecoSubModuleHedge implements DecoISubModule
 	public static Block decoBlockHedgeOak;
 	public static Block decoBlockHedgeSpruce;
 	
-	public static final int decoBlockHedgeBirchID = 3407;
-	public static final int decoBlockHedgeJungleID = 3408;
-	public static final int decoBlockHedgeOakID = 3409;
-	public static final int decoBlockHedgeSpruceID = 3410;
+	public static final int decoBlockHedgeBirchID = DecoAddonManager.getBlockID("decoBlockHedgeBirchID");
+	public static final int decoBlockHedgeJungleID = DecoAddonManager.getBlockID("decoBlockHedgeJungleID");
+	public static final int decoBlockHedgeOakID = DecoAddonManager.getBlockID("decoBlockHedgeOakID");
+	public static final int decoBlockHedgeSpruceID = DecoAddonManager.getBlockID("decoBlockHedgeSpruceID");
 	
 	public DecoSubModuleHedge()
 	{

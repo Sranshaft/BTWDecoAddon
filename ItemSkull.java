@@ -5,7 +5,8 @@ import java.util.List;
 public class ItemSkull extends Item
 {
     private static final String[] skullTypes = new String[] {"skeleton", "wither", "zombie", "char", "creeper", "infused", "enderman", "fire", "spider", "pigzombie"};
-    public static final String[] field_94587_a = new String[] {"skull_skeleton", "skull_wither", "skull_zombie", "skull_char", "skull_creeper", "fcItemSkullInfused", "skull_enderman", "skull_fire", "skull_spider", "skull_pigzombie" };
+    public static final String[] field_94587_a = new String[] {"skull_skeleton", "skull_wither", "skull_zombie", "skull_char", "skull_creeper", "fcItemSkullInfused", 
+    		"skull_enderman", "skull_fire", "skull_spider", "skull_pigzombie" };
     private Icon[] field_94586_c;
 
     public ItemSkull(int par1)
@@ -26,7 +27,7 @@ public class ItemSkull extends Item
         {
             return false;
         }
-        else if (!par3World.getBlockMaterial(par4, par5, par6).isSolid())
+        else if (!par3World.getBlockMaterial(par4, par5, par6).isSolid() && (par7 != 1 || !FCUtilsWorld.DoesBlockHaveSmallCenterHardpointToFacing(par3World, par4, par5, par6, 1)))
         {
             return false;
         }

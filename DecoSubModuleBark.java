@@ -7,24 +7,28 @@ public class DecoSubModuleBark implements DecoISubModule
 	public static Block decoBlockBarkSlabTop;
 	public static Block decoBlockBarkWall;
 	
-	public static Block decoBlockBarkBirchStairs;
-	public static Block decoBlockBarkEbonwoodStairs;
-	public static Block decoBlockBarkIronwoodStairs;
-	public static Block decoBlockBarkJungleStairs;
 	public static Block decoBlockBarkOakStairs;
 	public static Block decoBlockBarkSpruceStairs;
+	public static Block decoBlockBarkBirchStairs;
+	public static Block decoBlockBarkJungleStairs;
+	public static Block decoBlockBarkBloodwoodStairs;
+	public static Block decoBlockBarkEbonwoodStairs;
+	public static Block decoBlockBarkIronwoodStairs;
 	
 	public static final int decoBlockBarkID = DecoAddonManager.getBlockID("decoBlockBarkID");
 	public static final int decoBlockBarkSlabID = DecoAddonManager.getBlockID("decoBlockBarkSlabID");
 	public static final int decoBlockBarkSlabTopID = DecoAddonManager.getBlockID("decoBlockBarkSlabTopID");
 	public static final int decoBlockBarkWallID = DecoAddonManager.getBlockID("decoBlockBarkWallID");
 	
-	public static final int decoBlockBarkBirchStairsID = DecoAddonManager.getBlockID("decoBlockBarkBirchStairsID");
-	public static final int decoBlockBarkEbonwoodStairsID = DecoAddonManager.getBlockID("decoBlockBarkEbonwoodStairsID");
-	public static final int decoBlockBarkIronwoodStairsID = DecoAddonManager.getBlockID("decoBlockBarkIronwoodStairsID");
-	public static final int decoBlockBarkJungleStairsID = DecoAddonManager.getBlockID("decoBlockBarkJungleStairsID");
 	public static final int decoBlockBarkOakStairsID = DecoAddonManager.getBlockID("decoBlockBarkOakStairsID");
 	public static final int decoBlockBarkSpruceStairsID = DecoAddonManager.getBlockID("decoBlockBarkSpruceStairsID");
+	public static final int decoBlockBarkBirchStairsID = DecoAddonManager.getBlockID("decoBlockBarkBirchStairsID");
+	public static final int decoBlockBarkJungleStairsID = DecoAddonManager.getBlockID("decoBlockBarkJungleStairsID");
+	public static final int decoBlockBarkBloodwoodStairsID = DecoAddonManager.getBlockID("decoBlockBarkBloodwoodStairsID");
+	public static final int decoBlockBarkEbonwoodStairsID = DecoAddonManager.getBlockID("decoBlockBarkEbonwoodStairsID");
+	public static final int decoBlockBarkIronwoodStairsID = DecoAddonManager.getBlockID("decoBlockBarkIronwoodStairsID");
+	
+	
 	
 	public DecoSubModuleBark()
 	{
@@ -39,8 +43,9 @@ public class DecoSubModuleBark implements DecoISubModule
 		this.decoBlockBarkSpruceStairs = new DecoBlockStair(this.decoBlockBarkSpruceStairsID, this.decoBlockBark, "spruce", 1);
 		this.decoBlockBarkBirchStairs = new DecoBlockStair(this.decoBlockBarkBirchStairsID, this.decoBlockBark, "birch", 2);
 		this.decoBlockBarkJungleStairs = new DecoBlockStair(this.decoBlockBarkJungleStairsID, this.decoBlockBark, "jungle", 3);
-		this.decoBlockBarkEbonwoodStairs = new DecoBlockStair(this.decoBlockBarkEbonwoodStairsID, this.decoBlockBark, "ebonwood", 4);
-		this.decoBlockBarkIronwoodStairs = new DecoBlockStair(this.decoBlockBarkIronwoodStairsID, this.decoBlockBark, "ironwood", 5);
+		this.decoBlockBarkBloodwoodStairs = new DecoBlockStair(this.decoBlockBarkBloodwoodStairsID, this.decoBlockBark, "bloodwood", 4);
+		this.decoBlockBarkEbonwoodStairs = new DecoBlockStair(this.decoBlockBarkEbonwoodStairsID, this.decoBlockBark, "ebonwood", 5);
+		this.decoBlockBarkIronwoodStairs = new DecoBlockStair(this.decoBlockBarkIronwoodStairsID, this.decoBlockBark, "ironwood", 6);
 		
 		this.registerBlocks();
 		this.addRecipes();
@@ -54,6 +59,7 @@ public class DecoSubModuleBark implements DecoISubModule
 		DecoAddonManager.register(this.decoBlockBarkSpruceStairs, "Spruce Bark Stairs");
 		DecoAddonManager.register(this.decoBlockBarkBirchStairs, "Birch Bark Stairs");
 		DecoAddonManager.register(this.decoBlockBarkJungleStairs, "Jungle Bark Stairs");
+		DecoAddonManager.register(this.decoBlockBarkBloodwoodStairs, "Bloodwood Bark Stairs");
 		DecoAddonManager.register(this.decoBlockBarkEbonwoodStairs, "Ebonwood Bark Stairs");
 		DecoAddonManager.register(this.decoBlockBarkIronwoodStairs, "Ironwood Bark Stairs");
 	}

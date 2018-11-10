@@ -5,9 +5,10 @@ public class DecoItemNameTag extends Item
 	public DecoItemNameTag(int id)
 	{
 		super(id);
-		setUnlocalizedName("decoItemNameTag");
-		SetBellowsBlowDistance(3);
-		setCreativeTab(CreativeTabs.tabTools);
+		
+		this.setUnlocalizedName("decoItemNameTag");
+		this.SetBellowsBlowDistance(3);
+		this.setCreativeTab(CreativeTabs.tabTools);
 	}
 	
 	public boolean itemInteractionForEntity(ItemStack stack, EntityLiving entity)

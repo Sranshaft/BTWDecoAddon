@@ -1,6 +1,6 @@
 package net.minecraft.src;
 
-public class DecoBlockCabinet extends Block implements FCIBlock, FCIBlockSolidTop
+public class DecoBlockCabinet extends Block
 {
 	private String m_Tag;
 
@@ -56,7 +56,7 @@ public class DecoBlockCabinet extends Block implements FCIBlock, FCIBlockSolidTo
 
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entity, ItemStack itemStack)
 	{
-		int var7 = FCUtilsMisc.ConvertPlacingEntityOrientationToBlockFacing(entity);
+		int var7 = FCUtilsMisc.ConvertOrientationToFlatBlockFacingReversed(entity);
 		this.SetFacing(world, x, y, z, var7);
 
 	}
@@ -101,9 +101,9 @@ public class DecoBlockCabinet extends Block implements FCIBlock, FCIBlockSolidTo
 		return false;
 	}
 
-	public void RotateAroundJAxis(World world, int x, int y, int z, boolean var5)
+	public boolean RotateAroundJAxis(World world, int x, int y, int z, boolean var5)
 	{
-		FCUtilsMisc.StandardRotateAroundJ(this, world, x, y, z, var5);
+		return FCUtilsMisc.StandardRotateAroundJ(this, world, x, y, z, var5);
 	}
 
 	public int RotateMetadataAroundJAxis(int metadata, boolean var2)

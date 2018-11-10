@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 public class DecoBlockMud extends Block
 {
-	private final float m_SinkRate = 0.025F;
+	private final float m_SinkRate = -0.025F;
 	
 	public DecoBlockMud(int id)
 	{
@@ -20,8 +20,8 @@ public class DecoBlockMud extends Block
      */
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
     {
-        float var5 = 0.85F;
-        return AxisAlignedBB.getAABBPool().getAABB((double)x, (double)y, (double)z, (double)(x + 1), (double)(y + var5), (double)(z + 1));
+        float var5 = 0.625F;
+        return AxisAlignedBB.getAABBPool().getAABB((double)x, (double)y, (double)z, (double)(x + 1), (double)((float)(y + 1) - var5), (double)(z + 1));
     }
 
     /**
@@ -29,8 +29,8 @@ public class DecoBlockMud extends Block
      */
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
     {
-        entity.motionX *= this.m_SinkRate;
-        entity.motionZ *= this.m_SinkRate;
+    	entity.setInWeb();
+        entity.motionY *= this.m_SinkRate;
     }
     
     /**

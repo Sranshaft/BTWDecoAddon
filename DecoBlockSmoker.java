@@ -65,10 +65,11 @@ public class DecoBlockSmoker extends Block
 		        	for (int index = 0; index <= 25; index++)
 			        {
 		        		double randX = random.nextDouble();
-		            	double randZ = random.nextDouble();
+		        		double randY = random.nextDouble();
+		        		double randZ = random.nextDouble();
 		            	
-			        	world.spawnParticle("smoke", (double)(x + randX), (double)(indexY - 1.0D), (double)(z + randZ), 0.0D, 0.2D, 0.025D);
-			        	world.spawnParticle("largesmoke", (double)(x + randX), (double)(indexY - 1.0D), (double)(z + randZ), 0.0D, 0.05D, 0.05D);
+			        	world.spawnParticle("smoke", (double)(x + randX), (double)(indexY), (double)(z + randZ), 0.0D, 0.2D + randY, 0.025D);
+			        	world.spawnParticle("largesmoke", (double)(x + randX), (double)(indexY), (double)(z + randZ), 0.0D, 0.05D + randY, 0.05D);
 			        }
 		        	break;
 		        }

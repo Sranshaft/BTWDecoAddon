@@ -2,13 +2,15 @@ package net.minecraft.src;
 
 import java.util.List;
 
-public class DecoBlockWood extends BlockWood
+public class DecoBlockWood extends FCBlockPlanks
 {
 	private Icon[] m_IconByMetadataArray;
 	
 	public DecoBlockWood(int id)
 	{
-		super(id);
+        super(id);
+        
+        this.setUnlocalizedName("wood");
 		this.setCreativeTab(CreativeTabs.tabBlock);
 		
 		DecoAddonManager.register(this, DecoUtilsStrings.WOOD_TAGS, DecoUtilsStrings.WOOD_NAMES, " Planks");

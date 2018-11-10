@@ -13,27 +13,37 @@ public class DecoModuleDecoration implements DecoIModule
 	public static DecoSubModuleHedge decoSubModuleHedge;
 	public static DecoSubModuleLantern decoSubModuleLantern;
 	
+	public static Block[] decoBlockStainedFlowerPot = new Block[16];
+	
 	public static Block decoBlockBamboo;
+	public static Block decoBlockCarpetWool;
+	public static Block decoBlockChainRope;
 	public static Block decoBlockCrate;
-	public static Block decoBlockPaperWall;
-	public static Block decoBlockWoolCarpet;
+	public static Block decoBlockLadderMetalIron;
 	
 	public static BlockPane decoBlockPanePaperWall;
 	public static BlockPane decoBlockPaneSoulforgedSteelFence;
 	public static BlockPane decoBlockPaneWattle;
 	
 	public static Item decoItemBottleHempOil;
+	public static Item decoItemChainRope;
+	
+	public static Item[] decoItemStainedFlowerPot = new Item[16];
 	
 	public static final int decoBlockBambooID = DecoAddonManager.getBlockID("decoBlockBambooID");
+	public static final int decoBlockCarpetWoolID = DecoAddonManager.getBlockID("decoBlockCarpetWoolID");
+	public static final int decoBlockChainRopeID = DecoAddonManager.getBlockID("decoBlockChainRopeID");
 	public static final int decoBlockCrateID = DecoAddonManager.getBlockID("decoBlockCrateID");
-	public static final int decoBlockPaperWallID = DecoAddonManager.getBlockID("decoBlockPaperWallID");
-	public static final int decoBlockWoolCarpetID = DecoAddonManager.getBlockID("decoBlockWoolCarpetID");
+	public static final int decoBlockLadderIronID = DecoAddonManager.getBlockID("decoBlockLadderIronID");
+	
+	public static final int decoBlockStainedFlowerPotID = DecoAddonManager.getBlockID("decoBlockStainedFlowerPotID");
 	
 	public static final int decoBlockPanePaperWallID = DecoAddonManager.getBlockID("decoBlockPanePaperWallID");
 	public static final int decoBlockPaneSoulforgedSteelFenceID = DecoAddonManager.getBlockID("decoBlockPaneSoulforgedSteelFenceID");
 	public static final int decoBlockPaneWattleID = DecoAddonManager.getBlockID("decoBlockPaneWattleID");
 	
 	public static final int decoItemBottleHempOilID = DecoAddonManager.getBlockID("decoItemBottleHempOilID");
+	public static final int decoItemChainRopeID = DecoAddonManager.getBlockID("decoItemChainRopeID");
 	
 	public static final int decoCrateContainerID = 301;
 	
@@ -57,19 +67,28 @@ public class DecoModuleDecoration implements DecoIModule
 			this.decoSubModuleLantern = new DecoSubModuleLantern();
 		
 		if (DecoAddonManager.getConfigOption("enableWoolCarpet"))
-			this.decoBlockWoolCarpet = new DecoBlockWoolCarpet(this.decoBlockWoolCarpetID);
+			this.decoBlockCarpetWool = new DecoBlockWoolCarpet(this.decoBlockCarpetWoolID);
 		
 		this.decoBlockBamboo = new DecoBlockBamboo(this.decoBlockBambooID);
+		this.decoBlockChainRope = new DecoBlockChainRope(this.decoBlockChainRopeID);
 		
 		TileEntity.addMapping(DecoTileEntityCrate.class, "Crate");
 		this.decoBlockCrate = new DecoBlockCrate(this.decoBlockCrateID);
-
-		this.decoBlockPaperWall = new DecoBlockPaperWall(this.decoBlockPaperWallID);
+		
+		this.decoBlockLadderMetalIron = new DecoBlockLadderMetal(this.decoBlockLadderIronID);
+		
+		for (int index = 0; index < DecoUtilsStrings.COLOUR_TAGS.length; index++)
+		{
+			this.decoBlockStainedFlowerPot[index] = new DecoBlockStainedFlowerPot(this.decoBlockStainedFlowerPotID + index, DecoUtilsStrings.COLOUR_TAGS[index]);
+			this.decoItemStainedFlowerPot[index] = (new ItemReed(this.decoBlockStainedFlowerPotID + index, this.decoBlockStainedFlowerPot[index])).setUnlocalizedName("decoItemStainedFlowerPot_" + DecoUtilsStrings.COLOUR_TAGS[index]).setCreativeTab(CreativeTabs.tabDecorations);
+		}
+		
 		this.decoBlockPanePaperWall = new DecoBlockPanePaperWall(this.decoBlockPanePaperWallID);
 		this.decoBlockPaneSoulforgedSteelFence = new DecoBlockPaneSoulforgedSteelFence(this.decoBlockPaneSoulforgedSteelFenceID);
 		this.decoBlockPaneWattle = new DecoBlockPaneWattle(this.decoBlockPaneWattleID);
 		
 		this.decoItemBottleHempOil = new DecoItemBottleHempOil(this.decoItemBottleHempOilID);
+		this.decoItemChainRope = new DecoItemChainRope(this.decoItemChainRopeID);
 		
 		FCBetterThanWolves.fcAestheticNonOpaque = new DecoFixLightningRod(DecoAddonManager.replaceBlockID(FCBetterThanWolves.fcAestheticNonOpaque));
 		
@@ -82,12 +101,19 @@ public class DecoModuleDecoration implements DecoIModule
 	public void registerBlocks() 
 	{
 		DecoAddonManager.register(this.decoBlockBamboo, "Bamboo");
-		DecoAddonManager.register(this.decoBlockPaperWall, "Paper Wall");
+		DecoAddonManager.register(this.decoBlockLadderMetalIron, "Iron Ladder");
+		
+		for (int index = 0; index < DecoUtilsStrings.COLOUR_TAGS.length; index++)
+		{
+			DecoAddonManager.register(this.decoItemStainedFlowerPot[index], DecoUtilsStrings.COLOUR_NAMES[index] + " Stained Flower Pot");
+		}
+		
 		DecoAddonManager.register(this.decoBlockPanePaperWall, "Paper Wall");
 		DecoAddonManager.register(this.decoBlockPaneSoulforgedSteelFence, "Soulforge Steel Fence");
 		DecoAddonManager.register(this.decoBlockPaneWattle, "Wattle");
 		
 		DecoAddonManager.register(this.decoItemBottleHempOil, "Hemp Oil");
+		DecoAddonManager.register(this.decoItemChainRope, "Iron Chain");
 	}
 
 	public void addRecipes() 
@@ -96,7 +122,7 @@ public class DecoModuleDecoration implements DecoIModule
 		{
 			for (int index = 0; index < DecoUtilsStrings.COLOUR_TAGS.length; index++)
 			{
-				FCRecipes.AddVanillaRecipe( new ItemStack(this.decoBlockWoolCarpet, 4, index),
+				FCRecipes.AddVanillaRecipe( new ItemStack(this.decoBlockCarpetWool, 4, index),
 						new Object[] {"XX ", 'X', new ItemStack(Block.cloth, 1, index) });
 			}
 		}
@@ -109,6 +135,7 @@ public class DecoModuleDecoration implements DecoIModule
 		/*FCRecipes.AddStokedCrucibleRecipe(new ItemStack(FCBetterThanWolves.fcItemNuggetSteel, 1), 
 				new ItemStack[] { new ItemStack(this.decoBlockPaneSoulforgedSteelFence, 1) });*/
 		
+		// Hemp Oil
 		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(this.decoItemBottleHempOil), 
 				new Object[] { Item.glassBottle, FCBetterThanWolves.fcHempSeeds });
 	}
@@ -118,10 +145,11 @@ public class DecoModuleDecoration implements DecoIModule
 	public void setupCustomToolProperties() 
 	{
 		if (DecoAddonManager.getConfigOption("enableWoolCarpet"))
-			ItemAxe.SetAllAxesToBeEffectiveVsBlock(this.decoBlockWoolCarpet);
+			ItemAxe.SetAllAxesToBeEffectiveVsBlock(this.decoBlockCarpetWool);
 		
-		ItemAxe.SetAllAxesToBeEffectiveVsBlock(this.decoBlockPaperWall);
 		ItemAxe.SetAllAxesToBeEffectiveVsBlock(this.decoBlockPanePaperWall);
+		
+		ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this.decoBlockChainRope);
 		ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this.decoBlockPaneSoulforgedSteelFence);
 	}
 }

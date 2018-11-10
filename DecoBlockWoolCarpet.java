@@ -12,12 +12,13 @@ public class DecoBlockWoolCarpet extends Block
 	public DecoBlockWoolCarpet(int id) 
 	{
 		super(id, Material.cloth);
-		setUnlocalizedName("decoBlockWoolCarpet");
-		setHardness(0.3F);
-		setResistance(0.5F);
-		setStepSound(Block.soundClothFootstep);
-		setCreativeTab(CreativeTabs.tabDecorations);
-		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
+		
+		this.setUnlocalizedName("decoBlockWoolCarpet");
+		this.setHardness(0.3F);
+		this.setResistance(0.5F);
+		this.setStepSound(Block.soundClothFootstep);
+		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
 
 		DecoAddonManager.register(this, this.COLOUR_TYPES, this.COLOUR_NAMES, " Carpet");
 	}

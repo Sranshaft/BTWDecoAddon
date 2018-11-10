@@ -2,12 +2,14 @@ package net.minecraft.src;
 
 public class DecoItemScythe extends ItemTool
 {
-	private static Block[] m_BlockEffectiveAgainst = new Block[] { Block.leaves, Block.tallGrass, Block.deadBush, Block.plantRed, Block.plantYellow, 
-			DecoSubModuleFlowers.decoBlockFlowerExtended, DecoSubModuleFlowers.decoBlockFlowerTulip, DecoModuleWorld.decoBlockFoliage };
+	private static Block[] m_BlockEffectiveAgainst = new Block[] { Block.leaves, Block.tallGrass, Block.deadBush, Block.plantRed, Block.plantYellow, Block.vine, 
+			DecoSubModuleFlowers.decoBlockFlowerExtended, DecoSubModuleFlowers.decoBlockFlowerTulip, DecoModuleWorld.decoBlockFoliage, DecoModuleWorld.decoBlockWildgrass };
+	
+	public static Material[] m_MaterialEffectiveAgainst = new Material[] { Material.leaves, Material.plants, Material.vine };
 	
 	private int m_BreakRadius = 1;
 	private String m_Type;
-	private boolean m_bIsDamagedByVegetation = false;
+	private boolean m_bIsDamagedByVegetation = true;
     private boolean m_bConsumeHungerOnZeroHardnessVegetation = false;
 	
 	public DecoItemScythe(int id, EnumToolMaterial toolMaterial, String type, int radius)
@@ -81,9 +83,10 @@ public class DecoItemScythe extends ItemTool
 		
 		if (player.capabilities.isCreativeMode || player.canPlayerEdit(xIndex, yIndex, zIndex, metadata, itemStack))
 		{
-			if (isEffective(block) && world.canMineBlock(player, xIndex, yIndex, zIndex))
+			if (isEffective(block) && world.canMineBlock(player, xIndex, yIndex, zIndex) && !world.isAirBlock(xIndex, yIndex, zIndex))
 			{
 				world.destroyBlock(xIndex, yIndex, zIndex, true);
+				itemStack.damageItem(1, player);
 				
 				if (!world.isRemote)
 					player.playerNetServerHandler.sendPacketToPlayer(new Packet14BlockDig(4, xIndex, yIndex, zIndex, side));
@@ -95,7 +98,7 @@ public class DecoItemScythe extends ItemTool
 		return false;
 	}
 	
-	public Block[] GetBlocksEffectiveAgainst() 
+	public Block[] GetBlocksEffectiveAgainst()
 	{
 		return this.m_BlockEffectiveAgainst;
 	}
@@ -104,8 +107,7 @@ public class DecoItemScythe extends ItemTool
 	{
 		for (Block block : GetBlocksEffectiveAgainst())
 		{
-			if (checkblock == null) return false;
-			else if (checkblock == block) return true;
+			if (checkblock == block) return true;
 		}
 		
 		return false;

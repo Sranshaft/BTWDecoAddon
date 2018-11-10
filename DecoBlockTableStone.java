@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.List;
 
-public class DecoBlockTableStone extends Block implements DecoIBlock, FCIBlockSolidTop
+public class DecoBlockTableStone extends Block implements DecoIBlock
 {
 	public String[] m_Tags, m_Names;
 	private Icon[] m_IconByMetadataArray;

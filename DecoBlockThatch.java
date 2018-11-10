@@ -1,6 +1,6 @@
 package net.minecraft.src;
 
-public class DecoBlockThatch extends Block implements FCIBlock
+public class DecoBlockThatch extends Block
 {
 	private Icon m_IconSide;
 	private Icon m_IconTop;
@@ -81,9 +81,9 @@ public class DecoBlockThatch extends Block implements FCIBlock
 		return true;
 	}
 	
-	public void RotateAroundJAxis(World world, int x, int y, int z, boolean var5)
+	public boolean RotateAroundJAxis(World world, int x, int y, int z, boolean var5)
 	{
-		FCUtilsMisc.StandardRotateAroundJ(this, world, x, y, z, var5);
+		return FCUtilsMisc.StandardRotateAroundJ(this, world, x, y, z, var5);
 	}
 	
 	public int RotateMetadataAroundJAxis(int var1, boolean var2)

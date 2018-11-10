@@ -3,10 +3,11 @@ package net.minecraft.src;
 public class DecoModuleTweaks implements DecoIModule
 {
 	public static DecoSubModuleDiamondium decoSubModuleDiamondium;
+	public static DecoSubModuleExtendedDirtAndGrassBlocks decoSubModuleExtendedDirtAndGrassBlocks;
 	public static DecoSubModuleExtendedStoneBlocks decoSubModuleExtendedStoneBlocks;
 	public static DecoSubModuleExtendedWoodBlocks decoSubModuleExtendedWoodBlocks;
-	public static DecoSubModuleExtendedDirtAndGrassBlocks decoSubModuleExtendedDirtAndGrassBlocks;
 	
+	public static BlockFlowerPot decoBlockFlowerPot;
 	public static Block decoBlockGlass;
 	public static Block decoBlockIce;
 	public static Block decoBlockLadder;
@@ -39,9 +40,10 @@ public class DecoModuleTweaks implements DecoIModule
 		this.decoItemGlassShard = new DecoItemGlassShard(this.decoItemGlassShardID);
 		
 		// REPLACE VANILLA BLOCKS
+		this.decoBlockFlowerPot = new DecoBlockFlowerPot(DecoAddonManager.replaceBlockID(Block.flowerPot));
 		this.decoBlockGlass = new DecoBlockGlass(DecoAddonManager.replaceBlockID(Block.glass));
 		this.decoBlockIce = new DecoBlockIce(DecoAddonManager.replaceBlockID(Block.ice));
-		this.decoBlockLadder = new DecoBlockLadder(DecoAddonManager.replaceBlockID(Block.ladder));
+		this.decoBlockLadder = new DecoBlockLadderWood(DecoAddonManager.replaceBlockID(Block.ladder), "oak");
 		this.decoBlockObsidian = new DecoBlockObsidian(DecoAddonManager.replaceBlockID(Block.obsidian));
 		this.decoBlockSnowBlock	= new DecoBlockSnowBlock(DecoAddonManager.replaceBlockID(Block.blockSnow));
 		

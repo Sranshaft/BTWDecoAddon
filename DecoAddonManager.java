@@ -19,7 +19,7 @@ public class DecoAddonManager extends FCAddOn
 {
 	private static final boolean DEBUG_ADDON_LOAD = false;
 	
-	private static final String m_fcVersionString = "4.A3 Headed Beastie";
+	private static final String m_fcVersionString = "4.ABCEEFABc";
 	private static final String m_decoAddonVersionString = "2.A1 Bodacious Beaver";
 	
 	private static boolean m_ConfigFound = false;
@@ -36,7 +36,8 @@ public class DecoAddonManager extends FCAddOn
 		FCAddOnHandler.LogMessage("[INFO]: BTW Deco Addon Version " + this.m_decoAddonVersionString + " Initializing...");
 		FCAddOnHandler.LogMessage("[INFO]: This mod was built on " + this.m_fcVersionString + "! Any other BTW version might cause conflicts, glitches or unwanted outcomes...");
 		
-		DecoUtils.CheatBlockIDs();
+		//DecoUtils.CheatBlockIDs();
+		
 		DecoUtils.LoadMapIDFix();
 		
 		this.readModConfigFile();
@@ -89,12 +90,21 @@ public class DecoAddonManager extends FCAddOn
 			this.replaceItemName(var1, Item.swordDiamond, "Diamondium Sword");
 		}
 		
+		if (this.getConfigOption("enableExtendedWoodBlocks"))
+		{
+			FCAddOnHandler.LogMessage("[INFO]: Modifying the names of wood blocks...");
+			this.replaceItemName(var1, Item.doorWood, "Oak Door");
+			this.replaceBlockName(var1, Block.fenceGate, "Oak Fence Gate");
+			this.replaceBlockName(var1, Block.ladder, "Oak Ladder");
+			this.replaceBlockName(var1, Block.trapdoor, "Oak Trapdoor");
+		}
+		
 		if (this.getConfigOption("enableFireproofBloodWood"))
 		{
 			FCAddOnHandler.LogMessage("[INFO]: Modifying bloodwood logs and leaves to make them fireproof...");
 			FCBetterThanWolves.fcBloodWood.setStepSound(Block.soundWoodFootstep);
 			FCBetterThanWolves.SetFirePropertiesOfBlock(FCBetterThanWolves.fcBloodWood.blockID, 0, 0);
-			FCBetterThanWolves.SetFirePropertiesOfBlock(FCBetterThanWolves.fcLeaves.blockID, 0, 0);
+			FCBetterThanWolves.SetFirePropertiesOfBlock(FCBetterThanWolves.fcBlockBloodLeaves.blockID, 0, 0);
 		}
 		
 		// CHANGES BTW BLOCKS AND ITEMS
@@ -116,8 +126,6 @@ public class DecoAddonManager extends FCAddOn
 		this.replaceBlockName(var1, Block.cobblestoneMossy, "Mossy Cobblestone");
 		this.replaceBlockName(var1, Block.netherBrick, "Nether Bricks");
 		this.replaceBlockName(var1, Block.stairsCobblestone, "Cobblestone Stairs");
-		this.replaceBlockName(var1, Block.trapdoor, "Oak Trapdoor");
-		this.replaceItemName(var1, Item.doorWood, "Oak Door");
 		this.replaceItemName(var1, Item.seeds, "Wheat Seeds");
 		
 		this.addStringName(var1, "item.skull.spider.name", "Spider Head");

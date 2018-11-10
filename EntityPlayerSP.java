@@ -60,7 +60,7 @@ public class EntityPlayerSP extends EntityPlayer
 
         if (par3Session != null && par3Session.username != null && par3Session.username.length() > 0)
         {
-            this.skinUrl = "http://skins.minecraft.net/MinecraftSkins/" + StringUtils.stripControlCodes(par3Session.username) + ".png";
+            this.skinUrl = FCBetterThanWolves.fcPlayerSkinURL + StringUtils.stripControlCodes(par3Session.username) + ".png";
         }
 
         this.username = par3Session.username;
@@ -275,10 +275,10 @@ public class EntityPlayerSP extends EntityPlayer
         {
             var1 *= 1.1F;
         }
-
+        
         /** ADDED BY DECO ADDON MOD */
         if (this.isZooming) var1 *= DecoUtilsMath.clamp(var1, (float)prevZoomProgress, (float)(zoomProgress - 1.0D)) / 5.0D;
-        
+
         var1 *= (this.landMovementFactor * this.getFOVSpeedModifier() / this.speedOnGround + 1.0F) / 2.0F;
         var1 *= this.UpdateGloomFOVMultiplier();
 
@@ -304,7 +304,7 @@ public class EntityPlayerSP extends EntityPlayer
 
     public void updateCloak()
     {
-        this.cloakUrl = "http://skins.minecraft.net/MinecraftCloaks/" + StringUtils.stripControlCodes(this.username) + ".png";
+        this.cloakUrl = FCBetterThanWolves.fcPlayerCloakURL + StringUtils.stripControlCodes(this.username) + ".png";
     }
 
     /**
@@ -375,7 +375,7 @@ public class EntityPlayerSP extends EntityPlayer
      */
     public void displayGUIWorkbench(int par1, int par2, int par3)
     {
-        this.mc.displayGuiScreen(new GuiCrafting(this.inventory, this.worldObj, par1, par2, par3));
+        this.mc.displayGuiScreen(new FCClientGuiCraftingWorkbench(this.inventory, this.worldObj, par1, par2, par3));
     }
 
     public void displayGUIEnchantment(int par1, int par2, int par3, String par4Str)
@@ -772,5 +772,10 @@ public class EntityPlayerSP extends EntityPlayer
         var6 += var14;
         var10 += var16;
         this.worldObj.playSound(var6, var8, var10, var1, var2, var3, false);
+    }
+
+    public boolean IsLocalPlayerAndHittingBlock()
+    {
+        return this.mc.playerController.IsHittingBlock();
     }
 }

@@ -1,17 +1,18 @@
 package net.minecraft.src;
 
-public class DecoBlockWardrobe extends Block implements FCIBlock, FCIBlockSolidTop
+public class DecoBlockWardrobe extends Block
 {
 	private String m_Tag;
 	
 	public DecoBlockWardrobe(int id, String tag)
 	{
 		super(id, Material.wood);
-		setUnlocalizedName("decoBlockWardrobe." + tag);
-		setHardness(Block.wood.blockHardness);
-		setResistance(Block.wood.blockResistance);
-		setStepSound(Block.soundWoodFootstep);
-		setCreativeTab(CreativeTabs.tabDecorations);
+		
+		this.setUnlocalizedName("decoBlockWardrobe." + tag);
+		this.setHardness(Block.wood.blockHardness);
+		this.setResistance(Block.wood.blockResistance);
+		this.setStepSound(Block.soundWoodFootstep);
+		this.setCreativeTab(CreativeTabs.tabDecorations);
 		
 		Block.useNeighborBrightness[id] = true;
 		Block.lightOpacity[id] = 255;
@@ -19,9 +20,34 @@ public class DecoBlockWardrobe extends Block implements FCIBlock, FCIBlockSolidT
 		this.m_Tag = tag;
 	}
 	
+	/**
+	 * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
+	 */
+	public int idPicked(World world, int x, int y, int z)
+	{
+		return world.getBlockId(x, y, z);
+	}
+	
 	public boolean DoesBlockHaveSolidTop(IBlockAccess bAccess, int x, int y, int z) 
 	{
 		return true;
+	}
+	
+	public int onBlockPlaced(World world, int x, int y, int z, int direction, float hitX, float hitY, float hitZ, int metadata)
+	{
+		if (direction < 2)
+			direction = 2;
+		else
+			direction = FCUtilsMisc.GetOppositeFacing(direction);
+
+		return SetFacingInMetadata(metadata, direction);
+	}
+	
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entity, ItemStack itemStack)
+	{
+		int var7 = FCUtilsMisc.ConvertOrientationToFlatBlockFacingReversed(entity);
+		this.SetFacing(world, x, y, z, var7);
+		
 	}
 	
 	public int GetFacing(IBlockAccess bAccess, int x, int y, int z)
@@ -59,9 +85,9 @@ public class DecoBlockWardrobe extends Block implements FCIBlock, FCIBlockSolidT
 		return false;
 	}
 	
-	public void RotateAroundJAxis(World world, int x, int y, int z, boolean var5)
+	public boolean RotateAroundJAxis(World world, int x, int y, int z, boolean var5)
 	{
-		FCUtilsMisc.StandardRotateAroundJ(this, world, x, y, z, var5);
+		return FCUtilsMisc.StandardRotateAroundJ(this, world, x, y, z, var5);
 	}
 	
 	public int RotateMetadataAroundJAxis(int metadata, boolean var2)
@@ -73,23 +99,6 @@ public class DecoBlockWardrobe extends Block implements FCIBlock, FCIBlockSolidT
 	{
 		this.RotateAroundJAxis(world, x, y, z, var5);
 		return true;
-	}
-	
-	public int onBlockPlaced(World world, int x, int y, int z, int direction, float hitX, float hitY, float hitZ, int metadata)
-	{
-		if (direction < 2)
-			direction = 2;
-		else
-			direction = FCUtilsMisc.GetOppositeFacing(direction);
-
-		return SetFacingInMetadata(metadata, direction);
-	}
-	
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entity, ItemStack itemStack)
-	{
-		int var7 = FCUtilsMisc.ConvertPlacingEntityOrientationToBlockFacing(entity);
-		this.SetFacing(world, x, y, z, var7);
-		
 	}
 	
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
@@ -227,7 +236,7 @@ public class DecoBlockWardrobe extends Block implements FCIBlock, FCIBlockSolidT
 	{
 		int direction = GetFacing(render.blockAccess, x, y, z);
 		
-		//Legs
+		// LEGS
 		SetRenderBoundsRotatedAboutJToFacing(render, 0.025F, 0.0F, 0.025F, 0.15F, 1.85F, 0.15F, direction);
 		FCClientUtilsRender.RenderStandardBlockWithTexture(render, this, x, y, z, blockIcon);
 		SetRenderBoundsRotatedAboutJToFacing(render, 0.025F, 0.0F, 0.85F, 0.15F, 1.85F, 0.975F, direction);
@@ -237,21 +246,25 @@ public class DecoBlockWardrobe extends Block implements FCIBlock, FCIBlockSolidT
 		SetRenderBoundsRotatedAboutJToFacing(render, 0.85F, 0F, 0.85F, 0.975F, 1.85F, 0.975F, direction);
 		FCClientUtilsRender.RenderStandardBlockWithTexture(render, this, x, y, z, blockIcon);
 		
-		//Shelves
+		// SHELVES
 		SetRenderBoundsRotatedAboutJToFacing(render, 0.1F, 0.2F, 0.1F, 0.9F, 0.35F, 0.9F, direction);
 		FCClientUtilsRender.RenderStandardBlockWithTexture(render, this, x, y, z, blockIcon);
 		SetRenderBoundsRotatedAboutJToFacing(render, 0.1F, 0.55F, 0.1F, 0.9F, 0.65F, 0.9F, direction);
 		FCClientUtilsRender.RenderStandardBlockWithTexture(render, this, x, y, z, blockIcon);
 		
-		//Top
+		// SIDE: TOP
 		SetRenderBoundsRotatedAboutJToFacing(render, 0.0F, 1.85F, 0.0F, 1.0F, 2.0F, 1.0F, direction);
 		FCClientUtilsRender.RenderStandardBlockWithTexture(render, this, x, y, z, blockIcon);
 		
-		//Sides
+		// SIDE: LEFT
 		SetRenderBoundsRotatedAboutJToFacing(render, 0.05F, 0.2F, 0.05F, 0.95F, 1.85F, 0.1F, direction);
 		FCClientUtilsRender.RenderStandardBlockWithTexture(render, this, x, y, z, blockIcon);
+		
+		// SIDE: RIGHT
 		SetRenderBoundsRotatedAboutJToFacing(render, 0.05F, 0.2F, 0.05F, 0.1F, 1.85F, 0.95F, direction);
 		FCClientUtilsRender.RenderStandardBlockWithTexture(render, this, x, y, z, blockIcon);
+		
+		// SIDE: BACK
 		SetRenderBoundsRotatedAboutJToFacing(render, 0.05F, 0.2F, 0.9F, 0.95F, 1.85F, 0.95F, direction);
 		FCClientUtilsRender.RenderStandardBlockWithTexture(render, this, x, y, z, blockIcon);
 		

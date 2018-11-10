@@ -84,6 +84,12 @@ public class DecoUtilsRecipes {
 		FCRecipes.AddVanillaRecipe(new ItemStack(container, amountCrafted), new Object[] { "X  ", "XX ", "XXX", 'X', subItem });
 	}
 	
+	public static void addStorageRecipe(Object subItem, ItemStack container)
+	{
+		FCRecipes.AddVanillaRecipe(container, new Object [] { "XXX", "XXX", "XXX", 'X', subItem });
+		FCRecipes.AddShapelessVanillaRecipe(new ItemStack((Item)subItem, 9), new ItemStack[] { container });
+	}
+	
 	public static void addStorageRecipe(Item subItem, Block container)
 	{
 		FCRecipes.AddVanillaRecipe(new ItemStack(container), new Object[] { "XXX", "XXX", "XXX", 'X', subItem });
@@ -99,7 +105,7 @@ public class DecoUtilsRecipes {
 	public static void addStorageRecipe(ItemStack subItem, ItemStack Container)
 	{
 		FCRecipes.AddVanillaRecipe(Container, new Object[] { "XXX", "XXX", "XXX", 'X', subItem });
-		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(subItem.itemID, 9, subItem.getItemDamage()), new ItemStack[] {Container} );
+		FCRecipes.AddShapelessVanillaRecipe(new ItemStack(subItem.itemID, 9, subItem.getItemDamage()), new ItemStack[] { Container } );
 	}
 	
 	public static void addWallRecipe(Item subItem, Block container, int amountCrafted)

@@ -13,7 +13,8 @@ public class DecoBlockWorkbench extends FCBlockWorkbench
 	public DecoBlockWorkbench(int id)
 	{
 		super(id);
-		this.setUnlocalizedName("workbench");
+        
+        this.setUnlocalizedName("workbench");
 		this.setHardness(Block.planks.blockHardness);
 		this.setResistance(Block.planks.blockResistance);
 		this.setStepSound(Block.soundWoodFootstep);

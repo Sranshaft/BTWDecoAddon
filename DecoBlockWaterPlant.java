@@ -15,10 +15,11 @@ public class DecoBlockWaterPlant extends BlockFlower
 	public DecoBlockWaterPlant(int id)
 	{
 		super(id, Material.plants);
-		setUnlocalizedName("decoBlockWaterPlant");
-		setStepSound(soundGrassFootstep);
-		setCreativeTab(CreativeTabs.tabDecorations);
-		setBlockBounds(0.25F, -1.0F, 0.25F, 0.75F, 1.0F, 0.75F);
+        
+        this.setUnlocalizedName("decoBlockWaterPlant");
+		this.setStepSound(soundGrassFootstep);
+		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setBlockBounds(0.25F, -1.0F, 0.25F, 0.75F, 1.0F, 0.75F);
 		
 		Block.useNeighborBrightness[id] = true;
 		

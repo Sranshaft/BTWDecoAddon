@@ -88,6 +88,7 @@ public class GuiIngame extends Gui
             }
         }
         
+        // ADDED BY DECO ADDON MOD
         if (DecoAddonManager.getConfigOption("enablePotionEffectsToGUI"))
         	DecoUtilsHUD.displayDebuffEffects();
 
@@ -766,7 +767,19 @@ public class GuiIngame extends Gui
                 GL11.glTranslatef((float)(-(par2 + 8)), (float)(-(par3 + 12)), 0.0F);
             }
 
+            int var8 = var5.getItem().itemID;
+
+            if (var8 == Item.compass.itemID)
+            {
+                TextureCompass.compassTexture.UpdateActive();
+            }
+
             itemRenderer.renderItemAndEffectIntoGUI(this.mc.fontRenderer, this.mc.renderEngine, var5, par2, par3);
+
+            if (var8 == Item.compass.itemID)
+            {
+                TextureCompass.compassTexture.UpdateInert();
+            }
 
             if (var6 > 0.0F)
             {

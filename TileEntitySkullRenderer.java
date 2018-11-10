@@ -30,7 +30,7 @@ public class TileEntitySkullRenderer extends TileEntitySpecialRenderer
     public void func_82393_a(float par1, float par2, float par3, int par4, float par5, int par6, String par7Str)
     {
         ModelSkeletonHead var8 = this.field_82396_c;
-        
+
         switch (par6)
         {
             case 0:
@@ -50,7 +50,7 @@ public class TileEntitySkullRenderer extends TileEntitySpecialRenderer
             case 3:
                 if (par7Str != null && par7Str.length() > 0)
                 {
-                    String var9 = "http://skins.minecraft.net/MinecraftSkins/" + StringUtils.stripControlCodes(par7Str) + ".png";
+                    String var9 = FCBetterThanWolves.fcPlayerSkinURL + StringUtils.stripControlCodes(par7Str) + ".png";
 
                     if (!skullRenderer.tileEntityRenderer.renderEngine.hasImageData(var9))
                     {
@@ -73,7 +73,6 @@ public class TileEntitySkullRenderer extends TileEntitySpecialRenderer
             case 5:
                 this.bindTextureByName("/btwmodtex/fcInfusedSkull.png");
                 var8 = this.m_InfusedModel;
-                break;
                 
             case 6:
             	this.bindTextureByName("/mob/enderman_head.png");

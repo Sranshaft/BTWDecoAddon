@@ -2,54 +2,26 @@ package net.minecraft.src;
 
 public class DecoSubModuleExtendedWoodBlocks implements DecoISubModule 
 {
+	public static Block decoBlockWood;
 	public static Block decoBlockBookshelf;
+	public static Block decoBlockButtonWood;
 	
 	public static Block[] decoBlockDoors;
+	public static Block[] decoBlockFenceGates;
+	public static Block[] decoBlockLadders;
+	public static Block[] decoBlockTrapDoors;
 	
-	public static Block decoBlockTrapDoorBirch;
-	public static Block decoBlockTrapDoorBloodwood;
-	public static Block decoBlockTrapDoorEbonwood;
-	public static Block decoBlockTrapDoorIronwood;
-	public static Block decoBlockTrapDoorJungle;
-	public static Block decoBlockTrapDoorSpruce;
-	public static Block decoBlockWood;
-	public static Block decoBlockWoodSlab;
-	public static Block decoBlockWoodSlabTop;
-	public static Block decoBlockWoodOakStairs;
-	public static Block decoBlockWoodSpruceStairs;
-	public static Block decoBlockWoodBirchStairs;
-	public static Block decoBlockWoodJungleStairs;
 	public static Block decoBlockWorkbench;
 	
-	public static Item decoItemDoorBirch;
-	public static Item decoItemDoorBloodwood;
-	public static Item decoItemDoorEbonwood;
-	public static Item decoItemDoorIronwood;
-	public static Item decoItemDoorJungle;
-	public static Item decoItemDoorSpruce;
+	public static Item decoItemDoors[];
 	
-	public static final int decoBlockDoorOakID = DecoAddonManager.getBlockID("decoBlockDoorOakID");
-	public static final int decoBlockDoorBirchID = DecoAddonManager.getBlockID("decoBlockDoorBirchID");
-	public static final int decoBlockDoorBloodwoodID = DecoAddonManager.getBlockID("decoBlockDoorBloodwoodID");
-	public static final int decoBlockDoorEbonwoodID = DecoAddonManager.getBlockID("decoBlockDoorEbonwoodID");
-	public static final int decoBlockDoorIronwoodID = DecoAddonManager.getBlockID("decoBlockDoorIronwoodID");
-	public static final int decoBlockDoorJungleID =  DecoAddonManager.getBlockID("decoBlockDoorJungleID");
-	public static final int decoBlockDoorSpruceID =  DecoAddonManager.getBlockID("decoBlockDoorSpruceID");
-	
-	public static final int decoBlockTrapDoorBirchID =  DecoAddonManager.getBlockID("decoBlockTrapDoorBirchID");
-	public static final int decoBlockTrapDoorBloodwoodID =  DecoAddonManager.getBlockID("decoBlockTrapDoorBloodwoodID");
-	public static final int decoBlockTrapDoorEbonwoodID =  DecoAddonManager.getBlockID("decoBlockTrapDoorEbonwoodID");
-	public static final int decoBlockTrapDoorIronwoodID =  DecoAddonManager.getBlockID("decoBlockTrapDoorIronwoodID");
-	public static final int decoBlockTrapDoorJungleID =  DecoAddonManager.getBlockID("decoBlockTrapDoorJungleID");
+	public static final int decoBlockDoorSpruceID = DecoAddonManager.getBlockID("decoBlockDoorSpruceID");
+	public static final int decoBlockFenceGateSpruceID = DecoAddonManager.getBlockID("decoBlockFenceGateSpruceID");
+	public static final int decoBlockLadderSpruceID = DecoAddonManager.getBlockID("decoBlockLadderSpruceID");
 	public static final int decoBlockTrapDoorSpruceID =  DecoAddonManager.getBlockID("decoBlockTrapDoorSpruceID");
 	
 	public static final int decoBlockWoodID = DecoAddonManager.getBlockID("decoBlockWoodID");
 	
-	public static final int decoItemDoorBirchID = DecoAddonManager.getBlockID("decoItemDoorBirchID");
-	public static final int decoItemDoorBloodwoodID = DecoAddonManager.getBlockID("decoItemDoorBloodwoodID");
-	public static final int decoItemDoorEbonwoodID = DecoAddonManager.getBlockID("decoItemDoorEbonwoodID");
-	public static final int decoItemDoorIronwoodID = DecoAddonManager.getBlockID("decoItemDoorIronwoodID");
-	public static final int decoItemDoorJungleID = DecoAddonManager.getBlockID("decoItemDoorJungleID");
 	public static final int decoItemDoorSpruceID = DecoAddonManager.getBlockID("decoItemDoorSpruceID");
 	
 	public DecoSubModuleExtendedWoodBlocks()
@@ -57,26 +29,37 @@ public class DecoSubModuleExtendedWoodBlocks implements DecoISubModule
 		FCAddOnHandler.LogMessage("[INFO]: Loading submodule: Extended Wood Blocks");
 		
 		this.decoBlockWood = new DecoBlockWood(this.decoBlockWoodID);
+		this.decoBlockButtonWood = new DecoBlockButton(DecoAddonManager.replaceBlockID(Block.woodenButton), true).setUnlocalizedName("button");
 		
-		this.decoBlockDoors = new Block[DecoUtilsStrings.WOOD_TAGS.length];
-		for (int index = 0; index < DecoUtilsStrings.WOOD_TAGS.length; index++)
+		this.decoBlockDoors = new Block[6];
+		for (int index = 0; index < this.decoBlockDoors.length; index++)
 		{
-			this.decoBlockDoors[index] = new DecoBlockDoor(this.decoBlockDoorOakID + index, Material.wood, DecoUtilsStrings.WOOD_TAGS[index], index);
+			this.decoBlockDoors[index] = new DecoBlockDoor(this.decoBlockDoorSpruceID + index, DecoUtilsStrings.WOOD_TAGS[index + 1], index);
 		}
 		
-		this.decoBlockTrapDoorSpruce = new DecoBlockTrapDoor(this.decoBlockTrapDoorSpruceID, Block.planks, "spruce");
-		this.decoBlockTrapDoorBirch = new DecoBlockTrapDoor(this.decoBlockTrapDoorBirchID, Block.planks, "birch");
-		this.decoBlockTrapDoorJungle = new DecoBlockTrapDoor(this.decoBlockTrapDoorJungleID, Block.planks, "jungle");
-		this.decoBlockTrapDoorBloodwood = new DecoBlockTrapDoor(this.decoBlockTrapDoorBloodwoodID, Block.planks, "bloodwood");
-		this.decoBlockTrapDoorEbonwood = new DecoBlockTrapDoor(this.decoBlockTrapDoorEbonwoodID, Block.planks, "ebonwood");
-		this.decoBlockTrapDoorIronwood = new DecoBlockTrapDoor(this.decoBlockTrapDoorIronwoodID, Block.planks, "ironwood");
+		this.decoBlockFenceGates = new Block[6];
+		for (int index = 0; index < this.decoBlockDoors.length; index++)
+		{
+			this.decoBlockFenceGates[index] = new DecoBlockFenceGate(this.decoBlockFenceGateSpruceID + index, DecoUtilsStrings.WOOD_TAGS[index + 1]);
+		}
 		
-		this.decoItemDoorSpruce = new DecoItemDoor(this.decoItemDoorSpruceID, "spruce", 1);
-		this.decoItemDoorBirch = new DecoItemDoor(this.decoItemDoorBirchID, "birch", 2);
-		this.decoItemDoorJungle = new DecoItemDoor(this.decoItemDoorJungleID, "jungle", 3);
-		this.decoItemDoorBloodwood = new DecoItemDoor(this.decoItemDoorBloodwoodID, "bloodwood", 4);
-		this.decoItemDoorEbonwood = new DecoItemDoor(this.decoItemDoorEbonwoodID, "ebonwood", 5);
-		this.decoItemDoorIronwood = new DecoItemDoor(this.decoItemDoorIronwoodID, "ironwood", 6);
+		this.decoBlockLadders = new Block[6];
+		for (int index = 0; index < this.decoBlockLadders.length; index++)
+		{
+			this.decoBlockLadders[index] = new DecoBlockLadderWood(this.decoBlockLadderSpruceID + index, DecoUtilsStrings.WOOD_TAGS[index + 1]);
+		}
+		
+		this.decoBlockTrapDoors = new Block[6];
+		for (int index = 0; index < this.decoBlockTrapDoors.length; index++)
+		{
+			this.decoBlockTrapDoors[index] = new DecoBlockTrapDoor(this.decoBlockTrapDoorSpruceID + index, Block.planks, DecoUtilsStrings.WOOD_TAGS[index + 1]);
+		}
+		
+		this.decoItemDoors = new Item[6];
+		for (int index = 0; index < this.decoItemDoors.length; index++)
+		{
+			this.decoItemDoors[index] = new DecoItemDoor(this.decoItemDoorSpruceID + index, DecoUtilsStrings.WOOD_TAGS[index + 1], index);
+		}
 		
 		// REPLACE VANILLA BLOCKS
 		this.decoBlockBookshelf = new DecoBlockBookshelf(DecoAddonManager.replaceBlockID(Block.bookShelf));
@@ -90,24 +73,30 @@ public class DecoSubModuleExtendedWoodBlocks implements DecoISubModule
 	
 	public void registerBlocks() 
 	{
-		for (int index = 0; index < DecoUtilsStrings.WOOD_TAGS.length; index++)
+		/*for (int index = 0; index < this.decoBlockDoors.length; index++)
 		{
-			DecoAddonManager.register(this.decoBlockDoors[index], DecoUtilsStrings.WOOD_NAMES[index] + " Door");
+			DecoAddonManager.register(this.decoBlockDoors[index], DecoUtilsStrings.WOOD_NAMES[index + 1] + " Door");
+		}*/
+		
+		for (int index = 0; index < this.decoBlockFenceGates.length; index++)
+		{
+			DecoAddonManager.register(this.decoBlockFenceGates[index], DecoUtilsStrings.WOOD_NAMES[index + 1] + " Fence Gate");
 		}
 		
-		DecoAddonManager.register(this.decoBlockTrapDoorBirch, "Birch Trapdoor");
-		DecoAddonManager.register(this.decoBlockTrapDoorBloodwood, "Bloodwood Trapdoor");
-		DecoAddonManager.register(this.decoBlockTrapDoorEbonwood, "Ebonwood Trapdoor");
-		DecoAddonManager.register(this.decoBlockTrapDoorIronwood, "Ironwood Trapdoor");
-		DecoAddonManager.register(this.decoBlockTrapDoorJungle, "Jungle Trapdoor");
-		DecoAddonManager.register(this.decoBlockTrapDoorSpruce, "Spruce Trapdoor");
+		for (int index = 0; index < this.decoBlockLadders.length; index++)
+		{
+			DecoAddonManager.register(this.decoBlockLadders[index], DecoUtilsStrings.WOOD_NAMES[index + 1] + " Ladder");
+		}
 		
-		DecoAddonManager.register(this.decoItemDoorBirch, "Birch Door");
-		DecoAddonManager.register(this.decoItemDoorBloodwood, "Bloodwood Door");
-		DecoAddonManager.register(this.decoItemDoorEbonwood, "Ebonwood Door");
-		DecoAddonManager.register(this.decoItemDoorIronwood, "Ironwood Door");
-		DecoAddonManager.register(this.decoItemDoorJungle, "Jungle Door");
-		DecoAddonManager.register(this.decoItemDoorSpruce, "Spruce Door");
+		for (int index = 0; index < this.decoBlockTrapDoors.length; index++)
+		{
+			DecoAddonManager.register(this.decoBlockTrapDoors[index], DecoUtilsStrings.WOOD_NAMES[index + 1] + " Trapdoor");
+		}
+		
+		for (int index = 0; index < this.decoItemDoors.length; index++)
+		{
+			DecoAddonManager.register(this.decoItemDoors[index], DecoUtilsStrings.WOOD_NAMES[index + 1] + " Door");
+		}
 	}
 
 	public void addRecipes() 
@@ -146,17 +135,17 @@ public class DecoSubModuleExtendedWoodBlocks implements DecoISubModule
 		// TRAPDOOR RECIPES
 		FCRecipes.AddVanillaRecipe(new ItemStack(Block.trapdoor, 2),
 				new Object[] { "XXX", "XXX", 'X', new ItemStack(FCBetterThanWolves.fcBlockWoodSidingItemStubID, 1, 0) });
-		FCRecipes.AddVanillaRecipe(new ItemStack(this.decoBlockTrapDoorSpruce, 2), 
+		FCRecipes.AddVanillaRecipe(new ItemStack(this.decoBlockTrapDoors[0], 2), 
 				new Object[] { "XXX", "XXX", 'X', new ItemStack(FCBetterThanWolves.fcBlockWoodSidingItemStubID, 1, 1) });
-		FCRecipes.AddVanillaRecipe(new ItemStack(this.decoBlockTrapDoorBirch, 2),
+		FCRecipes.AddVanillaRecipe(new ItemStack(this.decoBlockTrapDoors[1], 2),
 				new Object[] { "XXX", "XXX", 'X', new ItemStack(FCBetterThanWolves.fcBlockWoodSidingItemStubID, 1, 2) });
-		FCRecipes.AddVanillaRecipe(new ItemStack(this.decoBlockTrapDoorJungle, 2), 
+		FCRecipes.AddVanillaRecipe(new ItemStack(this.decoBlockTrapDoors[2], 2), 
 				new Object[] { "XXX", "XXX", 'X', new ItemStack(FCBetterThanWolves.fcBlockWoodSidingItemStubID, 1, 3) });
-		FCRecipes.AddVanillaRecipe(new ItemStack(this.decoBlockTrapDoorBloodwood, 2), 
+		FCRecipes.AddVanillaRecipe(new ItemStack(this.decoBlockTrapDoors[3], 2), 
 				new Object[] { "XXX", "XXX", 'X', new ItemStack(this.decoBlockWood, 1, 4) });
-		FCRecipes.AddVanillaRecipe(new ItemStack(this.decoBlockTrapDoorEbonwood, 2), 
+		FCRecipes.AddVanillaRecipe(new ItemStack(this.decoBlockTrapDoors[4], 2), 
 				new Object[] { "XXX", "XXX", 'X', new ItemStack(this.decoBlockWood, 1, 5) });
-		FCRecipes.AddVanillaRecipe(new ItemStack(this.decoBlockTrapDoorIronwood, 2), 
+		FCRecipes.AddVanillaRecipe(new ItemStack(this.decoBlockTrapDoors[5], 2), 
 				new Object[] { "XXX", "XXX", 'X', new ItemStack(this.decoBlockWood, 1, 6) });
 		
 		// WORKBENCH RECIPES
@@ -185,7 +174,7 @@ public class DecoSubModuleExtendedWoodBlocks implements DecoISubModule
 				new Object[] { "XXX", "BBB", "XXX", 'X', new ItemStack(FCBetterThanWolves.fcBlockWoodSidingItemStubID, 1, 32767), 'B', Item.book });
 		
 		FCRecipes.RemoveVanillaRecipe(new ItemStack(Block.trapdoor, 2),
-				new Object[] { "XXX", "XXX", 'X', new ItemStack(FCBetterThanWolves.fcBlockWoodSidingItemStubID, 1, 32767) });
+				new Object[] { "IXX", "IXX", 'X', new ItemStack(FCBetterThanWolves.fcBlockWoodSidingItemStubID, 1, 32767), 'I', FCBetterThanWolves.fcItemNuggetIron });
 		
 		FCRecipes.RemoveVanillaRecipe(new ItemStack(Block.workbench),
 				new Object[] { "XX", "XX", 'X', Block.planks });
@@ -193,17 +182,20 @@ public class DecoSubModuleExtendedWoodBlocks implements DecoISubModule
 	
 	public void setupCustomToolProperties() 
 	{
-		for (int index = 1; index < DecoUtilsStrings.WOOD_TAGS.length; index++)
+		for (int index = 0; index < this.decoBlockDoors.length; index++)
 		{
-			ItemAxe.SetAllAxesToBeEffectiveVsBlock(this.decoBlockDoors[index - 1]);
+			ItemAxe.SetAllAxesToBeEffectiveVsBlock(this.decoBlockDoors[index]);
 		}
 		
-		ItemAxe.SetAllAxesToBeEffectiveVsBlock(this.decoBlockTrapDoorBirch);
-		ItemAxe.SetAllAxesToBeEffectiveVsBlock(this.decoBlockTrapDoorBloodwood);
-		ItemAxe.SetAllAxesToBeEffectiveVsBlock(this.decoBlockTrapDoorEbonwood);
-		ItemAxe.SetAllAxesToBeEffectiveVsBlock(this.decoBlockTrapDoorIronwood);
-		ItemAxe.SetAllAxesToBeEffectiveVsBlock(this.decoBlockTrapDoorJungle);
-		ItemAxe.SetAllAxesToBeEffectiveVsBlock(this.decoBlockTrapDoorSpruce);
+		for (int index = 0; index < this.decoBlockLadders.length; index++)
+		{
+			ItemAxe.SetAllAxesToBeEffectiveVsBlock(this.decoBlockLadders[index]);
+		}
+		
+		for (int index = 0; index < this.decoBlockTrapDoors.length; index++)
+		{
+			ItemAxe.SetAllAxesToBeEffectiveVsBlock(this.decoBlockTrapDoors[index]);
+		}
 	}
 
 }

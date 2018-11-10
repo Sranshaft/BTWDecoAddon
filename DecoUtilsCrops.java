@@ -4,6 +4,10 @@ import java.util.Random;
 
 public class DecoUtilsCrops 
 {
+	private static final int m_FlowerChance = 30;
+	private static final int m_FoliageChance = 40;
+	private static final int m_TallGrassChance = 75;
+	
 	/**
 	 * returns true if the block below the crop is suitable for planting
 	 */
@@ -21,7 +25,7 @@ public class DecoUtilsCrops
 	public static boolean isBonemeal(ItemStack itemStack)
 	{
 		if (itemStack.itemID == FCBetterThanWolves.fcPotash.itemID 
-				|| itemStack.itemID == DecoSubModuleFlowers.decoItemFertilizer.itemID
+				|| itemStack.itemID == DecoModuleStorage.decoItemFertilizer.itemID
 				|| (itemStack.itemID == Item.dyePowder.itemID && itemStack.getItemDamage() == 15))
 	    	 return true;
 		else 
@@ -102,12 +106,33 @@ public class DecoUtilsCrops
 	 */
 	public static boolean hasAppliedBonemeal(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int var7, float var8, float var9, float var10)
 	{
+		int blockID = world.getBlockId(x, y, z);
+		
+		if (blockID == Block.tallGrass.blockID)
+		{
+			int metadata = world.getBlockMetadata(x, y, z);
+			
+			if (metadata == 1)
+			{
+				world.setBlockAndMetadataWithNotify(x, y, z, DecoModuleWorld.decoBlockFoliageID, 5);
+				world.setBlockAndMetadataWithNotify(x, y + 1, z, DecoModuleWorld.decoBlockFoliageID, 6);
+			}
+			else if (metadata == 2)
+			{
+				world.setBlockAndMetadataWithNotify(x, y, z, DecoModuleWorld.decoBlockFoliageID, 7);
+				world.setBlockAndMetadataWithNotify(x, y + 1, z, DecoModuleWorld.decoBlockFoliageID, 8);
+			}
+			
+			return true;
+		}
+		
 		if (!isBlockSuitable(world, x, y, z))
 			y--;
 		
 		if (isBlockSuitable(world, x, y, z))
 		{
-			int blockID = world.getBlockId(x, y, z);
+			blockID = world.getBlockId(x, y, z);
+			
 			if (blockID == Block.tilledField.blockID)
 			{
 				int metadata = world.getBlockMetadata(x, y, z);
@@ -163,16 +188,7 @@ public class DecoUtilsCrops
 				
 				if (isGrassBlock && World.getBlockId(newX, newY, newZ) == 0)
 				{
-					if (Item.itemRand.nextInt(100) <= 40 && Block.tallGrass.canBlockStay(World, newX, newY, newZ))
-						World.setBlockAndMetadataWithNotify(newX, newY, newZ, Block.tallGrass.blockID, 1);
-					else if (Item.itemRand.nextInt(100) <= 50 && DecoModuleWorld.decoBlockFoliage.canBlockStay(World, newX, newY, newZ))
-					{
-						int tempRandomMetadata = Item.itemRand.nextInt(3) + 1;
-						World.setBlockAndMetadataWithNotify(newX, newY, newZ, DecoModuleWorld.decoBlockFoliageID, tempRandomMetadata);
-					}
-					else if (Item.itemRand.nextInt(100) <= 10 && DecoModuleWorld.decoBlockWildgrass.canBlockStay(World, newX, newY, newZ) && DecoAddonManager.getConfigOption("generateWildgrassAndFoliage"))
-						World.setBlockAndMetadataWithNotify(newX, newY, newZ, DecoModuleWorld.decoBlockWildgrass.blockID, 0);
-					else if (Item.itemRand.nextInt(100) <= 30 && Block.plantYellow.canBlockStay(World, newX, newY, newZ))
+					if (Item.itemRand.nextInt(100) <= m_FlowerChance && Block.plantYellow.canBlockStay(World, newX, newY, newZ))
 					{
 						int rnd = Item.itemRand.nextInt(21);
 						switch (rnd)
@@ -207,6 +223,16 @@ public class DecoUtilsCrops
 								World.setBlockAndMetadataWithNotify(newX, newY, newZ, DecoSubModuleFlowers.decoBlockFlowerTulip.blockID, rnd - 17);
 								break;
 						}
+					}
+					else if (Item.itemRand.nextInt(100) <= m_TallGrassChance && Block.tallGrass.canBlockStay(World, newX, newY, newZ))
+					{
+						World.setBlockAndMetadataWithNotify(newX, newY, newZ, Block.tallGrass.blockID, 1);
+						break;
+					}
+					else if (Item.itemRand.nextInt(100) <= m_FoliageChance && DecoModuleWorld.decoBlockFoliage.canBlockStay(World, newX, newY, newZ))
+					{
+						int tempRandomMetadata = Item.itemRand.nextInt(3) + 1;
+						World.setBlockAndMetadataWithNotify(newX, newY, newZ, DecoModuleWorld.decoBlockFoliageID, tempRandomMetadata);
 					}
 				}
 				

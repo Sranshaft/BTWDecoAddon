@@ -11,10 +11,11 @@ public class DecoItemSpyglass extends Item
 	public DecoItemSpyglass(int id)
 	{
 		super(id);
-		setUnlocalizedName("decoItemSpyglass");
-		setMaxStackSize(1);
-		setMaxDamage(256);
-		setCreativeTab(CreativeTabs.tabTools);
+        
+        this.setUnlocalizedName("decoItemSpyglass");
+		this.setMaxStackSize(1);
+		this.setMaxDamage(256);
+		this.setCreativeTab(CreativeTabs.tabTools);
 	}
 	
 	/**

@@ -11,8 +11,8 @@ public class DecoItemFertilizer extends Item
 		this.SetBellowsBlowDistance(FCBetterThanWolves.fcCoalDust.GetBellowsBlowDistance(0));
 	}
 	
-	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int var7, float var8, float var9, float var10)
+	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
-		return player != null && !player.canPlayerEdit(x, y, z, var7, itemStack) ? false : DecoUtilsCrops.hasAppliedBonemeal(itemStack, player, world, x, y, z, var7, var8, var9, var10);
+		return player != null && !player.canPlayerEdit(x, y, z, side, itemStack) ? false : DecoUtilsCrops.hasAppliedBonemeal(itemStack, player, world, x, y, z, side, hitX, hitY, hitZ);
 	}
 }

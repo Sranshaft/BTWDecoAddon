@@ -2,11 +2,11 @@ package net.minecraft.src;
 
 public class DecoItemHammer extends ItemPickaxe
 {
+	public static Material[] m_MaterialEffectiveAgainst = new Material[] { Material.rock, Material.iron, Material.ice, Material.glass, Material.piston, Material.anvil };
+	
 	private int m_BreakRadius = 1;
 	private int m_BreakDepth = 0;
 	private String m_Type;
-	
-	public static Material[] m_MaterialEffectiveAgainst = new Material[] { Material.rock, Material.iron, Material.ice, Material.glass, Material.piston, Material.anvil };
 	
 	public DecoItemHammer(int id, EnumToolMaterial toolMaterial, String type, int radius)
 	{
@@ -104,6 +104,7 @@ public class DecoItemHammer extends ItemPickaxe
 			if (isEffective(block.blockMaterial) && world.canMineBlock(player, xIndex, yIndex, zIndex))
 			{
 				world.destroyBlock(xIndex, yIndex, zIndex, true);
+				itemStack.damageItem(1, player);
 				
 				if (!world.isRemote)
 					player.playerNetServerHandler.sendPacketToPlayer(new Packet14BlockDig(4, xIndex, yIndex, zIndex, side));
@@ -124,8 +125,7 @@ public class DecoItemHammer extends ItemPickaxe
 	{
 		for (Material material : GetMaterialEffectiveAgainst())
 		{
-			if (checkMaterial == null) return false;
-			else if (checkMaterial == material) return true;
+			if (checkMaterial == material) return true;
 		}
 		
 		return false;

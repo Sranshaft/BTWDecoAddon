@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.List;
 
-public class DecoBlockTableWood extends Block implements FCIBlockSolidTop 
+public class DecoBlockTableWood extends Block 
 {
 	private Icon[] m_IconByMetadataArray;
 

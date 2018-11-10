@@ -5,16 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class DecoBlockWildgrass extends FCBlockTallGrass
+public class DecoBlockWildgrass extends BlockFlower
 {
 	private Icon m_IconTop, m_IconMiddle, m_IconBottom;
+	
+	private static int m_GrowthChance = 50;
 	
 	public DecoBlockWildgrass(int id)
 	{
 		super(id);
 		
 		this.setUnlocalizedName("decoBlockWildgrass");
-		this.setHardness(0.03F);
+		this.setHardness(0.01F);
 		this.setStepSound(soundGrassFootstep);
 		this.setTickRandomly(true);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
@@ -114,7 +116,7 @@ public class DecoBlockWildgrass extends FCBlockTallGrass
     
     public boolean canPlaceBlockAt(World world, int x, int y, int z)
 	{
-		return canThisPlantGrowOnThisBlockID(world, x, y - 1, z, true);
+		return canThisPlantGrowOnThisBlockID(world, x, y - 1, z, false);
 	}
     
     /**
@@ -128,11 +130,16 @@ public class DecoBlockWildgrass extends FCBlockTallGrass
     
     public void updateTick(World world, int x, int y, int z, Random random)
     {
-    	float growthMultiplier = 0.025F * FCUtilsMisc.GetBlockGrowthMultiplier(world, x, y - 1, z, this);
+    	/*float growthMultiplier = 0.025F * FCUtilsMisc.GetBlockGrowthMultiplier(world, x, y - 1, z, this);
 		
 		if (random.nextFloat() <= growthMultiplier && canThisPlantGrowOnThisBlockID(world, x, y - 1, z, false))
     		this.growPlant(world, x, y, z, random);
     	
+        super.updateTick(world, x, y, z, random);*/
+        
+        if (random.nextInt(100) <= this.m_GrowthChance && canThisPlantGrowOnThisBlockID(world, x, y - 1, z, true))
+        	this.growPlant(world, x, y, z, random);
+	
         super.updateTick(world, x, y, z, random);
     }
 
@@ -212,7 +219,7 @@ public class DecoBlockWildgrass extends FCBlockTallGrass
     
     public int getBlockColor()
     {
-        double var1 = 0.5D;
+    	double var1 = 0.5D;
         double var3 = 1.0D;
         return ColorizerGrass.getGrassColor(var1, var3);
     }
@@ -222,30 +229,15 @@ public class DecoBlockWildgrass extends FCBlockTallGrass
      */
     public int getRenderColor(int par1)
     {
-        return this.getBlockColor();
+    	return ColorizerFoliage.getFoliageColorBasic();
     }
 
     /**
      * Returns a integer with hex for 0xrrggbb with this color multiplied against the blocks color. Note only called
      * when first determining what to render.
      */
-    public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+    public int colorMultiplier(IBlockAccess bAccess, int x, int y, int z)
     {
-        int var5 = 0;
-        int var6 = 0;
-        int var7 = 0;
-
-        for (int var8 = -1; var8 <= 1; ++var8)
-        {
-            for (int var9 = -1; var9 <= 1; ++var9)
-            {
-                int var10 = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8).getBiomeGrassColor();
-                var5 += (var10 & 16711680) >> 16;
-                var6 += (var10 & 65280) >> 8;
-                var7 += var10 & 255;
-            }
-        }
-
-        return (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
+    	return bAccess.getBiomeGenForCoords(x, z).getBiomeGrassColor();
     }
 }

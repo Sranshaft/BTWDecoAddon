@@ -2,7 +2,6 @@ package net.minecraft.src;
 
 public class DecoModuleMechanical 
 {
-	public static Block decoBlockButtonWood;
 	public static Block decoBlockCompostBin;
 	public static Block decoBlockFenceGate;
 	public static Block decoBlockScaffoldMetal;
@@ -28,13 +27,6 @@ public class DecoModuleMechanical
 	{
 		FCAddOnHandler.LogMessage("[INFO]: Loading module: Mechanical");
 		
-		// REPLACE VANILLA BLOCKS
-		if (DecoAddonManager.getConfigOption("enableExtendedWoodBlocks"))
-		{
-			this.decoBlockButtonWood = new DecoBlockButton(DecoAddonManager.replaceBlockID(Block.woodenButton), true).setUnlocalizedName("button");
-			this.decoBlockFenceGate = new DecoBlockFenceGate(DecoAddonManager.replaceBlockID(Block.fenceGate)).setUnlocalizedName("fenceGate");
-		}
-		
 		if (DecoAddonManager.getConfigOption("enableCompostBin"))
 		{
 			TileEntity.addMapping(DecoTileEntityCompostBin.class, "Compost Bin");
@@ -48,7 +40,6 @@ public class DecoModuleMechanical
 		this.decoBlockSteelAxlePowerSource = new DecoBlockSteelAxlePowerSource(this.decoBlockSteelAxlePowerSourceID);
 		this.decoBlockSteelGearBox = new DecoBlockSteelGearBox(this.decoBlockSteelGearBoxID);
 		this.decoBlockTrapDoorIron = new DecoBlockTrapDoor(this.decoBlockTrapDoorIronID, Block.blockIron, "iron");
-		
 		
 		registerBlocks();
 		addRecipes();

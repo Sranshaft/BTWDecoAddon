@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class DecoBlockBark extends Block implements DecoIBlock
 {
-	private Icon[] m_IconByMetadataArray = new Icon[DecoUtilsStrings.TREE_TAGS.length];
+	private Icon[] m_IconByMetadataArray = new Icon[7];
 
 	public DecoBlockBark(int id)
 	{
@@ -70,7 +70,7 @@ public class DecoBlockBark extends Block implements DecoIBlock
 	 */
 	public void registerIcons(IconRegister register)
 	{
-		for (int index = 0; index < DecoUtilsStrings.TREE_TAGS.length; index++)
+		for (int index = 0; index < this.m_IconByMetadataArray.length; index++)
 		{
 			this.m_IconByMetadataArray[index] = register.registerIcon(DecoUtilsStrings.TREE_SIDE_TEXTURE_PATHS[index]);
 		}

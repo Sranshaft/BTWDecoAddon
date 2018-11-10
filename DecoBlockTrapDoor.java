@@ -7,7 +7,7 @@ public class DecoBlockTrapDoor extends FCBlockTrapDoor
 	
 	public DecoBlockTrapDoor(int id, Block parentBlock, String tag)
 	{
-		super(id, parentBlock.blockMaterial);
+		super(id);
 		setUnlocalizedName("decoBlockTrapDoor." + tag);
 		setHardness(parentBlock.blockHardness);
 		setResistance(parentBlock.blockResistance);
@@ -35,14 +35,17 @@ public class DecoBlockTrapDoor extends FCBlockTrapDoor
     
     public void onPoweredBlockChange(World world, int x, int y, int z, boolean par5)
     {
-	    int metadata = world.getBlockMetadata(x, y, z);
-        boolean var7 = (metadata & 4) > 0;
-
-        if (var7 != par5)
-        {
-            world.setBlockMetadataWithNotify(x, y, z, metadata ^ 4, 2);
-            world.playAuxSFXAtEntity((EntityPlayer)null, 1003, x, y, z, 0);
-        }
+    	if (this.m_Tag == "iron")
+    	{
+		    int metadata = world.getBlockMetadata(x, y, z);
+	        boolean var7 = (metadata & 4) > 0;
+	
+	        if (var7 != par5)
+	        {
+	            world.setBlockMetadataWithNotify(x, y, z, metadata ^ 4, 2);
+	            world.playAuxSFXAtEntity((EntityPlayer)null, 1003, x, y, z, 0);
+	        }
+    	}
     }
     
     /**
@@ -51,7 +54,7 @@ public class DecoBlockTrapDoor extends FCBlockTrapDoor
      */
     public void onNeighborBlockChange(World world, int x, int y, int z, int neighbourBlockID)
     {
-        if (!world.isRemote)
+        if (!world.isRemote && this.m_Tag == "iron")
         {
             boolean var9 = world.isBlockIndirectlyGettingPowered(x, y, z);
 

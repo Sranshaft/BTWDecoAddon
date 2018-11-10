@@ -3,37 +3,34 @@ package net.minecraft.src;
 public class DecoSubModuleExtendedStoneBlocks implements DecoISubModule
 {
 	public static Block decoBlockStoneBrick;
-	public static Block decoBlockBlackStoneWall;
-	public static Block decoBlockBrickWall;
-	public static Block decoBlockCobblestoneWall;
-	public static Block decoBlockMossyCobbleWall;
-	public static Block decoBlockNetherBrickWall;
-	public static Block decoBlockSandstoneWall;
-	public static Block decoBlockStoneBrickWall;
-	public static Block decoBlockStoneStairs;
-	public static Block decoBlockStoneWall;
-	public static Block decoBlockWhiteStoneWall;
 	
-	public static final int decoBlockBlackStoneWallID = DecoAddonManager.getBlockID("decoBlockBlackStoneWallID");
-	public static final int decoBlockBrickWallID = DecoAddonManager.getBlockID("decoBlockBrickWallID");
-	public static final int decoBlockNetherBrickWallID = DecoAddonManager.getBlockID("decoBlockNetherBrickWallID");
-	public static final int decoBlockSandstoneWallID = DecoAddonManager.getBlockID("decoBlockSandstoneWallID");
-	public static final int decoBlockStoneBrickWallID = DecoAddonManager.getBlockID("decoBlockStoneBrickWallID");
-	public static final int decoBlockStoneStairsID = DecoAddonManager.getBlockID("decoBlockStoneStairsID");
-	public static final int decoBlockStoneWallID = DecoAddonManager.getBlockID("decoBlockStoneWallID");
-	public static final int decoBlockWhiteStoneWallID = DecoAddonManager.getBlockID("decoBlockWhiteStoneWallID");
+	public static Block decoBlockWallBlackStone;
+	public static Block decoBlockWallBrick;
+	public static Block decoBlockWallNetherBrick;
+	public static Block decoBlockWallSandstone;
+	public static Block decoBlockWallStone;
+	public static Block decoBlockWallStoneBrick;
+	public static Block decoBlockWallWhiteStone;
+	
+	public static final int decoBlockWallBlackStoneID = DecoAddonManager.getBlockID("decoBlockWallBlackStoneID");
+	public static final int decoBlockWallBrickID = DecoAddonManager.getBlockID("decoBlockWallBrickID");
+	public static final int decoBlockWallNetherBrickID = DecoAddonManager.getBlockID("decoBlockWallNetherBrickID");
+	public static final int decoBlockWallSandstoneID = DecoAddonManager.getBlockID("decoBlockWallSandstoneID");
+	public static final int decoBlockWallStoneID = DecoAddonManager.getBlockID("decoBlockWallStoneID");
+	public static final int decoBlockWallStoneBrickID = DecoAddonManager.getBlockID("decoBlockWallStoneBrickID");
+	public static final int decoBlockWallWhiteStoneID = DecoAddonManager.getBlockID("decoBlockWallWhiteStoneID");
 	
 	public DecoSubModuleExtendedStoneBlocks()
 	{
 		FCAddOnHandler.LogMessage("[INFO]: Loading submodule: Extended Stone Blocks");
 		
-		this.decoBlockBlackStoneWall = new DecoBlockWall(this.decoBlockBlackStoneWallID, Block.blockNetherQuartz);
-		this.decoBlockBrickWall = new DecoBlockWall(this.decoBlockBrickWallID, Block.brick);
-		this.decoBlockNetherBrickWall = new DecoBlockWall(this.decoBlockNetherBrickWallID, Block.netherBrick);
-		this.decoBlockSandstoneWall = new DecoBlockWall(this.decoBlockSandstoneWallID, Block.sandStone);
-		this.decoBlockStoneWall = new DecoBlockWall(this.decoBlockStoneWallID, Block.stone);
-		this.decoBlockStoneBrickWall = new DecoBlockWall(this.decoBlockStoneBrickWallID, Block.stoneBrick);
-		this.decoBlockStoneStairs = new DecoBlockStair(this.decoBlockStoneStairsID, Block.stone, 0);
+		this.decoBlockWallBlackStone = new DecoBlockWall(this.decoBlockWallBlackStoneID, Block.blockNetherQuartz);
+		this.decoBlockWallBrick = new DecoBlockWall(this.decoBlockWallBrickID, Block.brick);
+		this.decoBlockWallNetherBrick = new DecoBlockWall(this.decoBlockWallNetherBrickID, Block.netherBrick);
+		this.decoBlockWallSandstone = new DecoBlockWall(this.decoBlockWallSandstoneID, Block.sandStone);
+		this.decoBlockWallStone = new DecoBlockWall(this.decoBlockWallStoneID, Block.stone);
+		this.decoBlockWallStoneBrick = new DecoBlockWall(this.decoBlockWallStoneBrickID, Block.stoneBrick);
+		//this.decoBlockWallWhiteStone = new DecoBlockWall(this.decoBlockWallWhiteStoneID, FCBetterThanWolves.fcAestheticNonOpaque);
 		
 		this.registerBlocks();
 		this.addRecipes();
@@ -43,24 +40,22 @@ public class DecoSubModuleExtendedStoneBlocks implements DecoISubModule
 	
 	public void registerBlocks() 
 	{
-		DecoAddonManager.register(this.decoBlockBlackStoneWall, "Black Stone Wall");
-		DecoAddonManager.register(this.decoBlockBrickWall, "Brick Wall");
-		DecoAddonManager.register(this.decoBlockNetherBrickWall, "Nether Brick Wall");
-		DecoAddonManager.register(this.decoBlockSandstoneWall, "Sandstone Wall");
-		DecoAddonManager.register(this.decoBlockStoneBrickWall, "Stone Brick Wall");
-		DecoAddonManager.register(this.decoBlockStoneWall, "Stone Wall");
-		DecoAddonManager.register(this.decoBlockStoneStairs, "Stone Stairs");
+		DecoAddonManager.register(this.decoBlockWallBlackStone, "Black Stone Wall");
+		DecoAddonManager.register(this.decoBlockWallBrick, "Brick Wall");
+		DecoAddonManager.register(this.decoBlockWallNetherBrick, "Nether Brick Wall");
+		DecoAddonManager.register(this.decoBlockWallSandstone, "Sandstone Wall");
+		DecoAddonManager.register(this.decoBlockWallStone, "Stone Wall");
+		DecoAddonManager.register(this.decoBlockWallStoneBrick, "Stone Brick Wall");
 	}
 
 	public void addRecipes() 
 	{
-		DecoUtilsRecipes.addWallRecipe(Block.blockNetherQuartz, this.decoBlockBlackStoneWall, 2);
-		DecoUtilsRecipes.addWallRecipe(Block.brick, this.decoBlockBrickWall, 2);
-		DecoUtilsRecipes.addWallRecipe(Block.netherBrick, this.decoBlockNetherBrickWall, 2);
-		DecoUtilsRecipes.addWallRecipe(Block.sandStone, this.decoBlockSandstoneWall, 2);
-		DecoUtilsRecipes.addWallRecipe(Block.stoneBrick, this.decoBlockStoneBrickWall, 2);
-		DecoUtilsRecipes.addWallRecipe(Block.stone, this.decoBlockStoneBrickWall, 2);
-		DecoUtilsRecipes.addStairsRecipe(Block.stone, this.decoBlockStoneStairs, 4);	
+		DecoUtilsRecipes.addWallRecipe(Block.blockNetherQuartz, this.decoBlockWallBlackStone, 2);
+		DecoUtilsRecipes.addWallRecipe(Block.brick, this.decoBlockWallBrick, 2);
+		DecoUtilsRecipes.addWallRecipe(Block.netherBrick, this.decoBlockWallNetherBrick, 2);
+		DecoUtilsRecipes.addWallRecipe(Block.sandStone, this.decoBlockWallSandstone, 2);
+		DecoUtilsRecipes.addWallRecipe(Block.stoneBrick, this.decoBlockWallStone, 2);
+		DecoUtilsRecipes.addWallRecipe(Block.stone, this.decoBlockWallStoneBrick, 2);
 	}
 
 	public void changeVanillaItems() {

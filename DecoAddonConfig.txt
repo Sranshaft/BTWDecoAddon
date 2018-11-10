@@ -15,7 +15,7 @@ BUILDING:
 option.enableBarkBlock=true
 option.enableBlackStoneBricks=true
 option.enableBloodwood=false
-option.enableBrimstone=false
+option.enableBrimstone=true
 option.enableCharredNetherBricks=true
 option.enableDuskbound=true
 option.enableEbonstoneAndBricks=true
@@ -27,7 +27,6 @@ option.enableHardenedClay=true
 option.enableHardenedNetherSludge=false
 option.enableIronwood=false
 option.enableMagmaBlock=false
-option.enableMidori=false
 option.enableMudstoneAndBricks=true
 option.enableNetherWroughtStone=true
 option.enablePrismarine=false
@@ -79,14 +78,14 @@ option.enableCompostBin=true
 
 TWEAKS:
 ============================
-// Adds variants for dirt, grass and farmland (normal, coarse, dried and rich varieties)
-option.enableExtendedDirtAndGrassBlocks=true
-
 // Adds missing sandstone, stone, stone brick, etc. walls, slabs and stairs
 option.enableExtendedStoneBlocks=true
 
 // Adds wood variants of chests, doors, fence gates and trapdoors
 option.enableExtendedWoodBlocks=true
+
+// Adds more variants of dirt and grass blocks
+option.enableExtendedDirtAndGrassBlocks=true
 
 // Renames tools and blocks made from Diamond ingots to Diamondium
 option.enableDiamondium=true
@@ -105,8 +104,9 @@ option.enableFireproofBloodWood=true
 
 WORLD:
 ============================
+// Adds decoration to biomes
 option.generateBouldersInPlains=true
-option.generateRedSandInDeserts=false
+option.generateQuicksandInDeserts=false
 option.generateQuicksandInJungles=true
 
 // Replaces the sand found in swamps and oceans with a mixture of mud, coarse dirt and packed earth
@@ -126,508 +126,515 @@ option.generateLargeTrees=true
 
 BLOCK IDs:
 ============================
-decoBlockApiaryID = 3000
-decoBlockBambooID = 3001
+
+
+WOOD BLOCK IDs:
+============================
+
+// 0: Wattle 1: Daub - Wet 2: Daub - Dry 3: Paper Wall 
+// 4: Frame 5: Frame - Slash 6: Frame - Backslash 7: Frame - Cross 
+// 8: Carved - Oak 9: Carved - Spruce 10: Carved - Birch 11: Carved - Jungle 12: Carved - Bloodwood 13: Carved - Ebonwood 14: Carved - Ironwood
+decoBlockAestheticWoodID = 3000
+
+decoBlockApiaryID = 3001
 
 decoBlockBarkID = 3002
+
 decoBlockBarkBirchMouldingAndDecorativeID = 3003
 decoBlockBarkBirchSidingAndCornerID = 3004
 decoBlockBarkBirchStairsID = 3005
-decoBlockBarkEbonwoodMouldingAndDecorativeID = 3006
-decoBlockBarkEbonwoodSidingAndCornerID = 3007
-decoBlockBarkEbonwoodStairsID = 3008
-decoBlockBarkIronwoodMouldingAndDecorativeID = 3009
-decoBlockBarkIronwoodSidingAndCornerID = 3010
-decoBlockBarkIronwoodStairsID = 3011
-decoBlockBarkJungleMouldingAndDecorativeID = 3012
-decoBlockBarkJungleSidingAndCornerID = 3013
-decoBlockBarkJungleStairsID = 3014
-decoBlockBarkOakMouldingAndDecorativeID = 3015
-decoBlockBarkOakSidingAndCornerID = 3016
-decoBlockBarkOakStairsID = 3017
-decoBlockBarkSlabID = 3018
-decoBlockBarkSlabTopID = 3019
-decoBlockBarkSpruceMouldingAndDecorativeID = 3020
-decoBlockBarkSpruceSidingAndCornerID = 3021
-decoBlockBarkSpruceStairsID = 3022
-decoBlockBarkWallID = 3023
 
-decoBlockBeehiveID = 3034
-decoBlockBlackStoneBrickID = 3035
-decoBlockBlackStoneBrickMouldingAndDecorativeID = 3036
-decoBlockBlackStoneBrickSidingAndCornerID = 3037
-decoBlockBlackStoneBrickSlabID = 3038
-decoBlockBlackStoneBrickSlabTopID = 3039
-decoBlockBlackStoneBrickStairsID = 3040
-decoBlockBlackStoneBrickWallID = 3041
-decoBlockBloodwoodPlankID = 3042
-decoBlockBloodwoodFenceID = 3043
-decoBlockBloodwoodFenceGateID = 3044
-decoBlockBloodwoodMouldingAndDecorativeID = 3045
-decoBlockBloodwoodSidingAndCornerID = 3046
-decoBlockBloodwoodSlabID = 3047
-decoBlockBloodwoodSlabTopID = 3048
-decoBlockBloodwoodStairsID = 3049
-decoBlockBloodwoodWallID = 3050
-decoBlockBrimstoneID = 3051
-decoBlockBrimstoneMouldingAndDecorativeID = 3052
-decoBlockBrimstoneSidingAndCornerID = 3053
-decoBlockBrimstoneSlabID = 3054
-decoBlockBrimstoneSlabTopID = 3055
-decoBlockBrimstoneStairsID = 3056
-decoBlockBrimstoneWallID = 3057
-decoBlockCharredNetherBrickID = 3058
-decoBlockCharredNetherBrickMouldingAndDecorativeID = 3059
-decoBlockCharredNetherBrickSidingAndCornerID = 3060
-decoBlockCharredNetherBrickSlabID = 3061
-decoBlockCharredNetherBrickSlabTopID = 3062
-decoBlockCharredNetherBrickStairsID = 3063
-decoBlockCharredNetherBrickWallID = 3064
-decoBlockChimesID = 3065
-decoBlockCoralID = 3066
-decoBlockCrateID = 3067
-decoBlockCarvedWoodID = 3068
-decoBlockDiamondiumID = 3069
-decoBlockDaubID = 3070
-decoBlockDirtID = 3071
-decoBlockDirtCoarseSlabID = 3072
-decoBlockDirtCoarseSlabTopID = 3073
-decoBlockDirtDriedSlabID = 3074
-decoBlockDirtDriedSlabTopID = 3075
-decoBlockDuskboundID = 3077
-decoBlockDuskboundMouldingAndDecorativeID = 3078
-decoBlockDuskboundSidingAndCornerID = 3079
-decoBlockDuskboundSlabID = 3080
-decoBlockDuskboundSlabTopID = 3081
-decoBlockDuskboundStairsID = 3082
-decoBlockDuskboundWallID = 3083
-decoBlockEbonstoneID = 3084
-decoBlockEbonstoneMouldingAndDecorativeID = 3085
-decoBlockEbonstoneSidingAndCornerID = 3086
-decoBlockEbonstoneSlabID = 3087
-decoBlockEbonstoneSlabTopID = 3088
-decoBlockEbonstoneStairsID = 3089
-decoBlockEbonstoneWallID = 3090
-decoBlockEbonstoneBrickID = 3091
-decoBlockEbonstoneBrickMouldingAndDecorativeID = 3092
-decoBlockEbonstoneBrickSidingAndCornerID = 3093
-decoBlockEbonstoneBrickSlabID = 3094
-decoBlockEbonstoneBrickSlabTopID = 3095
-decoBlockEbonstoneBrickStairsID = 3096
-decoBlockEbonstoneBrickWallID = 3097
-decoBlockEbonwoodLogID = 3098
-decoBlockEbonwoodLeavesID = 3099
-decoBlockEbonwoodPlankID = 3100
-decoBlockEbonwoodFenceID = 3101
-decoBlockEbonwoodFenceGateID = 3102
-decoBlockEbonwoodMouldingAndDecorativeID = 3103
-decoBlockEbonwoodSaplingID = 3104
-decoBlockEbonwoodSidingAndCornerID = 3105
-decoBlockEbonwoodSlabID = 3106
-decoBlockEbonwoodSlabTopID = 3107
-decoBlockEbonwoodStairsID = 3108
-decoBlockEbonwoodWallID = 3109
-decoBlockEndstoneBrickID = 3110
-decoBlockEndstoneBrickMouldingAndDecorativeID = 3111
-decoBlockEndstoneBrickSidingAndCornerID = 3112
-decoBlockEndstoneBrickSlabID = 3113
-decoBlockEndstoneBrickSlabTopID = 3114
-decoBlockEndstoneBrickStairsID = 3115
-decoBlockEndstoneBrickWallID = 3116
-decoBlockFlowerExtendedID = 3117
-decoBlockFlowerTulipID = 3118
-decoBlockFoliageID = 3119
-decoBlockFoliageDesertID = 3120
-decoBlockFroststoneID = 3121
-decoBlockFroststoneMouldingAndDecorativeID = 3122
-decoBlockFroststoneSidingAndCornerID = 3123
-decoBlockFroststoneSlabID = 3124
-decoBlockFroststoneSlabTopID = 3125
-decoBlockFroststoneStairsID = 3126
-decoBlockFroststoneWallID = 3127
-decoBlockGlowcelium = 3128
-decoBlockGlowshroom = 3129
-decoBlockHardenedClayID = 3130
-decoBlockHardenedClayMouldingAndDecorativeID = 3131
-decoBlockHardenedClaySidingAndCornerID = 3132
-decoBlockHardenedClaySlabID = 3133
-decoBlockHardenedClaySlabTopID = 3134
-decoBlockHardenedClayStairsID = 3135
-decoBlockHardenedClayWallID = 3136
-decoBlockHardenedNetherSludge = 3137
-decoBlockHardenedNetherSludgeMouldingAndDecorativeID = 3138
-decoBlockHardenedNetherSludgeSidingAndCornerID = 3139
-decoBlockHardenedNetherSludgeSlabID = 3140
-decoBlockHardenedNetherSludgeSlabTopID = 3141
-decoBlockHardenedNetherSludgeStairsID = 3142
-decoBlockHardenedNetherSludgeWallID = 3143
-decoBlockHaybaleID = 3144
-decoBlockIronPlateID = 3145
-decoBlockIronwoodLogID = 3146
-decoBlockIronwoodLeavesID = 3147
-decoBlockIronwoodPlankID = 3148
-decoBlockIronwoodFenceID = 3149
-decoBlockIronwoodFenceGateID = 3150
-decoBlockIronwoodMouldingAndDecorativeID = 3151
-decoBlockIronwoodSaplingID = 3152
-decoBlockIronwoodSidingAndCornerID = 3153
-decoBlockIronwoodSlabID = 3154
-decoBlockIronwoodSlabTopID = 3155
-decoBlockIronwoodStairsID = 3156
-decoBlockIronwoodWallID = 3157
-decoBlockLadderBirchID = 3158
-decoBlockLadderBloodwoodID = 3159
-decoBlockLadderEbonwoodID = 3160
-decoBlockLadderIronwoodID = 3161
-decoBlockLadderJungleID = 3162
-decoBlockLadderSpruceID = 3163
-decoBlockLatticeBirchID = 3162
-decoBlockLatticeBloodwoodID = 3163
-decoBlockLatticeEbonwoodID = 3164
-decoBlockLatticeIronwoodID = 3165
-decoBlockLatticeJungleID = 3166
-decoBlockLatticeOakID = 3167
-decoBlockLatticeSpruceID = 3168
-decoBlockMagmaID = 3169
-decoBlockMudID = 3170
-decoBlockMudstoneID = 3171
-decoBlockMudstoneMouldingAndDecorativeID = 3172
-decoBlockMudstoneSidingAndCornerID = 3173
-decoBlockMudstoneSlabID = 3174
-decoBlockMudstoneSlabTopID = 3175
-decoBlockMudstoneStairsID = 3176
-decoBlockMudstoneWallID = 3177
-decoBlockMudstoneBrickID = 3178
-decoBlockMudstoneBrickMouldingAndDecorativeID = 3179
-decoBlockMudstoneBrickSidingAndCornerID = 3180
-decoBlockMudstoneBrickSlabID = 3181
-decoBlockMudstoneBrickSlabTopID = 3182
-decoBlockMudstoneBrickStairsID = 3183
-decoBlockMudstoneBrickWallID = 3184
-decoBlockNetherWroughtStoneID = 3185
-decoBlockNetherWroughtStoneMouldingAndDecorativeID = 3186
-decoBlockNetherWroughtStoneSidingAndCornerID = 3187
-decoBlockNetherWroughtStoneSlabID = 3188
-decoBlockNetherWroughtStoneSlabTopID = 3189
-decoBlockNetherWroughtStoneStairsID = 3190
-decoBlockNetherWroughtStoneWallID = 3191
-decoBlockObsidianID = 3192
-decoBlockPackedIceID = 3193
-decoBlockPodzolID = 3194
-decoBlockPrismarineID = 3195
-decoBlockPrismarineMouldingAndDecorativeID = 3196
-decoBlockPrismarineSidingAndCornerID = 3197
-decoBlockPrismarineSlabID = 3198
-decoBlockPrismarineSlabTopID = 3199
-decoBlockPrismarineStairsID = 3200
-decoBlockPrismarineWallID = 3201
-decoBlockPrismarineBrickID = 3202
-decoBlockPrismarineBrickMouldingAndDecorativeID = 3203
-decoBlockPrismarineBrickSidingAndCornerID = 3204
-decoBlockPrismarineBrickSlabID = 3205
-decoBlockPrismarineBrickSlabTopID = 3206
-decoBlockPrismarineBrickStairsID = 3207
-decoBlockPrismarineBrickWallID = 3208
-decoBlockPrismarineDarkID = 3209
-decoBlockPrismarineDarkMouldingAndDecorativeID = 3210
-decoBlockPrismarineDarkSidingAndCornerID = 3211
-decoBlockPrismarineDarkSlabID = 3212
-decoBlockPrismarineDarkSlabTopID = 3213
-decoBlockPrismarineDarkStairsID = 3214
-decoBlockPrismarineDarkWallID = 3215
-decoBlockQuicksandID = 3216
-decoBlockRedSandID = 3217
-decoBlockRedSandstoneID = 3218
-decoBlockRedSandstoneMouldingAndDecorativeID = 3219
-decoBlockRedSandstoneSidingAndCornerID = 3220
-decoBlockRedSandstoneSlabID = 3221
-decoBlockRedSandstoneSlabTopID = 3222
-decoBlockRedSandstoneStairsID = 3223
-decoBlockRedSandstoneWallID = 3224
-decoBlockRedSandstoneBrickID = 3225
-decoBlockRedSandstoneBrickMouldingAndDecorativeID = 3226
-decoBlockRedSandstoneBrickSidingAndCornerID = 3227
-decoBlockRedSandstoneBrickSlabID = 3228
-decoBlockRedSandstoneBrickSlabTopID = 3229
-decoBlockRedSandstoneBrickStairsID = 3230
-decoBlockRedSandstoneBrickWallID = 3231
-decoBlockRockFormationID = 3232
-decoBlockSaguaroID = 3233
-decoBlockSaguaroMouldingAndDecorativeID = 3234
-decoBlockSaguaroSidingAndCornerID = 3235
-decoBlockSaguaroSlabID = 3236
-decoBlockSaguaroSlabTopID = 3237
-decoBlockSaguaroStairsID = 3238
-decoBlockSaguaroWallID = 3239
-decoBlockSandstoneBrickID = 3240
-decoBlockSandstoneBrickMouldingAndDecorativeID = 3241
-decoBlockSandstoneBrickSidingAndCornerID = 3242
-decoBlockSandstoneBrickSlabID = 3243
-decoBlockSandstoneBrickSlabTopID = 3244
-decoBlockSandstoneBrickStairsID = 3245
-decoBlockSandstoneBrickWallID = 3246
-decoBlockSandyBrickID = 3247
-decoBlockSandyBrickMouldingAndDecorativeID = 3248
-decoBlockSandyBrickSidingAndCornerID = 3249
-decoBlockSandyBrickSlabID = 3250
-decoBlockSandyBrickSlabTopID = 3251
-decoBlockSandyBrickStairsID = 3252
-decoBlockSandyBrickWallID = 3253
-decoBlockScaffoldMetalID = 3254
-decoBlockScaffoldWoodID = 3255
-decoBlockSnowBrickID = 3256
-decoBlockSnowBrickSlabID = 3257
-decoBlockSnowBrickSlabTopID = 3258
-decoBlockSnowBrickStairsID = 3259
-decoBlockSoulSandstoneID = 3260
-decoBlockSoulSandstoneMouldingAndDecorativeID = 3261
-decoBlockSoulSandstoneSidingAndCornerID = 3262
-decoBlockSoulSandstoneSlabID = 3263
-decoBlockSoulSandstoneSlabTopID = 3264
-decoBlockSoulSandstoneStairsID = 3265
-decoBlockSoulSandstoneWallID = 3266
-decoBlockSoulSandstoneBrickID = 3267
-decoBlockSoulSandstoneBrickMouldingAndDecorativeID = 3268
-decoBlockSoulSandstoneBrickSidingAndCornerID = 3269
-decoBlockSoulSandstoneBrickSlabID = 3270
-decoBlockSoulSandstoneBrickSlabTopID = 3271
-decoBlockSoulSandstoneBrickStairsID = 3272
-decoBlockSoulSandstoneBrickWallID = 3273
-decoBlockStainedClayID = 3274
-decoBlockStainedClayShinglesID = 3275
-decoBlockStainedGlassID = 3276
-decoBlockThatchID = 3277
-decoBlockThatchSlabID = 3278
-decoBlockThatchSlabTopID = 3279
-decoBlockThatchStairsID = 3280
-decoBlockTikiTorchID = 3281
-decoBlockWaterPlantID = 3282
-decoBlockWhiteStoneBrickID = 3283
-decoBlockWhiteStoneBrickMouldingAndDecorativeID = 3284
-decoBlockWhiteStoneBrickSidingAndCornerID = 3285
-decoBlockWhiteStoneBrickSlabID = 3286
-decoBlockWhiteStoneBrickSlabTopID = 3287
-decoBlockWhiteStoneBrickStairsID = 3288
-decoBlockWhiteStoneBrickWallID = 3289
-decoBlockWildgrassID = 3290
-decoBlockWoodenBeamBirchID = 3291
-decoBlockWoodenBeamJungleID = 3292
-decoBlockWoodenBeamOakID = 3293
-decoBlockWoodenBeamSpruceID = 3294
-decoBlockWoodenFrameID = 3295
-decoBlockWoodenFrameSlashID = 3296
-decoBlockWoodenFrameBackslashID = 3297
-decoBlockWoodenFrameCrossedID = 3298
-decoBlockWoolCarpetID = 3299
-decoBlockBlackStoneWallID = 3300
-decoBlockBrickWallID = 3301
-decoBlockNetherBrickWallID = 3302
-decoBlockSandstoneWallID = 3303
-decoBlockStoneSlabID = 3304
-decoBlockStoneSlabTopID = 3305
-decoBlockStoneStairsID = 3306
-decoBlockStoneWallID = 3307
-decoBlockStoneBrickWallID = 3308
-decoBlockWhiteStoneWallID = 3309
+decoBlockBarkBloodwoodMouldingAndDecorativeID = 3006
+decoBlockBarkBloodwoodSidingAndCornerID = 3007
+decoBlockBarkBloodwoodStairsID = 3008
 
-decoBlockBoneID = 3310
-decoBlockStorageID = 3311
-decoBlockStorageCongealedID = 3312
-decoBlockStoragePowderID = 3313
-decoBlockGrassPathID = 3314
-decoBlockPaperWallID = 3315
-decoBlockWoodID = 3316
+decoBlockBarkEbonwoodMouldingAndDecorativeID = 3009
+decoBlockBarkEbonwoodSidingAndCornerID = 3010
+decoBlockBarkEbonwoodStairsID = 3011
 
-STAINED CLAY BLOCK IDs:
+decoBlockBarkIronwoodMouldingAndDecorativeID = 3012
+decoBlockBarkIronwoodSidingAndCornerID = 3013
+decoBlockBarkIronwoodStairsID = 3014
+
+decoBlockBarkJungleMouldingAndDecorativeID = 3015
+decoBlockBarkJungleSidingAndCornerID = 3016
+decoBlockBarkJungleStairsID = 3017
+
+decoBlockBarkOakMouldingAndDecorativeID = 3018
+decoBlockBarkOakSidingAndCornerID = 3019
+decoBlockBarkOakStairsID = 3020
+
+decoBlockBarkSlabID = 3021
+decoBlockBarkSlabTopID = 3022
+
+decoBlockBarkSpruceMouldingAndDecorativeID = 3023
+decoBlockBarkSpruceSidingAndCornerID = 3024
+decoBlockBarkSpruceStairsID = 3025
+
+decoBlockBarkWallID = 3026
+
+decoBlockCrateID = 3027
+decoBlockCarvedWoodID = 3028
+decoBlockChimesID = 3029
+
+decoBlockEbonwoodLogID = 3030
+decoBlockEbonwoodLeavesID = 3031
+decoBlockEbonwoodPlankID = 3032
+decoBlockEbonwoodFenceID = 3033
+decoBlockEbonwoodMouldingAndDecorativeID = 3034
+decoBlockEbonwoodSaplingID = 3035
+decoBlockEbonwoodSidingAndCornerID = 3036
+decoBlockEbonwoodSlabID = 3037
+decoBlockEbonwoodStairsID = 3038
+decoBlockEbonwoodWallID = 3039
+
+decoBlockIronwoodLogID = 3040
+decoBlockIronwoodLeavesID = 3041
+decoBlockIronwoodPlankID = 3042
+decoBlockIronwoodFenceID = 3043
+decoBlockIronwoodMouldingAndDecorativeID = 3044
+decoBlockIronwoodSaplingID = 3045
+decoBlockIronwoodSidingAndCornerID = 3046
+decoBlockIronwoodSlabID = 3047
+decoBlockIronwoodStairsID = 3048
+decoBlockIronwoodWallID = 3049
+
+decoBlockLatticeOakID = 3050
+decoBlockLatticeSpruceID = 3051
+decoBlockLatticeBirchID = 3052
+decoBlockLatticeJungleID = 3053
+decoBlockLatticeBloodwoodID = 3054
+decoBlockLatticeEbonwoodID = 3055
+decoBlockLatticeIronwoodID = 3056
+
+decoBlockWoodenBeamOakID = 3060
+decoBlockWoodenBeamSpruceID = 3061
+decoBlockWoodenBeamBirchID = 3062
+decoBlockWoodenBeamJungleID = 3063
+decoBlockWoodenBeamBloodwoodID = 3064
+decoBlockWoodenBeamEbonwoodID = 3065
+decoBlockWoodenBeamIronwoodID = 3066
+
+decoBlockWoodenFrameID = 3070
+decoBlockWoodenFrameSlashID = 3071
+decoBlockWoodenFrameBackslashID = 3072
+decoBlockWoodenFrameCrossedID = 3073
+
+STONE BLOCK IDs:
+===========================
+
+decoBlockBlackStoneBrickID = 3100
+decoBlockBlackStoneBrickMouldingAndDecorativeID = 3101
+decoBlockBlackStoneBrickSidingAndCornerID = 3102
+decoBlockBlackStoneBrickSlabID = 3103
+decoBlockBlackStoneBrickSlabTopID = 3104
+decoBlockBlackStoneBrickStairsID = 3105
+decoBlockBlackStoneBrickWallID = 3106
+
+decoBlockBrimstoneID = 3110
+decoBlockBrimstoneMouldingAndDecorativeID = 3111
+decoBlockBrimstoneSidingAndCornerID = 3112
+decoBlockBrimstoneSlabID = 3113
+decoBlockBrimstoneSlabTopID = 3114
+decoBlockBrimstoneStairsID = 3115
+decoBlockBrimstoneWallID = 3116
+
+decoBlockCharredNetherBrickID = 3120
+decoBlockCharredNetherBrickMouldingAndDecorativeID = 3121
+decoBlockCharredNetherBrickSidingAndCornerID = 3122
+decoBlockCharredNetherBrickSlabID = 3123
+decoBlockCharredNetherBrickSlabTopID = 3124
+decoBlockCharredNetherBrickStairsID = 3125
+decoBlockCharredNetherBrickWallID = 3126
+
+decoBlockDuskboundID = 3130
+decoBlockDuskboundMouldingAndDecorativeID = 3131
+decoBlockDuskboundSidingAndCornerID = 3132
+decoBlockDuskboundSlabID = 3133
+decoBlockDuskboundSlabTopID = 3134
+decoBlockDuskboundStairsID = 3135
+decoBlockDuskboundWallID = 3136
+
+decoBlockEbonstoneID = 3140
+decoBlockEbonstoneMouldingAndDecorativeID = 3141
+decoBlockEbonstoneSidingAndCornerID = 3142
+decoBlockEbonstoneSlabID = 3143
+decoBlockEbonstoneSlabTopID = 3144
+decoBlockEbonstoneStairsID = 3145
+decoBlockEbonstoneWallID = 3146
+
+decoBlockEbonstoneBrickID = 3150
+decoBlockEbonstoneBrickMouldingAndDecorativeID = 3151
+decoBlockEbonstoneBrickSidingAndCornerID = 3152
+decoBlockEbonstoneBrickSlabID = 3153
+decoBlockEbonstoneBrickSlabTopID = 3154
+decoBlockEbonstoneBrickStairsID = 3155
+decoBlockEbonstoneBrickWallID = 3156
+
+decoBlockEndstoneBrickID = 3160
+decoBlockEndstoneBrickMouldingAndDecorativeID = 3161
+decoBlockEndstoneBrickSidingAndCornerID = 3162
+decoBlockEndstoneBrickSlabID = 3163
+decoBlockEndstoneBrickSlabTopID = 3164
+decoBlockEndstoneBrickStairsID = 3165
+decoBlockEndstoneBrickWallID = 3166
+
+decoBlockFroststoneID = 3170
+decoBlockFroststoneMouldingAndDecorativeID = 3171
+decoBlockFroststoneSidingAndCornerID = 3172
+decoBlockFroststoneSlabID = 3173
+decoBlockFroststoneSlabTopID = 3174
+decoBlockFroststoneStairsID = 3175
+decoBlockFroststoneWallID = 3176
+
+decoBlockHardenedNetherSludge = 3180
+decoBlockHardenedNetherSludgeMouldingAndDecorativeID = 3181
+decoBlockHardenedNetherSludgeSidingAndCornerID = 3182
+decoBlockHardenedNetherSludgeSlabID = 3183
+decoBlockHardenedNetherSludgeSlabTopID = 3184
+decoBlockHardenedNetherSludgeStairsID = 3185
+decoBlockHardenedNetherSludgeWallID = 3186
+
+decoBlockMudstoneID = 3190
+decoBlockMudstoneMouldingAndDecorativeID = 3191
+decoBlockMudstoneSidingAndCornerID = 3192
+decoBlockMudstoneSlabID = 3193
+decoBlockMudstoneSlabTopID = 3194
+decoBlockMudstoneStairsID = 3195
+decoBlockMudstoneWallID = 3196
+
+decoBlockMudstoneBrickID = 3200
+decoBlockMudstoneBrickMouldingAndDecorativeID = 3201
+decoBlockMudstoneBrickSidingAndCornerID = 3202
+decoBlockMudstoneBrickSlabID = 3203
+decoBlockMudstoneBrickSlabTopID = 3204
+decoBlockMudstoneBrickStairsID = 3205
+decoBlockMudstoneBrickWallID = 3206
+
+decoBlockNetherWroughtStoneID = 3210
+decoBlockNetherWroughtStoneMouldingAndDecorativeID = 3211
+decoBlockNetherWroughtStoneSidingAndCornerID = 3212
+decoBlockNetherWroughtStoneSlabID = 3213
+decoBlockNetherWroughtStoneSlabTopID = 3214
+decoBlockNetherWroughtStoneStairsID = 3215
+decoBlockNetherWroughtStoneWallID = 3216
+
+decoBlockWhiteStoneBrickID = 3220
+decoBlockWhiteStoneBrickMouldingAndDecorativeID = 3221
+decoBlockWhiteStoneBrickSidingAndCornerID = 3222
+decoBlockWhiteStoneBrickSlabID = 3223
+decoBlockWhiteStoneBrickSlabTopID = 3224
+decoBlockWhiteStoneBrickStairsID = 3225
+decoBlockWhiteStoneBrickWallID = 3226
+
+CLAY BLOCK IDs:
+==============================
+
+decoBlockHardenedClayID = 3300
+decoBlockHardenedClayMouldingAndDecorativeID = 3301
+decoBlockHardenedClaySidingAndCornerID = 3302
+decoBlockHardenedClaySlabID = 3303
+decoBlockHardenedClaySlabTopID = 3304
+decoBlockHardenedClayStairsID = 3305
+decoBlockHardenedClayWallID = 3306
+
+decoBlockStainedClayID = 3310
+decoBlockStainedClayMouldingAndDecorativeID = 3311
+decoBlockStainedClaySidingAndCornerID = 3312
+decoBlockStainedClaySlabID = 3313
+decoBlockStainedClaySlabTopID = 3314
+
+// USES THE NEXT 16 ID SLOTS
+decoBlockStainedClayStairsID = 3315
+decoBlockStainedClayWallID = 3332
+
+decoBlockStainedClayShinglesID = 3320
+decoBlockStainedClayShinglesMouldingAndDecorativeID = 3321
+decoBlockStainedClayShinglesSidingAndCornerID = 3322
+decoBlockStainedClayShinglesSlabID = 3323
+decoBlockStainedClayShinglesSlabTopID = 3324
+
+// USES THE NEXT 16 ID SLOTS
+decoBlockStainedClayShinglesStairsID = 3325
+
+// USES THE NEXT 16 ID SLOTS
+decoBlockStainedFlowerPotID = 3350
+
+SAND BLOCK IDs:
 ============================
-decoBlockStainedClayMouldingAndDecorativeID = 3400
-decoBlockStainedClaySidingAndCornerID = 3401
-decoBlockStainedClaySlabID = 3402
-decoBlockStainedClaySlabTopID = 3403
-decoBlockStainedClayStairsID = 3404
-decoBlockStainedClayWallID = 3405
+decoBlockQuicksandID = 3390
+decoBlockRedSandID = 3399
 
-decoBlockStainedClayShinglesMouldingAndDecorativeID = 3406
-decoBlockStainedClayShinglesSidingAndCornerID = 3407
-decoBlockStainedClayShinglesSlabID = 3408
-decoBlockStainedClayShinglesSlabTopID = 3409
-decoBlockStainedClayShinglesStairsID = 3410
+decoBlockRedSandstoneID = 3400
+decoBlockRedSandstoneMouldingAndDecorativeID = 3401
+decoBlockRedSandstoneSidingAndCornerID = 3402
+decoBlockRedSandstoneSlabID = 3403
+decoBlockRedSandstoneSlabTopID = 3404
+decoBlockRedSandstoneStairsID = 3405
+decoBlockRedSandstoneWallID = 3406
+
+decoBlockRedSandstoneBrickID = 3410
+decoBlockRedSandstoneBrickMouldingAndDecorativeID = 3411
+decoBlockRedSandstoneBrickSidingAndCornerID = 3412
+decoBlockRedSandstoneBrickSlabID = 3413
+decoBlockRedSandstoneBrickSlabTopID = 3414
+decoBlockRedSandstoneBrickStairsID = 3415
+decoBlockRedSandstoneBrickWallID = 3416
+
+decoBlockSandstoneBrickID = 3420
+decoBlockSandstoneBrickMouldingAndDecorativeID = 3421
+decoBlockSandstoneBrickSidingAndCornerID = 3422
+decoBlockSandstoneBrickSlabID = 3423
+decoBlockSandstoneBrickSlabTopID = 3424
+decoBlockSandstoneBrickStairsID = 3425
+decoBlockSandstoneBrickWallID = 3426
+
+decoBlockSandyBrickID = 3430
+decoBlockSandyBrickMouldingAndDecorativeID = 3431
+decoBlockSandyBrickSidingAndCornerID = 3432
+decoBlockSandyBrickSlabID = 3433
+decoBlockSandyBrickSlabTopID = 3434
+decoBlockSandyBrickStairsID = 3435
+decoBlockSandyBrickWallID = 3436
+
+decoBlockSoulSandstoneID = 3440
+decoBlockSoulSandstoneMouldingAndDecorativeID = 3441
+decoBlockSoulSandstoneSidingAndCornerID = 3442
+decoBlockSoulSandstoneSlabID = 3443
+decoBlockSoulSandstoneSlabTopID = 3444
+decoBlockSoulSandstoneStairsID = 3445
+decoBlockSoulSandstoneWallID = 3446
+
+decoBlockSoulSandstoneBrickID = 3450
+decoBlockSoulSandstoneBrickMouldingAndDecorativeID = 3451
+decoBlockSoulSandstoneBrickSidingAndCornerID = 3452
+decoBlockSoulSandstoneBrickSlabID = 3453
+decoBlockSoulSandstoneBrickSlabTopID = 3454
+decoBlockSoulSandstoneBrickStairsID = 3455
+decoBlockSoulSandstoneBrickWallID = 3456
+
+// METAL BLOCK IDs:
+============================
+decoBlockChainRopeID = 3500
+decoBlockDiamondiumID = 3501
+
+decoBlockLadderIronID = 3503
+decoBlockLadderSoulforgedSteelID = 3504
+decoBlockLatticeIronID = 3505
+decoBlockLatticeSoulforgedSteelID = 3506
+
+// 0: Iron 1: Gold 2: Soulforged Steel
+decoBlockPlateMetalID = 3507
+
+decoBlockPipeIronID = 3508
+decoBlockPipeSoulforgedSteelID = 3509
+
+NATURE BLOCK IDs:
+============================
+decoBlockBambooID = 3550
+decoBlockBeehiveID = 3551
+decoBlockCarpetLeafID = 3552
+decoBlockCoralID = 3553
+decoBlockFlowerExtendedID = 3554
+decoBlockFlowerTulipID = 3555
+decoBlockFoliageID = 3556
+decoBlockFoliageDesertID = 3557
+decoBlockGlowcelium = 3558
+decoBlockGlowshroom = 3559
+decoBlockGrassPathID = 3560
+decoBlockPodzolID = 3561
+decoBlockWaterPlantID = 3562
+decoBlockWildgrassID = 3563
+
+MISCELLANEOUS BLOCK IDs:
+============================
+decoBlockBoneID = 3580
+decoBlockCarpetWoolID = 3581
+decoBlockHaybaleID = 3582
+decoBlockMagmaID = 3583
+decoBlockMudID = 3584
+decoBlockPackedIceID = 3585
+decoBlockSnowBrickID = 3586
+decoBlockSnowBrickSlabID = 3587
+decoBlockSnowBrickSlabTopID = 3588
+decoBlockSnowBrickStairsID = 3589
+decoBlockStainedGlassID = 3590
+decoBlockStorageID = 3591
+decoBlockStorageCongealedID = 3592
+decoBlockStoragePowderID = 3593
+decoBlockThatchID = 3594
+decoBlockThatchSlabID = 3595
+decoBlockThatchSlabTopID = 3596
+decoBlockThatchStairsID = 3597
+decoBlockTikiTorchID = 3598
 
 FURNITURE:
 ============================
-decoBlockArmorStandID = 3600
-decoBlockBannerID = 3601
+decoBlockArmorStandID = 3700
+decoBlockBannerID = 3701
 
-decoBlockBannisterBirchID = 3602
-decoBlockBannisterBloodwoodID = 3603
-decoBlockBannisterEbonwoodID = 3604
-decoBlockBannisterIronwoodID = 3605
-decoBlockBannisterJungleID = 3606
-decoBlockBannisterOakID = 3607
-decoBlockBannisterSpruceID = 3608
+decoBlockBannisterOakID = 3702
+decoBlockBannisterSpruceID = 3703
+decoBlockBannisterBirchID = 3704
+decoBlockBannisterJungleID = 3705
+decoBlockBannisterBloodwoodID = 3706
+decoBlockBannisterEbonwoodID = 3707
+decoBlockBannisterIronwoodID = 3708
 
-decoBlockBookcaseBirchID = 3609
-decoBlockBookcaseBloodwoodID = 3610
-decoBlockBookcaseEbonwoodID = 3611
-decoBlockBookcaseIronwoodID = 3612
-decoBlockBookcaseJungleID = 3613
-decoBlockBookcaseOakID = 3614
-decoBlockBookcaseSpruceID = 3615
+decoBlockBookcaseOakID = 3709
+decoBlockBookcaseSpruceID = 3710
+decoBlockBookcaseBirchID = 3711
+decoBlockBookcaseJungleID = 3712
+decoBlockBookcaseBloodwoodID = 3713
+decoBlockBookcaseEbonwoodID = 3714
+decoBlockBookcaseIronwoodID = 3715
 
-decoBlockBookshelfID = 3616
+decoBlockBookshelfID = 3716
 
-decoBlockCabinetBirchID = 3617
-decoBlockCabinetBloodwoodID = 3618
-decoBlockCabinetEbonwoodID = 3619
-decoBlockCabinetIronwoodID = 3620
-decoBlockCabinetJungleID = 3621
-decoBlockCabinetOakID = 3622
-decoBlockCabinetSpruceID = 3623
+decoBlockCabinetOakID = 3717
+decoBlockCabinetSpruceID = 3718
+decoBlockCabinetBirchID = 3719
+decoBlockCabinetJungleID = 3720
+decoBlockCabinetBloodwoodID = 3721
+decoBlockCabinetEbonwoodID = 3722
+decoBlockCabinetIronwoodID = 3723
 
-decoBlockChairBirchID = 3624
-decoBlockChairBloodwoodID = 3625
-decoBlockChairEbonwoodID = 3626
-decoBlockChairIronwoodID = 3627
-decoBlockChairJungleID = 3628
-decoBlockChairOakID = 3629
-decoBlockChairSpruceID = 3630
+decoBlockChairOakID = 3724
+decoBlockChairSpruceID = 3725
+decoBlockChairBirchID = 3726
+decoBlockChairJungleID = 3727
+decoBlockChairBloodwoodID = 3728
+decoBlockChairEbonwoodID = 3729
+decoBlockChairIronwoodID = 3730
 
-decoBlockChairBlackStoneID = 3631
-decoBlockChairBlackStoneBrickID = 3632
-decoBlockChairBrimstoneID = 3633
-decoBlockChairCharredNetherBrickID = 3634
-decoBlockChairDuskboundID = 3635
-decoBlockChairFroststoneID = 3636
-decoBlockChairNetherBrickID = 3637
-decoBlockChairNetherWroughtBrickID = 3638
-decoBlockChairObsidianID = 3639
-decoBlockChairRedSandstoneID = 3640
-decoBlockChairRedSandstoneBrickID = 3641
-decoBlockChairSaguaroID = 3642
-decoBlockChairSandstoneID = 3643
-decoBlockChairSandstoneBrickID = 3644
-decoBlockChairSoulSandstoneID = 3645
-decoBlockChairSoulSandstoneBrickID = 3646
-decoBlockChairStoneID = 3647
-decoBlockChairStoneBrickID = 3648
-decoBlockChairWhiteStoneID = 3649
-decoBlockChairWhiteStoneBrickID = 3650
+decoBlockChairBlackStoneID = 3731
+decoBlockChairBlackStoneBrickID = 3732
+decoBlockChairBrimstoneID = 3733
+decoBlockChairCharredNetherBrickID = 3734
+decoBlockChairDuskboundID = 3735
+decoBlockChairFroststoneID = 3737
+decoBlockChairNetherBrickID = 3737
+decoBlockChairNetherWroughtBrickID = 3738
+decoBlockChairObsidianID = 3737
+decoBlockChairRedSandstoneID = 3740
+decoBlockChairRedSandstoneBrickID = 3741
+decoBlockChairSaguaroID = 3742
+decoBlockChairSandstoneID = 3743
+decoBlockChairSandstoneBrickID = 3744
+decoBlockChairSoulSandstoneID = 3745
+decoBlockChairSoulSandstoneBrickID = 3746
+decoBlockChairStoneID = 3747
+decoBlockChairStoneBrickID = 3748
+decoBlockChairWhiteStoneID = 3749
+decoBlockChairWhiteStoneBrickID = 3750
 
-decoBlockCrossedSwordsID = 3651
+decoBlockCrossedSwordsID = 3751
 
-decoBlockFlagSmallID = 3652
-decoBlockFlagLargeID = 3653
+decoBlockFlagSmallID = 3752
+decoBlockFlagLargeID = 3753
 
-decoBlockKegSmallID = 3654
-decoBlockKegLargeID = 3655
+decoBlockKegSmallID = 3754
+decoBlockKegLargeID = 3755
 
-decoBlockLanternGoldID = 3656
-decoBlockLanternIronID = 3657
-decoBlockLanternPaperID = 3658
-decoBlockLanternSoulforgedSteelID = 3659
+decoBlockLanternGoldID = 3756
+decoBlockLanternIronID = 3757
+decoBlockLanternPaperID = 3758
+decoBlockLanternSoulforgedSteelID = 3759
 
-decoBlockLecternBirchID = 3670
-decoBlockLecternBloodwoodID = 3671
-decoBlockLecternEbonwoodID = 3672
-decoBlockLecternIronwoodID = 3673
-decoBlockLecternJungleID = 3674
-decoBlockLecternOakID = 3675
-decoBlockLecternSpruceID = 3676
+decoBlockLecternOakID = 3760
+decoBlockLecternSpruceID = 3761
+decoBlockLecternBirchID = 3762
+decoBlockLecternJungleID = 3763
+decoBlockLecternBloodwoodID = 3764
+decoBlockLecternEbonwoodID = 3765
+decoBlockLecternIronwoodID = 3766
 
-decoBlockLecternBlackStoneID = 3677
-decoBlockLecternBlackStoneBrickID = 3678
-decoBlockLecternBrimstoneID = 3679
-decoBlockLecternCharredNetherBrickID = 3680
-decoBlockLecternDuskboundID = 3681
-decoBlockLecternFroststoneID = 3682
-decoBlockLecternNetherBrickID = 3683
-decoBlockLecternNetherWroughtBrickID = 3684
-decoBlockLecternObsidianID = 3685
-decoBlockLecternRedSandstoneID = 3686
-decoBlockLecternRedSandstoneBrickID = 3687
-decoBlockLecternSaguaroID = 3688
-decoBlockLecternSandstoneID = 3689
-decoBlockLecternSandstoneBrickID = 3690
-decoBlockLecternSoulSandstoneID = 3691
-decoBlockLecternStoneID = 3692
-decoBlockLecternStoneBrickID = 3693
-decoBlockLecternWhiteStoneID = 3694
-decoBlockLecternWhiteStoneBrickID = 3695
+decoBlockLecternBlackStoneID = 3767
+decoBlockLecternBlackStoneBrickID = 3768
+decoBlockLecternBrimstoneID = 3769
+decoBlockLecternCharredNetherBrickID = 3770
+decoBlockLecternDuskboundID = 3771
+decoBlockLecternFroststoneID = 3772
+decoBlockLecternNetherBrickID = 3773
+decoBlockLecternNetherWroughtBrickID = 3774
+decoBlockLecternObsidianID = 3775
+decoBlockLecternRedSandstoneID = 3776
+decoBlockLecternRedSandstoneBrickID = 3777
+decoBlockLecternSaguaroID = 3778
+decoBlockLecternSandstoneID = 3779
+decoBlockLecternSandstoneBrickID = 3780
+decoBlockLecternSoulSandstoneID = 3781
+decoBlockLecternStoneID = 3782
+decoBlockLecternStoneBrickID = 3783
+decoBlockLecternWhiteStoneID = 3784
+decoBlockLecternWhiteStoneBrickID = 3785
 
-decoBlockShelfBirchID = 3696
-decoBlockShelfBloodwoodID = 3697
-decoBlockShelfEbonwoodID = 3698
-decoBlockShelfIronwoodID = 3699
-decoBlockShelfJungleID = 3700
-decoBlockShelfOakID = 3701
-decoBlockShelfSpruceID = 3702
+decoBlockShelfOakID = 3786
+decoBlockShelfSpruceID = 3787
+decoBlockShelfBirchID = 3788
+decoBlockShelfJungleID = 3789
+decoBlockShelfBloodwoodID = 3790
+decoBlockShelfEbonwoodID = 3791
+decoBlockShelfIronwoodID = 3792
 
-decoBlockShieldBirchID = 3703
-decoBlockShieldBloodwoodID = 3704
-decoBlockShieldEbonwoodID = 3705
-decoBlockShieldIronwoodID = 3706
-decoBlockShieldJungleID = 3707
-decoBlockShieldOakID = 3708
-decoBlockShieldSpruceID = 3709
+decoBlockShieldOakID = 3793
+decoBlockShieldSpruceID = 3794
+decoBlockShieldBirchID = 3795
+decoBlockShieldJungleID = 3796
+decoBlockShieldBloodwoodID = 3797
+decoBlockShieldEbonwoodID = 3798
+decoBlockShieldIronwoodID = 3799
 
-decoBlockShieldSwordBirchID = 3710
-decoBlockShieldSwordBloodwoodID = 3711
-decoBlockShieldSwordEbonwoodID = 3712
-decoBlockShieldSwordIronwoodID = 3713
-decoBlockShieldSwordJungleID = 3714
-decoBlockShieldSwordOakID = 3715
-decoBlockShieldSwordSpruceID = 3716
+decoBlockShieldSwordOakID = 3800
+decoBlockShieldSwordSpruceID = 3801
+decoBlockShieldSwordBirchID = 3802
+decoBlockShieldSwordJungleID = 3803
+decoBlockShieldSwordBloodwoodID = 3804
+decoBlockShieldSwordEbonwoodID = 3805
+decoBlockShieldSwordIronwoodID = 3806
 
-decoBlockTableWoodID = 3717
-decoBlockTableStoneID = 3718
-decoBlockTableStone2ID = 3719
-decoBlockTableStone3ID = 3720
+decoBlockTableWoodID = 3807
+decoBlockTableStoneID = 3808
+decoBlockTableStone2ID = 3809
+decoBlockTableStone3ID = 3810
 
-decoBlockToolRackBirchID = 3721
-decoBlockToolRackBloodwoodID = 3722
-decoBlockToolRackEbonwoodID = 3723
-decoBlockToolRackIronwoodID = 3724
-deocBlockToolRackJungleID = 3725
-decoBlockToolRackOakID = 3726
-decoBlockToolRackSpruceID = 3727
+decoBlockToolRackOakID = 3811
+decoBlockToolRackSpruceID = 3812
+decoBlockToolRackBirchID = 3813
+deocBlockToolRackJungleID = 3814
+decoBlockToolRackBloodwoodID = 3815
+decoBlockToolRackEbonwoodID = 3816
+decoBlockToolRackIronwoodID = 3817
 
-decoBlockWardrobeBirchID = 3728
-decoBlockWardrobeBloodwoodID = 3729
-decoBlockWardrobeEbonwoodID = 3730
-decoBlockWardrobeIronwoodID = 3731
-decoBlockWardrobeJungleID = 3732
-decoBlockWardrobeOakID = 3733
-decoBlockWardrobeSpruceID = 3734
+decoBlockWardrobeOakID = 3818
+decoBlockWardrobeSpruceID = 3819
+decoBlockWardrobeBirchID = 3820
+decoBlockWardrobeJungleID = 3821
+decoBlockWardrobeBloodwoodID = 3822
+decoBlockWardrobeEbonwoodID = 3823
+decoBlockWardrobeIronwoodID = 3824
 
-decoBlockHedgeBirchID = 3735
-decoBlockHedgeBloodwoodID = 3736
-decoBlockHedgeEbonwoodID = 3737
-decoBlockHedgeIronwoodID = 3738
-decoBlockHedgeJungleID = 3739
-decoBlockHedgeOakID = 3740
-decoBlockHedgeSpruceID = 3741
+decoBlockHedgeOakID = 3825
+decoBlockHedgeSpruceID = 3826
+decoBlockHedgeBirchID = 3827
+decoBlockHedgeJungleID = 3828
+decoBlockHedgeBloodwoodID = 3829
+decoBlockHedgeEbonwoodID = 3830
+decoBlockHedgeIronwoodID = 3831
 
 MECHANICAL:
 ============================
 decoBlockCompostBinID = 3900
-decoBlockDoorOakID = 3901
-decoBlockDoorSpruceID = 3902
-decoBlockDoorBirchID = 3903
-decoBlockDoorJungleID = 3904
-decoBlockDoorBloodwoodID = 3905
-decoBlockDoorEbonwoodID = 3906
-decoBlockDoorIronwoodID = 3907
-decoBlockTrapDoorSpruceID = 3908
-decoBlockTrapDoorBirchID = 3909
-decoBlockTrapDoorJungleID = 3919
-decoBlockTrapDoorBloodwoodID = 3911
-decoBlockTrapDoorEbonwoodID = 3912
-decoBlockTrapDoorIronwoodID = 3913
-decoBlockTrapDoorIronID = 3914
-decoBlockSmokerID = 3915
-decoBlockSteelGearBoxID = 3916
-decoBlockSteelAxleID = 3917
-decoBlockSteelAxlePowerSourceID = 3918
+
+decoBlockScaffoldMetalID = 3901
+decoBlockScaffoldWoodID = 3902
+
+decoBlockSmokerID = 3903
+decoBlockSteelGearBoxID = 3904
+decoBlockSteelAxleID = 3905
+decoBlockSteelAxlePowerSourceID = 3906
+
+decoBlockTrapDoorIronID = 3907
 
 PANES:
 ============================
@@ -639,15 +646,57 @@ decoBlockPaneSoulforgedSteelFenceID = 3954
 decoBlockPaneStainedGlassID = 3955
 decoBlockPaneWattleID = 3956
 
+EXTENDED VANILLA & BTW WOOD BLOCK IDs:
+============================
+decoBlockDoorSpruceID = 3970
+decoBlockDoorBirchID = 3971
+decoBlockDoorJungleID = 3972
+decoBlockDoorBloodwoodID = 3973
+decoBlockDoorEbonwoodID = 3974
+decoBlockDoorIronwoodID = 3975
+
+decoBlockFenceGateSpruceID = 3976
+decoBlockFenceGateBirchID = 3977
+decoBlockFenceGateJungleID = 3978
+decoBlockFenceGateBloodwoodID = 3979
+decoBlockFenceGateEbonwoodID = 3980
+decoBlockFenceGateIronwoodID = 3981
+
+decoBlockLadderSpruceID = 3982
+decoBlockLadderBirchID = 3983
+decoBlockLadderJungleID = 3984
+decoBlockLadderBloodwoodID = 3985
+decoBlockLadderEbonwoodID = 3986
+decoBlockLadderIronwoodID = 3987
+
+decoBlockTrapDoorSpruceID = 3988
+decoBlockTrapDoorBirchID = 3989
+decoBlockTrapDoorJungleID = 3990
+decoBlockTrapDoorBloodwoodID = 3991
+decoBlockTrapDoorEbonwoodID = 3992
+decoBlockTrapDoorIronwoodID = 3993
+
+decoBlockWoodID = 3994
+
+EXTENDED VANILLA & BTW STONE BLOCK IDs:
+============================
+decoBlockWallBlackStoneID = 3995
+decoBlockWallBrickID = 3996
+decoBlockWallNetherBrickID = 3997
+decoBlockWallSandstoneID = 3998
+decoBlockWallStoneID = 3999
+decoBlockWallStoneBrickID = 4000
+decoBlockWallWhiteStoneID = 4001
+
 ITEM IDs:
 ============================
 decoItemAshID = 30000
 decoItemBambooID = 30001
 decoItemBottleHempOilID = 30002
-decoItemFertilizerID = 30003
-decoItemGlassShardID = 30004
-decoItemPileRedSandID = 30005
-decoItemPrismarineShardID = 30006
+decoItemChainRopeID = 30004
+decoItemFertilizerID = 30005
+decoItemGlassShardID = 30006
+decoItemPileRedSandID = 30007
 
 FOOD:
 ============================
@@ -678,4 +727,7 @@ decoItemScytheDiamondID = 30108
 decoItemScytheGoldID = 30109
 decoItemScytheIronID = 30110
 decoItemScytheSoulforgedSteelID = 30111
-decoItemSpyglassID = 30112
+decoItemSlingID = 30113
+decoItemSpyglassID = 30114
+
+decoItemDebugStickID = 30115

@@ -168,7 +168,7 @@ public class BiomeDecorator
         this.generateLakes = true;
         this.biome = par1BiomeGenBase;
         
-     // ADDED BY DECO ADDON MOD
+        // ADDED BY DECO ADDON MOD
         this.decoBiomeDecorator.initialize();
     }
 
@@ -383,6 +383,7 @@ public class BiomeDecorator
             }
         }
         
+        // ADDED BY DECO ADDON MOD
         this.decoBiomeDecorator.decorate(this.currentWorld, this.randomGenerator, this.chunk_X, this.chunk_Z);
     }
 

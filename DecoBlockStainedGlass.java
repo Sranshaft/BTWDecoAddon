@@ -16,6 +16,8 @@ public class DecoBlockStainedGlass extends DecoBlockGlass
 		this.setResistance(0.5F);
 		this.setStepSound(Block.soundGlassFootstep);
 		this.setCreativeTab(CreativeTabs.tabBlock);
+		
+		this.blockMaterial = Material.glass;
 
 		DecoAddonManager.register(this, DecoUtilsStrings.COLOUR_TAGS, DecoUtilsStrings.COLOUR_NAMES, " Stained Glass");
 	}

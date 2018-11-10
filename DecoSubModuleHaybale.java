@@ -43,7 +43,7 @@ public class DecoSubModuleHaybale implements DecoISubModule
 	
 	public void addRecipes()
 	{
-		DecoUtilsRecipes.addBlockRecipe(Item.wheat, this.decoBlockThatch, 1);
+		DecoUtilsRecipes.addBlockRecipe(Block.tallGrass, this.decoBlockThatch, 1);
 		DecoUtilsRecipes.addSlabRecipe(this.decoBlockThatch, this.decoBlockThatchSlab, 6);
 		DecoUtilsRecipes.addStairsRecipe(this.decoBlockThatch, this.decoBlockThatchStairs, 4);
 		DecoUtilsRecipes.addStorageRecipe(Item.wheat, this.decoBlockHaybale);

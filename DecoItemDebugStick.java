@@ -17,12 +17,9 @@ public class DecoItemDebugStick extends Item
      */
     public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
     {
-    	int blockID = world.getBlockId(x, y, z);
-        int blockMetadata = world.getBlockMetadata(x, y, z);
-        
-        player.addChatMessage("======================================");
-        player.addChatMessage("Block ID: " + blockID);
-        player.addChatMessage("Metadata: " + blockMetadata);
+    	player.addChatMessage("======================================");
+        player.addChatMessage("Block ID: " + world.getBlockId(x, y, z));
+        player.addChatMessage("Metadata: " + world.getBlockMetadata(x, y, z));
         player.addChatMessage("Side: " + side);
         player.addChatMessage("Position: " + x + ", " + y + ", " + z);
         player.addChatMessage("======================================");

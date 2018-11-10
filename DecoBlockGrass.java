@@ -1,15 +1,13 @@
-
 package net.minecraft.src;
 
 import java.util.List;
 import java.util.Random;
-
 import net.minecraft.client.Minecraft;
 
 public class DecoBlockGrass extends FCBlockGrass implements DecoIBlock, DecoILiving
 {
-	public static final String[] GRASS_TEXTURE_PATHS = new String[] { "grass_side", "decoBlockGrass_coarse", "decoBlockGrass_dried", "decoBlockGrass_rich" };
-	public static final String[] SNOW_TEXTURE_PATHS = new String[] { "snow_side", "decoBlockSnow_coarse", "decoBlockSnow_dried", "decoBlockSnow_rich" };
+	public static final String[] GRASS_TEXTURE_PATHS = new String[] { "grass_side", "grass_side_coarse", "grass_side_dried", "grass_side_sandy" };
+	public static final String[] SNOW_TEXTURE_PATHS = new String[] { "snow_side", "snow_side_coarse", "snow_side_dried", "snow_side_sandy" };
 
 	public static final int m_iGrassSpreadFromLightLevel = 11;
 	public static final int m_iGrassSpreadToLightLevel = 11;
@@ -21,8 +19,8 @@ public class DecoBlockGrass extends FCBlockGrass implements DecoIBlock, DecoILiv
 	private Icon iconSnowSide;
 
 	private Icon iconGrassDriedTopOverlay;
-	private Icon iconGrassDriedSideOverlay;
-	private Icon iconGrassSideOverlay;
+	public Icon iconGrassDriedSideOverlay;
+	public static Icon iconGrassSideOverlay;
 
 	private Icon[] m_IconGrassSideByMetadataArray = new Icon[this.GRASS_TEXTURE_PATHS.length];
 	private Icon[] m_IconSnowSideByMetadataArray = new Icon[this.GRASS_TEXTURE_PATHS.length];
@@ -93,9 +91,9 @@ public class DecoBlockGrass extends FCBlockGrass implements DecoIBlock, DecoILiv
 
 		this.iconGrassTop = register.registerIcon("grass_top_overlay");
 		this.iconGrassSideOverlay = register.registerIcon("grass_side_overlay");
-		this.iconGrassDriedTop = register.registerIcon("decoBlockGrass_dried_top");
-		this.iconGrassDriedTopOverlay = register.registerIcon("decoBlockGrass_dried_top_overlay");
-		this.iconGrassDriedSideOverlay = register.registerIcon("decoBlockGrass_dried_side_overlay");
+		this.iconGrassDriedTop = register.registerIcon("grass_top_dried");
+		this.iconGrassDriedTopOverlay = register.registerIcon("grass_top_overlay_dried");
+		this.iconGrassDriedSideOverlay = register.registerIcon("grass_side_overlay_dried");
 	}
 
 	/**
@@ -104,9 +102,9 @@ public class DecoBlockGrass extends FCBlockGrass implements DecoIBlock, DecoILiv
 	public Icon getIcon(int side, int metadata)
 	{
 		if (metadata == 2)
-			return side == 1 ? this.iconGrassDriedTop : (side == 0 ? DecoSubModuleExtendedDirtAndGrassBlocks.decoBlockDirt.getIcon(side, metadata) : this.m_IconGrassSideByMetadataArray[metadata]);
+			return side == 1 ? this.iconGrassDriedTop : (side == 0 ? DecoModuleTweaks.decoSubModuleExtendedDirtAndGrassBlocks.decoBlockDirt.getIcon(side, metadata) : this.m_IconGrassSideByMetadataArray[metadata]);
 		else
-			return side == 1 ? this.iconGrassTop : (side == 0 ? DecoSubModuleExtendedDirtAndGrassBlocks.decoBlockDirt.getIcon(side, metadata) : this.m_IconGrassSideByMetadataArray[metadata]);
+			return side == 1 ? this.iconGrassTop : (side == 0 ? DecoModuleTweaks.decoSubModuleExtendedDirtAndGrassBlocks.decoBlockDirt.getIcon(side, metadata) : this.m_IconGrassSideByMetadataArray[metadata]);
 	}
 
 	/**
@@ -115,11 +113,11 @@ public class DecoBlockGrass extends FCBlockGrass implements DecoIBlock, DecoILiv
 	public Icon getBlockTexture(IBlockAccess bAccess, int x, int y, int z, int side)
 	{
 		int metadata = bAccess.getBlockMetadata(x, y, z);
-
+		
 		if (side == 1)
 			return metadata == 2 ? this.iconGrassDriedTop : this.iconGrassTop;
 		else if (side == 0)
-			return DecoSubModuleExtendedDirtAndGrassBlocks.decoBlockDirt.getIcon(side, metadata);
+			return DecoModuleTweaks.decoSubModuleExtendedDirtAndGrassBlocks.decoBlockDirt.getIcon(side, metadata);
 		else
 			return this.m_bTempHasSnowOnTop ? this.m_IconSnowSideByMetadataArray[metadata] : this.m_IconGrassSideByMetadataArray[metadata];
 	}
@@ -133,11 +131,9 @@ public class DecoBlockGrass extends FCBlockGrass implements DecoIBlock, DecoILiv
 		int skylightValue = lightValue - world.skylightSubtracted;
 		int metadata = world.getBlockMetadata(x, y, z);
 
-		if (DecoUtilsCrops.isWaterNearby(world, x, y, z) && metadata != 1)
-			world.setBlockAndMetadataWithNotify(x, y, z, this.blockID, 3);
-		else if (!DecoUtilsCrops.isWaterNearby(world, x, y, z) && metadata == 3)
+		if (DecoUtilsCrops.isWaterNearby(world, x, y, z))
 			world.setBlockAndMetadataWithNotify(x, y, z, this.blockID, 0);
-
+		
 		if (lightValue >= 9 && Block.lightOpacity[world.getBlockId(x, y + 1, z)] <= 2)
 		{
 			if (skylightValue >= 11 && world.provider.dimensionId != 1)
@@ -157,7 +153,7 @@ public class DecoBlockGrass extends FCBlockGrass implements DecoIBlock, DecoILiv
 
 					if (lightAboveValue >= 11 && Block.lightOpacity[var12] <= 2 && (var12 != FCBetterThanWolves.fcBlockDirtSlab.blockID 
 							|| ((FCBlockDirtSlab)((FCBlockDirtSlab)FCBetterThanWolves.fcBlockDirtSlab)).GetIsUpsideDown(world, checkX, checkY + 1, checkZ)) 
-							&& blockMetadata != 1)
+							&& (blockMetadata != 1 || blockMetadata != 3))
 					{
 						world.setBlockAndMetadataWithNotify(checkX, checkY, checkZ, Block.grass.blockID, blockMetadata);
 					}
@@ -182,11 +178,11 @@ public class DecoBlockGrass extends FCBlockGrass implements DecoIBlock, DecoILiv
 	public void onNeighborBlockChange(World world, int x, int y, int z, int neighbourBlockID)
 	{
 		super.onNeighborBlockChange(world, x, y, z, neighbourBlockID);
-
+		
 		if (world.isBlockOpaqueCube(x, y + 1, z))
 		{
 			int metadata = world.getBlockMetadata(x, y, z);
-			world.setBlockAndMetadataWithNotify(x, y, z, DecoSubModuleExtendedDirtAndGrassBlocks.decoBlockDirt.blockID, this.getMetadata(metadata));
+			world.setBlockAndMetadataWithNotify(x, y, z, DecoModuleTweaks.decoSubModuleExtendedDirtAndGrassBlocks.decoBlockDirt.blockID, this.getMetadata(metadata));
 		}
 	}
 
@@ -198,7 +194,7 @@ public class DecoBlockGrass extends FCBlockGrass implements DecoIBlock, DecoILiv
 	{
 		return side == 1 && this.m_bTempHasSnowOnTop ? false : super.shouldSideBeRendered(bAccess, x, y, z, side);
 	}
-
+	
 	public boolean RenderBlock(RenderBlocks render, int x, int y, int z)
 	{
 		IBlockAccess bAccess = render.blockAccess;
@@ -206,7 +202,7 @@ public class DecoBlockGrass extends FCBlockGrass implements DecoIBlock, DecoILiv
 
 		render.setRenderBoundsFromBlock(this);
 
-		this.m_bTempHasSnowOnTop = this.hasSnowOnTop(bAccess, x, y, z);
+		this.m_bTempHasSnowOnTop = this.HasSnowOnTop(bAccess, x, y, z);
 
 		if (this.m_bTempHasSnowOnTop || metadata == 2)
 			return render.renderStandardBlock(this, x, y, z);
@@ -251,8 +247,8 @@ public class DecoBlockGrass extends FCBlockGrass implements DecoIBlock, DecoILiv
 				{
 					int biomeColor = bAccess.getBiomeGenForCoords(x + xOffset, z + zOffset).getBiomeGrassColor();
 					tintRed += (biomeColor & 16711680) >> 16;
-				tintGreen += (biomeColor & 65280) >> 8;
-				tintBlue += biomeColor & 255;
+					tintGreen += (biomeColor & 65280) >> 8;
+					tintBlue += biomeColor & 255;
 				}
 			}
 
@@ -272,8 +268,8 @@ public class DecoBlockGrass extends FCBlockGrass implements DecoIBlock, DecoILiv
 		int result = metadata > 3 ? (metadata / 2) - 2 : metadata;
 		return result < 0 || result > 16 ? 0 : result;		
 	}
-
-	private boolean hasSnowOnTop(IBlockAccess bAccess, int x, int y, int z)
+	
+	private boolean HasSnowOnTop(IBlockAccess bAccess, int x, int y, int z)
 	{
 		int var5 = bAccess.getBlockId(x, y + 1, z);
 
@@ -285,7 +281,7 @@ public class DecoBlockGrass extends FCBlockGrass implements DecoIBlock, DecoILiv
 			if (var7 == Material.snow || var7 == Material.craftedSnow)
 				return true;
 
-			if (var6.SnowRestingOnVisualOffset(bAccess, x, y + 1, z) < -0.99F && bAccess.getBlockId(x, y + 2, z) == snow.blockID)
+			if (var6.GroundCoverRestingOnVisualOffset(bAccess, x, y + 1, z) < -0.99F && bAccess.getBlockId(x, y + 2, z) == snow.blockID)
 				return true;
 		}
 

@@ -1,6 +1,6 @@
 package net.minecraft.src;
 
-public class DecoBlockHedge extends Block implements FCIBlock
+public class DecoBlockHedge extends Block
 {
 	private String m_Tag;
 	
@@ -52,9 +52,9 @@ public class DecoBlockHedge extends Block implements FCIBlock
 		return false;
 	}
 	
-	public void RotateAroundJAxis(World world, int x, int y, int z, boolean var5)
+	public boolean RotateAroundJAxis(World world, int x, int y, int z, boolean var5)
 	{
-		FCUtilsMisc.StandardRotateAroundJ(this, world, x, y, z, var5);
+		return FCUtilsMisc.StandardRotateAroundJ(this, world, x, y, z, var5);
 	}
 	
 	public int RotateMetadataAroundJAxis(int metadata, boolean var2)
@@ -80,7 +80,7 @@ public class DecoBlockHedge extends Block implements FCIBlock
 	
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entity, ItemStack itemStack)
 	{
-		int var7 = FCUtilsMisc.ConvertPlacingEntityOrientationToBlockFacing(entity);
+		int var7 = FCUtilsMisc.ConvertOrientationToFlatBlockFacing(entity);
 		this.SetFacing(world, x, y, z, var7);
 		
 	}
@@ -220,15 +220,9 @@ public class DecoBlockHedge extends Block implements FCIBlock
 	
 	public int getBlockColor()
     {
-        double temp = 0.5D;
-        double humidity = 1.0D;
-        
-        if (this.m_Tag == "birch")
-        	return ColorizerFoliage.getFoliageColorBirch();
-        else if (this.m_Tag == "spruce")
-        	return ColorizerFoliage.getFoliageColorPine();
-        else
-        	return ColorizerFoliage.getFoliageColor(temp, humidity);
+		double var1 = 0.5D;
+        double var3 = 1.0D;
+        return ColorizerFoliage.getFoliageColor(var1, var3);
     }
 
     /**
@@ -236,7 +230,8 @@ public class DecoBlockHedge extends Block implements FCIBlock
      */
     public int getRenderColor(int par1)
     {
-        return this.getBlockColor();
+    	return (par1 & 3) == 1 ? ColorizerFoliage.getFoliageColorPine() : ((par1 & 3) == 2 ? ColorizerFoliage.getFoliageColorBirch() : ColorizerFoliage.getFoliageColorBasic());
+        //return this.getBlockColor();
     }
 
     /**
@@ -245,7 +240,37 @@ public class DecoBlockHedge extends Block implements FCIBlock
      */
     public int colorMultiplier(IBlockAccess bAccess, int x, int y, int z)
     {
-        int var5 = 0;
+    	int var5 = bAccess.getBlockMetadata(x, y, z);
+
+        if (this.m_Tag == "spruce")
+        {
+            return ColorizerFoliage.getFoliageColorPine();
+        }
+        else if (this.m_Tag == "birch")
+        {
+            return ColorizerFoliage.getFoliageColorBirch();
+        }
+        else
+        {
+            int var6 = 0;
+            int var7 = 0;
+            int var8 = 0;
+
+            for (int var9 = -1; var9 <= 1; ++var9)
+            {
+                for (int var10 = -1; var10 <= 1; ++var10)
+                {
+                    int var11 = bAccess.getBiomeGenForCoords(x + var10, z + var9).getBiomeFoliageColor();
+                    var6 += (var11 & 16711680) >> 16;
+                    var7 += (var11 & 65280) >> 8;
+                    var8 += var11 & 255;
+                }
+            }
+
+            return (var6 / 9 & 255) << 16 | (var7 / 9 & 255) << 8 | var8 / 9 & 255;
+        }
+        
+        /*int var5 = 0;
         int var6 = 0;
         int var7 = 0;
 
@@ -260,7 +285,7 @@ public class DecoBlockHedge extends Block implements FCIBlock
             }
         }
 
-        return (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
+        return (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;*/
     }
     
     /**
