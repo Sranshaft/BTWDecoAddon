@@ -5,10 +5,13 @@ public class DecoSubModuleSandstoneBrick implements DecoISubModule
 	public static Block decoBlockSandstoneBrick;
 	public static Block decoBlockSandstoneBrickMouldingAndDecorative;
 	public static Block decoBlockSandstoneBrickSidingAndCorner;
-	public static Block decoBlockSandstoneBrickSlab;
-	public static Block decoBlockSandstoneBrickSlabTop;
+	public static DecoBlockSlab decoBlockSandstoneBrickSlab;
+	public static DecoBlockSlab decoBlockSandstoneBrickSlabTop;
 	public static Block decoBlockSandstoneBrickStairs;
 	public static Block decoBlockSandstoneBrickWall;
+	
+	public static Item decoItemSandstoneBrickSlab;
+	public static Item decoItemSandstoneBrickSlabTop;
 	
 	public static final int decoBlockSandstoneBrickID = DecoAddonManager.getBlockID("decoBlockSandstoneBrickID");
 	public static final int decoBlockSandstoneBrickSlabID = DecoAddonManager.getBlockID("decoBlockSandstoneBrickSlabID");
@@ -22,11 +25,16 @@ public class DecoSubModuleSandstoneBrick implements DecoISubModule
 		
 		this.decoBlockSandstoneBrick = new DecoBlockStoneBrick(this.decoBlockSandstoneBrickID, "decoBlockSandstoneBrick", "Sandstone Brick", 2.0F, 2.5F);
 		this.decoBlockSandstoneBrickSlab = new DecoBlockSlab(this.decoBlockSandstoneBrickSlabID, this.decoBlockSandstoneBrick, false, 
-				this.decoBlockSandstoneBrickSlabID, this.decoBlockSandstoneBrickSlabTopID);
+				this.decoBlockSandstoneBrickSlab, this.decoBlockSandstoneBrickSlabTop);
 		this.decoBlockSandstoneBrickSlabTop = new DecoBlockSlab(this.decoBlockSandstoneBrickSlabTopID, this.decoBlockSandstoneBrick, true, 
-				this.decoBlockSandstoneBrickSlabID, this.decoBlockSandstoneBrickSlabTopID);
+				this.decoBlockSandstoneBrickSlab, this.decoBlockSandstoneBrickSlabTop);
 		this.decoBlockSandstoneBrickStairs = new DecoBlockStair(this.decoBlockSandstoneBrickStairsID, this.decoBlockSandstoneBrick, 0);
 		this.decoBlockSandstoneBrickWall = new DecoBlockWall(this.decoBlockSandstoneBrickWallID, this.decoBlockSandstoneBrick);
+		
+		this.decoItemSandstoneBrickSlab = new DecoItemSlab(this.decoBlockSandstoneBrickSlabID - 256, 
+				this.decoBlockSandstoneBrickSlab, this.decoBlockSandstoneBrickSlabTop, false).setUnlocalizedName(this.decoBlockSandstoneBrick.getUnlocalizedName() + ".slab");
+		this.decoItemSandstoneBrickSlabTop = new DecoItemSlab(this.decoBlockSandstoneBrickSlabTopID - 256, 
+				this.decoBlockSandstoneBrickSlab, this.decoBlockSandstoneBrickSlabTop, true).setUnlocalizedName(this.decoBlockSandstoneBrick.getUnlocalizedName() + ".slab");
 		
 		this.registerBlocks();
 		this.addRecipes();
@@ -40,6 +48,9 @@ public class DecoSubModuleSandstoneBrick implements DecoISubModule
 		DecoAddonManager.register(this.decoBlockSandstoneBrickSlabTop, "Sandstone Brick Slab");
 		DecoAddonManager.register(this.decoBlockSandstoneBrickStairs, "Sandstone Brick Stairs");
 		DecoAddonManager.register(this.decoBlockSandstoneBrickWall, "Sandstone Brick Wall");
+		
+		DecoAddonManager.replaceItem(this.decoBlockSandstoneBrickSlabID, decoItemSandstoneBrickSlab);
+		DecoAddonManager.replaceItem(this.decoBlockSandstoneBrickSlabTopID, decoItemSandstoneBrickSlabTop);
 	}
 
 	public void addRecipes() 

@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-public class DecoUtilsRecipes {
-	
+public class DecoUtilsRecipes 
+{	
 	public static void addBlockRecipe(Block subItem, int subItemMetadata, Block container, int containerMetadata, int amountCrafted)
 	{
 		FCRecipes.AddVanillaRecipe(new ItemStack(container, amountCrafted, containerMetadata), new Object[] { "XX", "XX", 'X', new ItemStack(subItem, subItemMetadata) });
@@ -67,6 +67,12 @@ public class DecoUtilsRecipes {
 		FCRecipes.AddVanillaRecipe(new ItemStack(container, amountCrafted, containerMetadata), new Object[] { "X", "X", 'X', new ItemStack(subItem) });
 	}
 	
+	public static void addSlabRecipe(Block subItem, int subItemMetadata, Item container, int containerMetadata, int amountCrafted)
+	{
+		FCRecipes.AddVanillaRecipe(new ItemStack(container, amountCrafted, containerMetadata), new Object[] { "XXX", 'X', new ItemStack(subItem, subItemMetadata) });
+		FCRecipes.AddVanillaRecipe(new ItemStack(subItem), new Object[] { "X", "X", 'X', container });
+	}
+	
 	public static void addSlabRecipe(Block subItem, int subItemMetadata, Block container, int containerMetadata, int amountCrafted)
 	{
 		FCRecipes.AddVanillaRecipe(new ItemStack(container, amountCrafted, containerMetadata), new Object[] { "XXX", 'X', new ItemStack(subItem, subItemMetadata) });
@@ -79,7 +85,18 @@ public class DecoUtilsRecipes {
 		FCRecipes.AddVanillaRecipe(new ItemStack(subItem), new Object[] { "XX ", "XX ", 'X', container });
 	}
 	
+	public static void addSlabRecipe(Block subItem, Item container, int amountCrafted)
+	{
+		FCRecipes.AddVanillaRecipe(new ItemStack(container, amountCrafted), new Object[] { "XXX", 'X', subItem });
+		FCRecipes.AddVanillaRecipe(new ItemStack(subItem), new Object[] { "XX ", "XX ", 'X', container });
+	}
+	
 	public static void addStairsRecipe(Block subItem, Block container, int amountCrafted)
+	{
+		FCRecipes.AddVanillaRecipe(new ItemStack(container, amountCrafted), new Object[] { "X  ", "XX ", "XXX", 'X', subItem });
+	}
+	
+	public static void addStairsRecipe(ItemStack subItem, Block container, int amountCrafted)
 	{
 		FCRecipes.AddVanillaRecipe(new ItemStack(container, amountCrafted), new Object[] { "X  ", "XX ", "XXX", 'X', subItem });
 	}

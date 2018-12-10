@@ -23,6 +23,22 @@ public class DecoBlockObsidian extends Block
 	}
 	
 	/**
+     * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
+     */
+    public int idPicked(World world, int x, int y, int z)
+    {
+        return world.getBlockId(x, y, z);
+    }
+
+    /**
+     * Get the block's damage value (for use with pick block).
+     */
+    public int getDamageValue(World world, int x, int y, int z)
+    {
+        return world.getBlockMetadata(x, y, z);
+    }
+	
+	/**
      * Determines the damage on the item the block drops. Used in cloth and wood.
      */
 	public int damageDropped(int metadata)
@@ -72,21 +88,5 @@ public class DecoBlockObsidian extends Block
     	{
     		var3.add(new ItemStack(var1, 1, index));
     	}
-    }
-
-    /**
-     * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
-     */
-    public int idPicked(World world, int x, int y, int z)
-    {
-        return world.getBlockId(x, y, z);
-    }
-
-    /**
-     * Get the block's damage value (for use with pick block).
-     */
-    public int getDamageValue(World world, int x, int y, int z)
-    {
-        return world.getBlockMetadata(x, y, z);
     }
 }

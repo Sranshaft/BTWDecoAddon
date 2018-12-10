@@ -11,7 +11,6 @@ public class DecoBlockWood extends FCBlockPlanks
         super(id);
         
         this.setUnlocalizedName("wood");
-		this.setCreativeTab(CreativeTabs.tabBlock);
 		
 		DecoAddonManager.register(this, DecoUtilsStrings.WOOD_TAGS, DecoUtilsStrings.WOOD_NAMES, " Planks");
 	}

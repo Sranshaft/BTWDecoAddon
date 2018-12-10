@@ -5,15 +5,16 @@ public class DecoItemSling extends Item
 	public DecoItemSling(int id)
 	{
 		super(id);
-		setUnlocalizedName("decoItemSling");
-		maxStackSize = 1;
-		setMaxDamage(128);
-		setCreativeTab(CreativeTabs.tabCombat);
+		
+		this.setUnlocalizedName("decoItemSling");
+		this.maxStackSize = 1;
+		this.setMaxDamage(128);
+		this.setCreativeTab(CreativeTabs.tabCombat);
 	}
 
 	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int inUseCount)
 	{
-		if (!player.capabilities.isCreativeMode && getRock(player) == null) return;
+		if (!player.capabilities.isCreativeMode && DecoUtilsInventory.getItemInIventory(player, FCBetterThanWolves.fcItemStone.itemID) == null) return;
 
 		int useTime = this.getMaxItemUseDuration(stack) - inUseCount;
 		float tension = (float)useTime / 20.0F;
@@ -28,10 +29,7 @@ public class DecoItemSling extends Item
 		player.addExhaustion(0.25F + 0.5F * tension);
 		player.inventory.consumeInventoryItem(FCBetterThanWolves.fcItemStone.itemID);
 
-		if (!world.isRemote)
-		{
-			world.spawnEntityInWorld(rock);
-		}
+		if (!world.isRemote) world.spawnEntityInWorld(rock);
 	}
 
 	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player)
@@ -49,31 +47,18 @@ public class DecoItemSling extends Item
 		return EnumAction.bow;
 	}
 
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
+	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
 	{
 		if (player.getFoodStats().getFoodLevel() <= 18)
 		{
 			if (world.isRemote) player.addChatMessage("You\'re too exhausted for throwing rocks.");
-			return stack;
+			return itemStack;
 		}
-		if (player.capabilities.isCreativeMode || getRock(player) != null)
-		{
-			player.setItemInUse(stack, getMaxItemUseDuration(stack));
-		}
-		return stack;
-	}
-
-	public ItemStack getRock(EntityPlayer player)
-	{
-		for (int i = 0; i < 9; ++i)
-		{
-			ItemStack stack = player.inventory.getStackInSlot(i);
-			if (stack != null && stack.itemID == FCBetterThanWolves.fcItemStone.itemID)
-			{
-				return stack;
-			}
-		}
-		return null;
+		
+		if (player.capabilities.isCreativeMode || DecoUtilsInventory.getItemInIventory(player, FCBetterThanWolves.fcItemStone.itemID) != null) 
+			player.setItemInUse(itemStack, getMaxItemUseDuration(itemStack));
+		
+		return itemStack;
 	}
 
 	public int getItemEnchantability()

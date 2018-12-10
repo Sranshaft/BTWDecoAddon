@@ -2,14 +2,19 @@ package net.minecraft.src;
 
 public class DecoModuleBuilding implements DecoIModule 
 {
+	public static DecoSubModuleAestheticMetal decoSubModuleAestheticMetal;
+	public static DecoSubModuleAestheticWood decoSubModuleAestheticWood;
 	public static DecoSubModuleBark decoSubModuleBark;
 	public static DecoSubModuleBlackStoneBrick decoSubModuleBlackStoneBrick;
+	public static DecoSubModuleBrimstone decoSubModuleBrimstone;
 	public static DecoSubModuleCharredNetherBrick decoSubModuleCharredNetherBrick;
 	public static DecoSubModuleDuskbound decoSubModuleDuskbound;
 	public static DecoSubModuleEbonstoneAndBrick decoSubModuleEbonstoneAndBrick;
+	public static DecoSubModuleEndstoneBrick decoSubModuleEndstoneBrick;
 	public static DecoSubModuleHardenedClay decoSubModuleHardenedClay;
 	public static DecoSubModuleMudstoneAndBrick decoSubModuleMudstoneAndBrick;
 	public static DecoSubModuleNetherWroughtStone decoSubModuleNetherWroughtStone;
+	public static DecoSubModulePrismarineAndBrick decoSubModulePrismarineAndBrick;
 	public static DecoSubModuleRedSandstone decoSubModuleRedSandstone;
 	public static DecoSubModuleRedSandstoneBrick decoSubModuleRedSandstoneBrick;
 	public static DecoSubModuleSandstoneBrick decoSubModuleSandstoneBrick;
@@ -18,21 +23,24 @@ public class DecoModuleBuilding implements DecoIModule
 	public static DecoSubModuleStainedGlass decoSubModuleStainedGlass;
 	public static DecoSubModuleWhiteStoneBrick decoSubModuleWhiteStoneBrick;
 	
-	public static Block decoBlockAestheticWood;
-	public static Block decoBlockBrimstone;
-	
-	public static final int decoBlockAestheticWoodID = DecoAddonManager.getBlockID("decoBlockAestheticWoodID");
-	public static final int decoBlockBrimstoneID = DecoAddonManager.getBlockID("decoBlockBrimstoneID");
-	
 	public DecoModuleBuilding()
 	{
 		FCAddOnHandler.LogMessage("[INFO]: Loading module: Building");
+		
+		if (DecoAddonManager.getConfigOption("enableAestheticMetal"))
+			this.decoSubModuleAestheticMetal = new DecoSubModuleAestheticMetal();
+		
+		if (DecoAddonManager.getConfigOption("enableAestheticWood"))
+			this.decoSubModuleAestheticWood = new DecoSubModuleAestheticWood();
 		
 		if (DecoAddonManager.getConfigOption("enableBarkBlock"))
 			this.decoSubModuleBark = new DecoSubModuleBark();
 		
 		if (DecoAddonManager.getConfigOption("enableBlackStoneBricks"))
 			this.decoSubModuleBlackStoneBrick = new DecoSubModuleBlackStoneBrick();
+		
+		if (DecoAddonManager.getConfigOption("enableBrimstone"))
+			this.decoSubModuleBrimstone = new DecoSubModuleBrimstone();
 		
 		if (DecoAddonManager.getConfigOption("enableCharredNetherBricks"))
 			this.decoSubModuleCharredNetherBrick = new DecoSubModuleCharredNetherBrick();
@@ -43,6 +51,9 @@ public class DecoModuleBuilding implements DecoIModule
 		if (DecoAddonManager.getConfigOption("enableEbonstoneAndBricks"))
 			this.decoSubModuleEbonstoneAndBrick = new DecoSubModuleEbonstoneAndBrick();
 		
+		if (DecoAddonManager.getConfigOption("enableEndstoneBricks"))
+			this.decoSubModuleEndstoneBrick = new DecoSubModuleEndstoneBrick();
+		
 		if (DecoAddonManager.getConfigOption("enableHardenedClay"))
 			this.decoSubModuleHardenedClay = new DecoSubModuleHardenedClay();
 		
@@ -51,6 +62,9 @@ public class DecoModuleBuilding implements DecoIModule
 		
 		if (DecoAddonManager.getConfigOption("enableNetherWroughtStone"))
 			this.decoSubModuleNetherWroughtStone = new DecoSubModuleNetherWroughtStone();
+		
+		if (DecoAddonManager.getConfigOption("enablePrismarineAndBricks"))
+			this.decoSubModulePrismarineAndBrick = new DecoSubModulePrismarineAndBrick();
 			
 		if (DecoAddonManager.getConfigOption("enableRedSandstone"))
 			this.decoSubModuleRedSandstone = new DecoSubModuleRedSandstone();
@@ -72,21 +86,10 @@ public class DecoModuleBuilding implements DecoIModule
 		
 		if (DecoAddonManager.getConfigOption("enableWhiteStoneBricks"))
 			this.decoSubModuleWhiteStoneBrick = new DecoSubModuleWhiteStoneBrick();
-		
-		this.decoBlockAestheticWood = new DecoBlockAestheticWood(this.decoBlockAestheticWoodID);
-		this.decoBlockBrimstone = new DecoBlockBrimstone(this.decoBlockBrimstoneID);
-		
-		this.registerBlocks();
-		this.addRecipes();
-		this.changeVanillaItems();
-		this.setupCustomToolProperties();
 	}
 	
 	public void registerBlocks() {}
-	
 	public void addRecipes() {}
-	
 	public void changeVanillaItems() {}
-	
 	public void setupCustomToolProperties() {}
 }

@@ -73,7 +73,7 @@ public class DecoBlockAestheticWood extends Block
 
 	public int idDropped(int par1, Random random, int par3)
 	{
-		return DecoModuleBuilding.decoBlockAestheticWoodID;
+		return DecoModuleBuilding.decoSubModuleAestheticWood.decoBlockAestheticWoodID;
 	}
 	
 	/**
@@ -112,16 +112,16 @@ public class DecoBlockAestheticWood extends Block
     /**
      * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
      */
-    public int idPicked(World World, int x, int y, int z)
+    public int idPicked(World world, int x, int y, int z)
     {
-        return World.getBlockId(x, y, z);
+        return world.getBlockId(x, y, z);
     }
 
     /**
      * Get the block's damage value (for use with pick block).
      */
-    public int getDamageValue(World World, int x, int y, int z)
+    public int getDamageValue(World world, int x, int y, int z)
     {
-        return World.getBlockMetadata(x, y, z);
+        return world.getBlockMetadata(x, y, z);
     }    
 }

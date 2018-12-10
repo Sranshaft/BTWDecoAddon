@@ -5,10 +5,10 @@ import java.util.List;
 public class DecoBlockWall extends BlockWall 
 {
 	private Block m_ParentBlock;
-	private int m_Metadata = 0;
-	private String[] m_TexturePaths;
-	private String[] m_SubTypes;
-	private String[] m_SubNames;
+	
+	private String[] m_SubTypes, m_SubNames, m_TexturePaths;
+	private String  m_TexturePrefix;
+	private int m_Metadata;
 	private Icon[] m_IconByMetadataArray;
 	
 	public DecoBlockWall(int id, Block parentBlock)
@@ -26,6 +26,16 @@ public class DecoBlockWall extends BlockWall
 	
 	public DecoBlockWall(int id, Block parentBlock, String[] subTypes, String[] subNames, String[] texturePaths)
 	{
+		this(id, parentBlock, subTypes, subNames, texturePaths, "", "");
+	}
+	
+	public DecoBlockWall(int id, Block parentBlock, String[] subTypes, String[] subNames, String[] texturePaths, String texturePrefix)
+	{
+		this(id, parentBlock, subTypes, subNames, texturePaths, texturePrefix, "");
+	}
+	
+	public DecoBlockWall(int id, Block parentBlock, String[] subTypes, String[] subNames, String[] texturePaths, String texturePrefix, String name)
+	{
 		super(id, parentBlock);
 		
 		this.setUnlocalizedName(parentBlock.getUnlocalizedName2() + ".wall");
@@ -38,10 +48,11 @@ public class DecoBlockWall extends BlockWall
 		this.m_SubTypes = subTypes;
 		this.m_SubNames = subNames;
 		this.m_TexturePaths = texturePaths;
+		this.m_TexturePrefix = texturePrefix;
 		
 		this.m_ParentBlock = parentBlock;
 		
-		DecoAddonManager.register(this, this.m_SubTypes, this.m_SubNames, " Wall");
+		DecoAddonManager.register(this, this.m_SubTypes, this.m_SubNames, name + " Wall");
 	}
 	
 	/**
@@ -54,7 +65,7 @@ public class DecoBlockWall extends BlockWall
 		{
 			for (int index = 0; index < this.m_TexturePaths.length; index++)
 			{
-				this.m_IconByMetadataArray[index] = register.registerIcon(this.m_TexturePaths[index]);
+				this.m_IconByMetadataArray[index] = register.registerIcon(this.m_TexturePrefix + this.m_TexturePaths[index]);
 			}
 		}
 	}
@@ -113,74 +124,58 @@ public class DecoBlockWall extends BlockWall
 	
 	public boolean RenderWall(RenderBlocks render, IBlockAccess bAccess, int x, int y, int z, Block block)
 	{
-		boolean isBlockWest = canConnectWallTo(bAccess, x - 1, y, z);
-		boolean isBlockEast = canConnectWallTo(bAccess, x + 1, y, z);
-		boolean isBlockNorth = canConnectWallTo(bAccess, x, y, z - 1);
-		boolean isBlockSouth = canConnectWallTo(bAccess, x, y, z + 1);
-		boolean var9 = isBlockNorth && isBlockSouth && !isBlockWest && !isBlockEast;
-		boolean var10 = !isBlockNorth && !isBlockSouth && isBlockWest && isBlockEast;
-		boolean isBlockAbove = bAccess.isAirBlock(x, y + 1, z);
-		boolean isWallAbove = !isBlockAbove && canConnectWallTo(bAccess, x, y + 1, z);
-		
-		if ((var9 || var10) && isBlockAbove)
-		{
-			if (var9)
-			{
-				render.setRenderBounds(0.3125D, 0.0D, 0.0D, 0.6875D, 0.8125D, 1.0D);
-				render.renderStandardBlock(block, x, y, z);
-			}
-			else
-			{
-				render.setRenderBounds(0.0D, 0.0D, 0.3125D, 1.0D, 0.8125D, 0.6875D);
-				render.renderStandardBlock(block, x, y, z);
-			}
-		}
-		else if (((isBlockWest && isBlockEast) || (isBlockNorth && isBlockSouth)) && isWallAbove)
-		{
-			if (isBlockWest && isBlockEast)
-			{
-				render.setRenderBounds(0.0D, 0.0D, 0.3125D, 1.0D, 1.0D, 0.6875D);
-				render.renderStandardBlock(block, x, y, z);
-			}
+		boolean isBlockAbove = bAccess.isBlockOpaqueCube(x, y + 1, z);
+		boolean isWallAbove = !isBlockAbove && this.canConnectWallTo(render.blockAccess, x, y + 1, z);
 
-			if (isBlockNorth && isBlockSouth)
+		boolean isConnectedWest = this.canConnectWallTo(bAccess, x - 1, y, z);
+		boolean isConnectedEast = this.canConnectWallTo(bAccess, x + 1, y, z);
+		boolean isConnectedSouth = this.canConnectWallTo(bAccess, x, y, z - 1);
+		boolean isConnectedNorth = this.canConnectWallTo(bAccess, x, y, z + 1);
+		boolean isConnectedWestEast = (isConnectedWest && isConnectedEast && !isConnectedSouth && !isConnectedNorth);
+		boolean isConnectedSouthNorth = (!isConnectedWest && !isConnectedEast && isConnectedSouth && isConnectedNorth);
+		
+		float minY = 0.0F;
+		float maxY = 0.8125F;
+		if (isBlockAbove || isWallAbove) maxY = 1.0F;
+		
+		float minX = isConnectedWest ? 0.0F : 0.3125F;
+		float maxX = isConnectedEast ? 1.0F : 0.6875F;
+		float minZ = isConnectedSouth ? 0.0F : 0.3125F;
+		float maxZ = isConnectedNorth ? 1.0F : 0.6875F;
+		
+		if ((isConnectedWestEast || isConnectedSouthNorth) && !isBlockAbove)
+		{
+			if (isConnectedWest || isConnectedEast)
 			{
-				render.setRenderBounds(0.3125D, 0.0D, 0.0D, 0.6875D, 1.0D, 1.0D);
-				render.renderStandardBlock(block, x, y, z);
+				render.setRenderBounds(minX, 0.0F, 0.3125F, maxX, maxY, 0.6875F);
+				render.renderStandardBlock(this, x, y, z);
+			}
+			
+			if (isConnectedSouth || isConnectedNorth)
+			{
+				render.setRenderBounds(0.3125F, 0.0F, minZ, 0.6875F, maxY, maxZ);
+				render.renderStandardBlock(this, x, y, z);
 			}
 		}
 		else
 		{
-			render.setRenderBounds(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D);
-			render.renderStandardBlock(block, x, y, z);
-			double height = (isWallAbove?1.0D:0.8125D);
-
-			if (isBlockWest)
+			render.setRenderBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
+			render.renderStandardBlock(this, x, y, z);
+			
+			if (isConnectedWest || isConnectedEast)
 			{
-				render.setRenderBounds(0.0D, 0.0D, 0.3125D, 0.25D, height, 0.6875D);
-				render.renderStandardBlock(block, x, y, z);
+				render.setRenderBounds(minX, 0.0F, 0.3125F, maxX, maxY, 0.6875F);
+				render.renderStandardBlock(this, x, y, z);
 			}
-
-			if (isBlockEast)
+			
+			if (isConnectedSouth || isConnectedNorth)
 			{
-				render.setRenderBounds(0.75D, 0.0D, 0.3125D, 1.0D, height, 0.6875D);
-				render.renderStandardBlock(block, x, y, z);
-			}
-
-			if (isBlockNorth)
-			{
-				render.setRenderBounds(0.3125D, 0.0D, 0.0D, 0.6875D, height, 0.25D);
-				render.renderStandardBlock(block, x, y, z);
-			}
-
-			if (isBlockSouth)
-			{
-				render.setRenderBounds(0.3125D, 0.0D, 0.75D, 0.6875D, height, 1.0D);
-				render.renderStandardBlock(block, x, y, z);
+				render.setRenderBounds(0.3125F, 0.0F, minZ, 0.6875F, maxY, maxZ);
+				render.renderStandardBlock(this, x, y, z);
 			}
 		}
 		
-		block.setBlockBoundsBasedOnState(render.blockAccess, x, y, z);
+		this.setBlockBoundsBasedOnState(bAccess, x, y, z);
 		
 		return true;
 	}

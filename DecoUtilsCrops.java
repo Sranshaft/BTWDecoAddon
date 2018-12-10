@@ -25,7 +25,7 @@ public class DecoUtilsCrops
 	public static boolean isBonemeal(ItemStack itemStack)
 	{
 		if (itemStack.itemID == FCBetterThanWolves.fcPotash.itemID 
-				|| itemStack.itemID == DecoModuleStorage.decoItemFertilizer.itemID
+				|| itemStack.itemID == DecoModuleTweaks.decoItemFertilizer.itemID
 				|| (itemStack.itemID == Item.dyePowder.itemID && itemStack.getItemDamage() == 15))
 	    	 return true;
 		else 
@@ -208,7 +208,7 @@ public class DecoUtilsCrops
 							case 12:
 							case 13:
 							case 14:
-								World.setBlockAndMetadataWithNotify(newX, newY, newZ, DecoSubModuleFlowers.decoBlockFlowerExtended.blockID, rnd);
+								World.setBlockAndMetadataWithNotify(newX, newY, newZ, DecoSubModuleFlower.decoBlockFlowerExtended.blockID, rnd);
 								break;
 							case 15:
 								World.setBlockWithNotify(newX, newY, newZ, Block.plantYellow.blockID);
@@ -220,7 +220,7 @@ public class DecoUtilsCrops
 							case 18:
 							case 19:
 							case 20:
-								World.setBlockAndMetadataWithNotify(newX, newY, newZ, DecoSubModuleFlowers.decoBlockFlowerTulip.blockID, rnd - 17);
+								World.setBlockAndMetadataWithNotify(newX, newY, newZ, DecoSubModuleFlower.decoBlockFlowerTulip.blockID, rnd - 17);
 								break;
 						}
 					}

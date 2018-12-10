@@ -225,63 +225,24 @@ public class DecoBlockWoodenBeam extends Block
 		return false;
 	}
 	
-	public void SetRenderBoundsRotatedAboutJToFacing(RenderBlocks render, float minX, float minY, float minZ, float maxX, float maxY, float maxZ, int direction)
-	{
-		float rotatedMinX;
-		float rotatedMinZ;
-		float rotatedMaxX;
-		float rotatedMaxZ;
-		
-		if (direction == 4)
-		{
-			rotatedMinX = 1.0F - maxX;
-			rotatedMinZ = 1.0F - maxZ;
-			rotatedMaxX = 1.0F - minX;
-			rotatedMaxZ = 1.0F - minZ;
-		} 
-		else if (direction == 3)
-		{
-			rotatedMinX = minZ;
-			rotatedMinZ = minX;
-			rotatedMaxX = maxZ;
-			rotatedMaxZ = maxX;
-		} 
-		else if (direction == 2)
-		{
-			rotatedMinX = 1.0F - maxZ;
-			rotatedMinZ = 1.0F - maxX;
-			rotatedMaxX = 1.0F - minZ;
-			rotatedMaxZ = 1.0F - minX;
-		} 
-		else
-		{
-			rotatedMinX = minX;
-			rotatedMinZ = minZ;
-			rotatedMaxX = maxX;
-			rotatedMaxZ = maxZ;
-		}
-		
-		render.setRenderBounds((double) rotatedMinX, (double) minY, (double) rotatedMinZ, (double) rotatedMaxX, (double) maxY, (double) rotatedMaxZ);
-	}
-
 	public boolean RenderBlock(RenderBlocks render, int x, int y, int z)
 	{
 		int direction = GetFacing(render.blockAccess, x, y, z);
 		
 		// BRACE: LEFT
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.025F, 0.70F, 0.15F, 0.45F, 0.85F, 0.3F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.025F, 0.70F, 0.15F, 0.45F, 0.85F, 0.3F, direction);
 		render.renderStandardBlock(this, x, y, z);
 		
 		// BRACE: RIGHT
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.025F, 0.70F, 0.70F, 0.45F, 0.85F, 0.85F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.025F, 0.70F, 0.70F, 0.45F, 0.85F, 0.85F, direction);
 		render.renderStandardBlock(this, x, y, z);
 		
 		// SHELF
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.0F, 0.85F, 0.0F, 0.65F, 1.0F, 1.0F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.0F, 0.85F, 0.0F, 0.65F, 1.0F, 1.0F, direction);
 		render.renderStandardBlock(this, x, y, z);
 		
 		// BACK
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.0F, 0.70F, 0.025F, 0.15F, 0.85F, 0.975F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.0F, 0.70F, 0.025F, 0.15F, 0.85F, 0.975F, direction);
 		render.renderStandardBlock(this, x, y, z);
 		
 		return true;

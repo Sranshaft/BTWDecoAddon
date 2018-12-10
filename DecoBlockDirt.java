@@ -4,8 +4,9 @@ import java.util.List;
 
 public class DecoBlockDirt extends FCBlockDirt 
 {
-	private static final String[] DIRT_TYPE = new String[] { "dirt", "dirt_coarse", "dirt_dried", "dirt_sandy" };
+	private static final String[] DIRT_TYPE = new String[] { "dirt", "coarse", "dried", "sandy" };
 	private static final String[] DIRT_NAME = new String[] { "Dirt", "Coarse Dirt", "Dried Dirt", "Sandy Dirt" };
+	private static final String[] DIRT_TEXTURE_PATHS = new String[] { "dirt", "dirt_coarse", "dirt_dried", "dirt_sandy" };
 	
 	private Icon[] m_IconByMetadataArray;
 	
@@ -45,10 +46,10 @@ public class DecoBlockDirt extends FCBlockDirt
 		
 		for (int index = 0; index < this.DIRT_TYPE.length; index++)
 		{
-			this.m_IconByMetadataArray[index] = register.registerIcon(this.DIRT_TYPE[index]);
+			this.m_IconByMetadataArray[index] = register.registerIcon(this.DIRT_TEXTURE_PATHS[index]);
 		}
 		
-		this.blockIcon = register.registerIcon(this.DIRT_TYPE[0]);
+		this.blockIcon = register.registerIcon(this.DIRT_TEXTURE_PATHS[0]);
 	}
 
 	/**

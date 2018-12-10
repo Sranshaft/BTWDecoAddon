@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.List;
 
-public class DecoBlockTableStone extends Block implements DecoIBlock
+public class DecoBlockTableStone extends Block implements DecoIBlockWithMetadata
 {
 	public String[] m_Tags, m_Names;
 	private Icon[] m_IconByMetadataArray;
@@ -205,18 +205,18 @@ public class DecoBlockTableStone extends Block implements DecoIBlock
 		return true;
 	}
 
-	public void RenderBlockAsItem(RenderBlocks render, int var2, float var3)
+	public void RenderBlockAsItem(RenderBlocks render, int metadata, float var3)
 	{
 		render.setRenderBounds(0.1875F, 0.0F, 0.1875F, 0.8125F, 0.25F, 0.8125F);
-		FCClientUtilsRender.RenderInvBlockWithMetadata(render, this, -0.5F, -0.5F, -0.5F, var2);
+		FCClientUtilsRender.RenderInvBlockWithMetadata(render, this, -0.5F, -0.5F, -0.5F, metadata);
 
 		render.setRenderBounds(0.25F, 0.25F, 0.25F, 0.75F, 0.375F, 0.75F);
-		FCClientUtilsRender.RenderInvBlockWithMetadata(render, this, -0.5F, -0.5F, -0.5F, var2);
+		FCClientUtilsRender.RenderInvBlockWithMetadata(render, this, -0.5F, -0.5F, -0.5F, metadata);
 
 		render.setRenderBounds(0.1875F, 0.375F, 0.1875F, 0.8125F, 0.6875F, 0.8125F);
-		FCClientUtilsRender.RenderInvBlockWithMetadata(render, this, -0.5F, -0.5F, -0.5F, var2);
+		FCClientUtilsRender.RenderInvBlockWithMetadata(render, this, -0.5F, -0.5F, -0.5F, metadata);
 
 		render.setRenderBounds(0.0F, 0.6875F, 0.0F, 1.0F, 1.0F, 1.0F);
-		FCClientUtilsRender.RenderInvBlockWithMetadata(render, this, -0.5F, -0.5F, -0.5F, var2);
+		FCClientUtilsRender.RenderInvBlockWithMetadata(render, this, -0.5F, -0.5F, -0.5F, metadata);
 	}
 }

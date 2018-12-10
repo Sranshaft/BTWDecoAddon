@@ -3,7 +3,7 @@ package net.minecraft.src;
 import java.util.List;
 import java.util.Random;
 
-public class DecoBlockBamboo extends Block implements DecoIBlock, DecoILiving, DecoIPlant
+public class DecoBlockBamboo extends Block implements DecoIBlockWithMetadata, DecoILiving, DecoIPlant
 {
 	private Icon m_IconSide, m_IconTop, m_IconLeaves;
 	private static int m_GrowthChance = 50;
@@ -28,8 +28,16 @@ public class DecoBlockBamboo extends Block implements DecoIBlock, DecoILiving, D
 	 */
 	public int idPicked(World world, int x, int y, int z)
 	{
-		return world.getBlockId(x, y, z);
+		return DecoModuleDecoration.decoItemBamboo.itemID;
 	}
+	
+	/**
+     * Returns the ID of the items to drop on destruction.
+     */
+    public int idDropped(int var1, Random var2, int var3)
+    {
+        return DecoModuleDecoration.decoItemBamboo.itemID;
+    }
 	
 	/**
 	 * Ticks the block if it's been scheduled
@@ -71,7 +79,7 @@ public class DecoBlockBamboo extends Block implements DecoIBlock, DecoILiving, D
 
 	public boolean canPlaceBlockAt(World world, int x, int y, int z)
 	{
-		return canThisPlantGrowOnThisBlockID(world, x, y - 1, z, false);
+		return canThisPlantGrowOnThisBlockID(world, x, y - 1, z, true);
 	}
 
 	protected boolean canThisPlantGrowOnThisBlockID(World world, int x, int y, int z, boolean flag)
@@ -126,8 +134,8 @@ public class DecoBlockBamboo extends Block implements DecoIBlock, DecoILiving, D
 
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		return AxisAlignedBB.getAABBPool().getAABB((double) ((float) x + 0.35F), (double) ((float) y), 			(double) ((float) z + 0.35F), 
-											       (double) ((float) x + 0.65F), (double) ((float) y + 1.0F),   (double) ((float) z + 0.65F));
+		return AxisAlignedBB.getAABBPool().getAABB((double) ((float) x + 0.35F), (double) ((float) y), (double) ((float) z + 0.35F), 
+											       (double) ((float) x + 0.65F), (double) ((float) y + 1.0F), (double) ((float) z + 0.65F));
 	}
 
 	public boolean RenderBlock(RenderBlocks render, int x, int y, int z)

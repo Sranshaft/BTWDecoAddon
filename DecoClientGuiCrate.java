@@ -5,7 +5,7 @@ import org.lwjgl.opengl.GL11;
 public class DecoClientGuiCrate extends GuiContainer
 {
 	private DecoTileEntityCrate m_AssociatedTileEntity;
-	private int m_InventoryRows = 3;
+	private int m_InventoryRows = 1;
 	
 	public DecoClientGuiCrate(InventoryPlayer inventory, DecoTileEntityCrate entity)
     {

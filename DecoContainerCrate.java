@@ -3,7 +3,7 @@ package net.minecraft.src;
 public class DecoContainerCrate extends Container implements DecoIContainer
 {
 	private final DecoTileEntityCrate m_LocalTileEntityCrate;
-	private final int m_NumSlots = 27;
+	private final int m_NumSlots = 9;
 	private int m_NumRows;
 	
 	public DecoContainerCrate(IInventory inventory, DecoTileEntityCrate entity)

@@ -1,6 +1,6 @@
 package net.minecraft.src;
 
-public class DecoBlockBone extends Block implements DecoIBlock
+public class DecoBlockBone extends Block implements DecoIBlockWithMetadata
 {
 	private Icon m_IconSide;
 	private Icon m_IconTop;

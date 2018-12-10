@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.Random;
 
-public class DecoBlockGlass extends BlockGlass implements DecoIBlock
+public class DecoBlockGlass extends BlockGlass implements DecoIBlockWithMetadata
 {
 	public DecoBlockGlass(int id)
 	{
@@ -13,7 +13,7 @@ public class DecoBlockGlass extends BlockGlass implements DecoIBlock
 		this.setStepSound(Block.soundGlassFootstep);
 		this.setCreativeTab(CreativeTabs.tabBlock);
 		
-		ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
+		this.SetPicksEffectiveOn();
 	}
 	
 	public void onFallenUpon(World world, int x, int y, int z, Entity entity, float var6)
@@ -27,19 +27,19 @@ public class DecoBlockGlass extends BlockGlass implements DecoIBlock
 	
 	public int idDropped(int metadata, Random random, int fortune)
 	{
-		if (DecoModuleTweaks.decoItemGlassShard == null) return 0;
+		if (!DecoAddonManager.getConfigOption("enableGlassShards")) return 0;
 		return DecoModuleTweaks.decoItemGlassShard.itemID;
 	}
 	
 	public int quantityDropped(Random random)
 	{
-		if (DecoModuleTweaks.decoItemGlassShard == null) return 0;
+		if (!DecoAddonManager.getConfigOption("enableGlassShards")) return 0;
 		return random.nextInt(3);
 	}
 	
 	public int quantityDroppedWithBonus(int fortune, Random random)
 	{
-		if (DecoModuleTweaks.decoItemGlassShard == null) return 0;
+		if (!DecoAddonManager.getConfigOption("enableGlassShards")) return 0;
 		return Math.min(4, this.quantityDropped(random) + random.nextInt(fortune + 1));
 	}
 	

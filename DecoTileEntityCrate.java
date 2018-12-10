@@ -2,11 +2,11 @@ package net.minecraft.src;
 
 public class DecoTileEntityCrate extends TileEntity implements IInventory
 {
-	private final int m_InventorySize = 27;
+	private final int m_InventorySize = 9;
     private final int m_StackSizeLimit = 64;
     private final double m_MaxPlayerInteractionDist = 64.0D;
     private boolean m_ValidateContentsOnUpdate = true;
-    private ItemStack[] m_InventoryContents = new ItemStack[27];
+    private ItemStack[] m_InventoryContents = new ItemStack[9];
     
     /**
      * Reads a tile entity from NBT.

@@ -46,12 +46,14 @@ public final class DecoUtilsHUD
                 PotionEffect potionEffect = (PotionEffect)index.next();
                 Potion potion = Potion.potionTypes[potionEffect.getPotionID()];
                 
-                int backgroundXPos = 184;
+                int backgroundXPos = 150;
                 
-                if (!potion.isBadEffect())
-                	backgroundXPos = 216;
+                if (potion.isBadEffect())
+                	backgroundXPos = 182;
                 
-                String durationRemaining = potion.getDurationString(potionEffect);
+                // BIT GLITCHY : NEEDS A BETTER WAY
+                
+                /*String durationRemaining = potion.getDurationString(potionEffect);
                 int seconds = Integer.parseInt(durationRemaining.substring((int)(durationRemaining.length() - 2)));
                 
                 if ((seconds < 10) && (seconds % 2 == 0))
@@ -61,7 +63,7 @@ public final class DecoUtilsHUD
                 	GL11.glColor4f(m_alpha, m_alpha, m_alpha, m_alpha);
                 }
                 else
-                	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+                	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);*/
                 
                 Minecraft.getMinecraft().renderEngine.bindTexture("/gui/inventory.png");
                 drawTexturedModalRect(currentXPosition, m_topBorder, backgroundXPos, m_backgroundYPos, m_textureWidth, m_textureHeight);
@@ -69,7 +71,7 @@ public final class DecoUtilsHUD
                 if (potion.hasStatusIcon())
                 {
                     int potionIconIndex = potion.getStatusIconIndex();
-                    drawTexturedModalRect(currentXPosition + 6, m_topBorder + 7, 0 + potionIconIndex % 8 * 18, 198 + potionIconIndex / 8 * 18, 18, 18);
+                    drawTexturedModalRect(currentXPosition + 7, m_topBorder + 7, 0 + potionIconIndex % 8 * 18, 198 + potionIconIndex / 8 * 18, 18, 18);
                 }
 
                 String var11 = StatCollector.translateToLocal(potion.getName());

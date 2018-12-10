@@ -100,7 +100,7 @@ public class DecoBlockCompostBin extends BlockContainer implements FCIBlockMecha
             if (player instanceof EntityPlayerMP)
             {
                 DecoContainerCompostBin container = new DecoContainerCompostBin(player.inventory, entity);
-                DecoUtilsPacketHandler.ServerOpenCustomInterface((EntityPlayerMP)player, container, DecoModuleMechanical.decoCompostBinContainerID);
+                DecoUtilsPacketHandler.ServerOpenCustomInterface((EntityPlayerMP)player, container, DecoModuleMechanical.decoSubModuleCompostBin.decoContainerCompostBinID);
             }
         }
 

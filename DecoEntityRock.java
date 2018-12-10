@@ -47,7 +47,7 @@ public class DecoEntityRock extends EntityThrowable implements FCIEntityPacketHa
 				int z = mop.blockZ;
 				int id = worldObj.getBlockId(x, y, z);
 				Block block = Block.blocksList[id];
-				if (block instanceof BlockGlass || (block instanceof BlockPane && worldObj.getBlockMaterial(x, y, z) == Material.glass))
+				if (block instanceof BlockGlass || (block instanceof DecoBlockPane && worldObj.getBlockMaterial(x, y, z) == Material.glass))
 				{
 					worldObj.playAuxSFX(2001, x, y, z, Block.glass.blockID);
 					worldObj.destroyBlock(x, y, z, true);
@@ -68,7 +68,7 @@ public class DecoEntityRock extends EntityThrowable implements FCIEntityPacketHa
 	public boolean GetTrackMotion() { return true; }
 	public boolean ShouldServerTreatAsOversized() { return false; }
 
-	public static int getVehicleSpawnPacketType() { return DecoModuleEquipment.decoSubModuleTools.decoEntityRockVehicleSpawnType; }
+	public static int getVehicleSpawnPacketType() { return DecoModuleEquipment.decoSubModuleToolSling.decoEntityRockVehicleSpawnType; }
 
 	public Packet GetSpawnPacketForThisEntity()
 	{

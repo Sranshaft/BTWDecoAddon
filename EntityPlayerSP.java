@@ -277,7 +277,7 @@ public class EntityPlayerSP extends EntityPlayer
         }
         
         /** ADDED BY DECO ADDON MOD */
-        if (this.isZooming) var1 *= DecoUtilsMath.clamp(var1, (float)prevZoomProgress, (float)(zoomProgress - 1.0D)) / 5.0D;
+        if (this.isZooming && DecoAddonManager.getConfigOption("enableToolSpyglass")) var1 *= DecoUtilsMath.clamp(var1, (float)prevZoomProgress, (float)(zoomProgress - 1.0D)) / 5.0D;
 
         var1 *= (this.landMovementFactor * this.getFOVSpeedModifier() / this.speedOnGround + 1.0F) / 2.0F;
         var1 *= this.UpdateGloomFOVMultiplier();

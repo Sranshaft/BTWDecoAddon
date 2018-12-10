@@ -32,7 +32,7 @@ public class DecoItemSpyglass extends Item
      */
     public int getItemInUseDuration(ItemStack itemStack)
     {
-        return 7200;
+        return 72000;
     }
     
     /**
@@ -48,7 +48,7 @@ public class DecoItemSpyglass extends Item
      */
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
     {
-    	player.setItemInUse(itemStack, this.getMaxItemUseDuration(itemStack));
+    	player.setItemInUse(itemStack, getMaxItemUseDuration(itemStack));
     	player.isZooming = true;
     	
     	return itemStack;

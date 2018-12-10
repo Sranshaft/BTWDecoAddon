@@ -45,4 +45,54 @@ public class DecoUtilsRender
 		
 		tess.setNormal((int)x, (int)y, (int)z);
 	}
+	
+	public static void setRenderBoundsRotatedAboutJToFacing(RenderBlocks render, float minX, float minY, float minZ, float maxX, float maxY, float maxZ, int direction)
+	{
+		float rotatedMinX;
+		float rotatedMinZ;
+		float rotatedMaxX;
+		float rotatedMaxZ;
+		
+		switch (direction)
+		{
+			case 4 :
+			{
+				rotatedMinX = 1.0F - maxX;
+				rotatedMinZ = 1.0F - maxZ;
+				rotatedMaxX = 1.0F - minX;
+				rotatedMaxZ = 1.0F - minZ;
+				
+				break;
+			}
+			case 3 :
+			{
+				rotatedMinX = minZ;
+				rotatedMinZ = minX;
+				rotatedMaxX = maxZ;
+				rotatedMaxZ = maxX;
+				
+				break;
+			}
+			case 2 :
+			{
+				rotatedMinX = 1.0F - maxZ;
+				rotatedMinZ = 1.0F - maxX;
+				rotatedMaxX = 1.0F - minZ;
+				rotatedMaxZ = 1.0F - minX;
+				
+				break;
+			}
+			default :
+			{
+				rotatedMinX = minX;
+				rotatedMinZ = minZ;
+				rotatedMaxX = maxX;
+				rotatedMaxZ = maxZ;
+				
+				break;
+			}
+		}
+
+		render.setRenderBounds((double) rotatedMinX, (double) minY, (double) rotatedMinZ, (double) rotatedMaxX, (double) maxY, (double) rotatedMaxZ);
+	}
 }

@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.List;
 
-public class DecoBlockDuskbound extends Block implements DecoIBlock
+public class DecoBlockDuskbound extends Block implements DecoIBlockWithMetadata
 {
 	public static final String[] VARIANT_TYPES = new String[] {"normal", "chiseled", "smooth"};
 	public static final String[] VARIANT_NAMES = new String[] {"", "Chiseled", "Smooth"};

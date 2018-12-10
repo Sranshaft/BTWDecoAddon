@@ -21,14 +21,6 @@ public class DecoBlockStorage extends Block
         DecoAddonManager.register(this, DecoUtilsStrings.STORAGE_TAGS, "Block of ", DecoUtilsStrings.STORAGE_NAMES);
 	}
 	
-	/**
-     * Determines the damage on the item the block drops. Used in cloth and wood.
-     */
-	public int damageDropped(int metadata)
-	{
-		return metadata;
-	}
-
 	//CLIENT ONLY
 	
 	/**
@@ -69,6 +61,14 @@ public class DecoBlockStorage extends Block
     {
         return world.getBlockId(x, y, z);
     }
+    
+    /**
+     * Determines the damage on the item the block drops. Used in cloth and wood.
+     */
+	public int damageDropped(int metadata)
+	{
+		return metadata;
+	}
 
     /**
      * Get the block's damage value (for use with pick block).

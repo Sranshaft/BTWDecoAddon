@@ -170,6 +170,7 @@ public class DecoBlockDoor extends FCBlockDoorWood
     {
         float var2 = 0.1875F;
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 2.0F, 1.0F);
+        
         int var3 = par1 & 3;
         boolean var4 = (par1 & 4) != 0;
         boolean var5 = (par1 & 16) != 0;
@@ -178,73 +179,37 @@ public class DecoBlockDoor extends FCBlockDoorWood
         {
             if (var4)
             {
-                if (!var5)
-                {
-                    this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, var2);
-                }
-                else
-                {
-                    this.setBlockBounds(0.0F, 0.0F, 1.0F - var2, 1.0F, 1.0F, 1.0F);
-                }
+                if (!var5) this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, var2);
+                else this.setBlockBounds(0.0F, 0.0F, 1.0F - var2, 1.0F, 1.0F, 1.0F);
             }
-            else
-            {
-                this.setBlockBounds(0.0F, 0.0F, 0.0F, var2, 1.0F, 1.0F);
-            }
+            else this.setBlockBounds(0.0F, 0.0F, 0.0F, var2, 1.0F, 1.0F);
         }
         else if (var3 == 1)
         {
             if (var4)
             {
-                if (!var5)
-                {
-                    this.setBlockBounds(1.0F - var2, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-                }
-                else
-                {
-                    this.setBlockBounds(0.0F, 0.0F, 0.0F, var2, 1.0F, 1.0F);
-                }
+                if (!var5) this.setBlockBounds(1.0F - var2, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+                else this.setBlockBounds(0.0F, 0.0F, 0.0F, var2, 1.0F, 1.0F);
             }
-            else
-            {
-                this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, var2);
-            }
+            else this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, var2);
         }
         else if (var3 == 2)
         {
             if (var4)
             {
-                if (!var5)
-                {
-                    this.setBlockBounds(0.0F, 0.0F, 1.0F - var2, 1.0F, 1.0F, 1.0F);
-                }
-                else
-                {
-                    this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, var2);
-                }
+                if (!var5) this.setBlockBounds(0.0F, 0.0F, 1.0F - var2, 1.0F, 1.0F, 1.0F);
+                else this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, var2);
             }
-            else
-            {
-                this.setBlockBounds(1.0F - var2, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-            }
+            else this.setBlockBounds(1.0F - var2, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
         }
         else if (var3 == 3)
         {
             if (var4)
             {
-                if (!var5)
-                {
-                    this.setBlockBounds(0.0F, 0.0F, 0.0F, var2, 1.0F, 1.0F);
-                }
-                else
-                {
-                    this.setBlockBounds(1.0F - var2, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-                }
+                if (!var5) this.setBlockBounds(0.0F, 0.0F, 0.0F, var2, 1.0F, 1.0F);
+                else this.setBlockBounds(1.0F - var2, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
             }
-            else
-            {
-                this.setBlockBounds(0.0F, 0.0F, 1.0F - var2, 1.0F, 1.0F, 1.0F);
-            }
+            else this.setBlockBounds(0.0F, 0.0F, 1.0F - var2, 1.0F, 1.0F, 1.0F);
         }
     }
 
@@ -256,32 +221,25 @@ public class DecoBlockDoor extends FCBlockDoorWood
     /**
      * Called upon block activation (right click on the block.)
      */
-    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
     {
-        if (this.blockMaterial == Material.iron)
+    	int metadata = this.getFullMetadata(world, x, y, z);
+        int var11 = metadata & 7;
+        var11 ^= 4;
+
+        if ((metadata & 8) == 0)
         {
-            return true;
+            world.setBlockMetadataWithNotify(x, y, z, var11, 2);
+            world.markBlockRangeForRenderUpdate(x, y, z, x, y, z);
         }
         else
         {
-            int var10 = this.getFullMetadata(par1World, par2, par3, par4);
-            int var11 = var10 & 7;
-            var11 ^= 4;
-
-            if ((var10 & 8) == 0)
-            {
-                par1World.setBlockMetadataWithNotify(par2, par3, par4, var11, 2);
-                par1World.markBlockRangeForRenderUpdate(par2, par3, par4, par2, par3, par4);
-            }
-            else
-            {
-                par1World.setBlockMetadataWithNotify(par2, par3 - 1, par4, var11, 2);
-                par1World.markBlockRangeForRenderUpdate(par2, par3 - 1, par4, par2, par3, par4);
-            }
-
-            par1World.playAuxSFXAtEntity(par5EntityPlayer, 1003, par2, par3, par4, 0);
-            return true;
+            world.setBlockMetadataWithNotify(x, y - 1, z, var11, 2);
+            world.markBlockRangeForRenderUpdate(x, y - 1, z, x, y, z);
         }
+
+        world.playAuxSFXAtEntity(player, 1003, x, y, z, 0);
+        return true;
     }
 
     /**

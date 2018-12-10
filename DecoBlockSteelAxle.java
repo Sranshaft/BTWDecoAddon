@@ -191,8 +191,8 @@ public class DecoBlockSteelAxle extends FCBlockAxle
                     if (var11 == DecoModuleMechanical.decoBlockSteelAxlePowerSourceID && this.GetAxisAlignment(bAccess, var8.i, var8.j, var8.k) == var6)
                         return true;
                     
-                    if (var11 == DecoModuleMechanical.decoBlockSteelAxleID && ((DecoBlockSteelGearBox)DecoModuleMechanical.decoBlockSteelAxle).IsGearBoxOn(bAccess, var8.i, var8.j, var8.k))
-                        return true;
+                    //if (var11 == DecoModuleMechanical.decoBlockSteelAxleID && ((DecoBlockSteelGearBox)DecoModuleMechanical.decoBlockSteelAxle).IsGearBoxOn(bAccess, var8.i, var8.j, var8.k))
+                    //    return true;
                 }
 
                 ++var7;

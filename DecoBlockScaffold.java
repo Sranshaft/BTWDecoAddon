@@ -85,14 +85,14 @@ public class DecoBlockScaffold extends Block
         {
 	    	ItemStack currentItem = player.getCurrentEquippedItem();
 	
-	        if (currentItem.itemID == new ItemStack(DecoModuleMechanical.decoBlockScaffoldWood).itemID)
+	        if (currentItem.itemID == new ItemStack(DecoModuleMechanical.decoSubModuleScaffold.decoBlockScaffoldWood).itemID)
 	        {
 	        	for (int yIndex = y; yIndex < 255; yIndex++)
 	        	{
 	        		if (world.isAirBlock(x, yIndex, z))
 	        		{
 	        			FCUtilsMisc.PlayPlaceSoundForBlock(world, x, y, z); 
-	        			world.setBlock(x, yIndex, z, DecoModuleMechanical.decoBlockScaffoldWoodID);
+	        			world.setBlock(x, yIndex, z, DecoModuleMechanical.decoSubModuleScaffold.decoBlockScaffoldWoodID);
 	        			
 	        			currentItem.stackSize--;
 
@@ -103,14 +103,14 @@ public class DecoBlockScaffold extends Block
 	        		}
 	        	}
 	        }
-	        else if (currentItem.itemID == new ItemStack(DecoModuleMechanical.decoBlockScaffoldMetal).itemID)
+	        else if (currentItem.itemID == new ItemStack(DecoModuleMechanical.decoSubModuleScaffold.decoBlockScaffoldMetal).itemID)
 	        {
 	        	for (int yIndex = y; yIndex < 255; yIndex++)
 	        	{
 	        		if (world.isAirBlock(x, yIndex, z))
 	        		{
 	        			FCUtilsMisc.PlayPlaceSoundForBlock(world, x, y, z); 
-	        			world.setBlock(x, yIndex, z, DecoModuleMechanical.decoBlockScaffoldMetalID);
+	        			world.setBlock(x, yIndex, z, DecoModuleMechanical.decoSubModuleScaffold.decoBlockScaffoldMetalID);
 	        			
 	        			currentItem.stackSize--;
 

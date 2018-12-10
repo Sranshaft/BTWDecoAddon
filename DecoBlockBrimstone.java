@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.List;
 
-public class DecoBlockBrimstone extends Block implements DecoIBlock
+public class DecoBlockBrimstone extends Block implements DecoIBlockWithMetadata
 {
 	public static final String[] BRIMSTONE_TYPES = new String[] {"normal", "chiseled", "smooth"};
 	public static final String[] BRIMSTONE_NAMES = new String[] {"", "Chiseled", "Smooth"};

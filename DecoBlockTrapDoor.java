@@ -8,9 +8,12 @@ public class DecoBlockTrapDoor extends FCBlockTrapDoor
 	public DecoBlockTrapDoor(int id, Block parentBlock, String tag)
 	{
 		super(id);
-		setUnlocalizedName("decoBlockTrapDoor." + tag);
-		setHardness(parentBlock.blockHardness);
-		setResistance(parentBlock.blockResistance);
+		
+		this.setUnlocalizedName("decoBlockTrapDoor." + tag);
+		this.setHardness(parentBlock.blockHardness);
+		this.setResistance(parentBlock.blockResistance);
+		this.SetBlockMaterial(parentBlock.blockMaterial);
+		this.setStepSound(parentBlock.stepSound);
 		
 		this.m_ParentBlock = parentBlock;
 		this.m_Tag = tag;
@@ -35,7 +38,7 @@ public class DecoBlockTrapDoor extends FCBlockTrapDoor
     
     public void onPoweredBlockChange(World world, int x, int y, int z, boolean par5)
     {
-    	if (this.m_Tag == "iron")
+    	if (this.blockMaterial == Material.iron)
     	{
 		    int metadata = world.getBlockMetadata(x, y, z);
 	        boolean var7 = (metadata & 4) > 0;
@@ -54,7 +57,7 @@ public class DecoBlockTrapDoor extends FCBlockTrapDoor
      */
     public void onNeighborBlockChange(World world, int x, int y, int z, int neighbourBlockID)
     {
-        if (!world.isRemote && this.m_Tag == "iron")
+        if (!world.isRemote && this.blockMaterial == Material.iron)
         {
             boolean var9 = world.isBlockIndirectlyGettingPowered(x, y, z);
 
@@ -63,5 +66,21 @@ public class DecoBlockTrapDoor extends FCBlockTrapDoor
                 this.onPoweredBlockChange(world, x, y, z, var9);
             }
         }
+    }
+    
+    /**
+     * Called upon block activation (right click on the block.)
+     */
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
+    {
+        if ((this.blockMaterial == Material.iron && player.getCurrentEquippedItem() == new ItemStack(Block.torchRedstoneActive)) || this.blockMaterial != Material.iron)
+        {
+            int var10 = world.getBlockMetadata(x, y, z);
+            world.setBlockMetadataWithNotify(x, y, z, var10 ^ 4, 2);
+            world.playAuxSFXAtEntity(player, 1003, x, y, z, 0);
+            return true;
+        }
+        
+        return false;
     }
 }

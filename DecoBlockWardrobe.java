@@ -193,79 +193,40 @@ public class DecoBlockWardrobe extends Block
 		return false;
 	}
 	
-	public void SetRenderBoundsRotatedAboutJToFacing(RenderBlocks render, float minX, float minY, float minZ, float maxX, float maxY, float maxZ, int direction)
-	{
-		float rotatedMinX;
-		float rotatedMinZ;
-		float rotatedMaxX;
-		float rotatedMaxZ;
-		
-		if (direction == 4)
-		{
-			rotatedMinX = 1.0F - maxX;
-			rotatedMinZ = 1.0F - maxZ;
-			rotatedMaxX = 1.0F - minX;
-			rotatedMaxZ = 1.0F - minZ;
-		} 
-		else if (direction == 3)
-		{
-			rotatedMinX = minZ;
-			rotatedMinZ = minX;
-			rotatedMaxX = maxZ;
-			rotatedMaxZ = maxX;
-		} 
-		else if (direction == 2)
-		{
-			rotatedMinX = 1.0F - maxZ;
-			rotatedMinZ = 1.0F - maxX;
-			rotatedMaxX = 1.0F - minZ;
-			rotatedMaxZ = 1.0F - minX;
-		} 
-		else
-		{
-			rotatedMinX = minX;
-			rotatedMinZ = minZ;
-			rotatedMaxX = maxX;
-			rotatedMaxZ = maxZ;
-		}
-		
-		render.setRenderBounds((double) rotatedMinX, (double) minY, (double) rotatedMinZ, (double) rotatedMaxX, (double) maxY, (double) rotatedMaxZ);
-	}
-
 	public boolean RenderBlock(RenderBlocks render, int x, int y, int z)
 	{
 		int direction = GetFacing(render.blockAccess, x, y, z);
 		
 		// LEGS
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.025F, 0.0F, 0.025F, 0.15F, 1.85F, 0.15F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.025F, 0.0F, 0.025F, 0.15F, 1.85F, 0.15F, direction);
 		FCClientUtilsRender.RenderStandardBlockWithTexture(render, this, x, y, z, blockIcon);
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.025F, 0.0F, 0.85F, 0.15F, 1.85F, 0.975F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.025F, 0.0F, 0.85F, 0.15F, 1.85F, 0.975F, direction);
 		FCClientUtilsRender.RenderStandardBlockWithTexture(render, this, x, y, z, blockIcon);
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.85F, 0.0F, 0.025F, 0.975F, 1.85F, 0.15F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.85F, 0.0F, 0.025F, 0.975F, 1.85F, 0.15F, direction);
 		FCClientUtilsRender.RenderStandardBlockWithTexture(render, this, x, y, z, blockIcon);
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.85F, 0F, 0.85F, 0.975F, 1.85F, 0.975F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.85F, 0F, 0.85F, 0.975F, 1.85F, 0.975F, direction);
 		FCClientUtilsRender.RenderStandardBlockWithTexture(render, this, x, y, z, blockIcon);
 		
 		// SHELVES
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.1F, 0.2F, 0.1F, 0.9F, 0.35F, 0.9F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.1F, 0.2F, 0.1F, 0.9F, 0.35F, 0.9F, direction);
 		FCClientUtilsRender.RenderStandardBlockWithTexture(render, this, x, y, z, blockIcon);
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.1F, 0.55F, 0.1F, 0.9F, 0.65F, 0.9F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.1F, 0.55F, 0.1F, 0.9F, 0.65F, 0.9F, direction);
 		FCClientUtilsRender.RenderStandardBlockWithTexture(render, this, x, y, z, blockIcon);
 		
 		// SIDE: TOP
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.0F, 1.85F, 0.0F, 1.0F, 2.0F, 1.0F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.0F, 1.85F, 0.0F, 1.0F, 2.0F, 1.0F, direction);
 		FCClientUtilsRender.RenderStandardBlockWithTexture(render, this, x, y, z, blockIcon);
 		
 		// SIDE: LEFT
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.05F, 0.2F, 0.05F, 0.95F, 1.85F, 0.1F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.05F, 0.2F, 0.05F, 0.95F, 1.85F, 0.1F, direction);
 		FCClientUtilsRender.RenderStandardBlockWithTexture(render, this, x, y, z, blockIcon);
 		
 		// SIDE: RIGHT
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.05F, 0.2F, 0.05F, 0.1F, 1.85F, 0.95F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.05F, 0.2F, 0.05F, 0.1F, 1.85F, 0.95F, direction);
 		FCClientUtilsRender.RenderStandardBlockWithTexture(render, this, x, y, z, blockIcon);
 		
 		// SIDE: BACK
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.05F, 0.2F, 0.9F, 0.95F, 1.85F, 0.95F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.05F, 0.2F, 0.9F, 0.95F, 1.85F, 0.95F, direction);
 		FCClientUtilsRender.RenderStandardBlockWithTexture(render, this, x, y, z, blockIcon);
 		
 		return true;

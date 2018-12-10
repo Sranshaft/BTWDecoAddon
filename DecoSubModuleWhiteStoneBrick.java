@@ -5,10 +5,13 @@ public class DecoSubModuleWhiteStoneBrick implements DecoISubModule
 	public static Block decoBlockWhiteStoneBrick;
 	public static Block decoBlockWhiteStoneBrickMouldingAndDecorative;
 	public static Block decoBlockWhiteStoneBrickSidingAndCorner;
-	public static Block decoBlockWhiteStoneBrickSlab;
-	public static Block decoBlockWhiteStoneBrickSlabTop;
+	public static DecoBlockSlab decoBlockWhiteStoneBrickSlab;
+	public static DecoBlockSlab decoBlockWhiteStoneBrickSlabTop;
 	public static Block decoBlockWhiteStoneBrickStairs;
 	public static Block decoBlockWhiteStoneBrickWall;
+	
+	public static Item decoItemWhiteStoneBrickSlab;
+	public static Item decoItemWhiteStoneBrickSlabTop;
 	
 	public static final int decoBlockWhiteStoneBrickID = DecoAddonManager.getBlockID("decoBlockWhiteStoneBrickID");
 	public static final int decoBlockWhiteStoneBrickMouldingAndDecorativeID = DecoAddonManager.getBlockID("decoBlockWhiteStoneBrickMouldingAndDecorativeID");
@@ -24,11 +27,16 @@ public class DecoSubModuleWhiteStoneBrick implements DecoISubModule
 		
 		this.decoBlockWhiteStoneBrick = new DecoBlockStoneBrick(this.decoBlockWhiteStoneBrickID, "decoBlockWhiteStoneBrick", "White Stone Brick", 2.0F, 10.0F);
 		this.decoBlockWhiteStoneBrickSlab = new DecoBlockSlab(this.decoBlockWhiteStoneBrickSlabID, this.decoBlockWhiteStoneBrick, false, 
-				this.decoBlockWhiteStoneBrickSlabID, this.decoBlockWhiteStoneBrickSlabTopID);
+				this.decoBlockWhiteStoneBrickSlab, this.decoBlockWhiteStoneBrickSlabTop);
 		this.decoBlockWhiteStoneBrickSlabTop = new DecoBlockSlab(this.decoBlockWhiteStoneBrickSlabTopID, this.decoBlockWhiteStoneBrick, true, 
-				this.decoBlockWhiteStoneBrickSlabID, this.decoBlockWhiteStoneBrickSlabTopID);
+				this.decoBlockWhiteStoneBrickSlab, this.decoBlockWhiteStoneBrickSlabTop);
 		this.decoBlockWhiteStoneBrickStairs = new DecoBlockStair(this.decoBlockWhiteStoneBrickStairsID, this.decoBlockWhiteStoneBrick, 0);
 		this.decoBlockWhiteStoneBrickWall = new DecoBlockWall(this.decoBlockWhiteStoneBrickWallID, this.decoBlockWhiteStoneBrick);
+		
+		this.decoItemWhiteStoneBrickSlab = new DecoItemSlab(this.decoBlockWhiteStoneBrickSlabID - 256, 
+				this.decoBlockWhiteStoneBrickSlab, this.decoBlockWhiteStoneBrickSlabTop, false).setUnlocalizedName(this.decoBlockWhiteStoneBrick.getUnlocalizedName() + ".slab");
+		this.decoItemWhiteStoneBrickSlabTop = new DecoItemSlab(this.decoBlockWhiteStoneBrickSlabTopID - 256, 
+				this.decoBlockWhiteStoneBrickSlab, this.decoBlockWhiteStoneBrickSlabTop, true).setUnlocalizedName(this.decoBlockWhiteStoneBrick.getUnlocalizedName() + ".slab");
 		
 		this.registerBlocks();
 		this.addRecipes();
@@ -42,6 +50,9 @@ public class DecoSubModuleWhiteStoneBrick implements DecoISubModule
 		DecoAddonManager.register(this.decoBlockWhiteStoneBrickSlabTop, "White Stone Brick Slab");
 		DecoAddonManager.register(this.decoBlockWhiteStoneBrickStairs, "White Stone Brick Stairs");
 		DecoAddonManager.register(this.decoBlockWhiteStoneBrickWall, "White Stone Brick Wall");
+		
+		DecoAddonManager.replaceItem(this.decoBlockWhiteStoneBrickSlabID, decoItemWhiteStoneBrickSlab);
+		DecoAddonManager.replaceItem(this.decoBlockWhiteStoneBrickSlabTopID, decoItemWhiteStoneBrickSlabTop);
 	}
 	
 	public void addRecipes()

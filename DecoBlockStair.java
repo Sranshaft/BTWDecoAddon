@@ -12,7 +12,7 @@ public class DecoBlockStair  extends FCBlockStairs
 	
 	public DecoBlockStair(int id, Block parentBlock, int metadata)
 	{
-		this(id, parentBlock, "", 0);
+		this(id, parentBlock, "", metadata);
 	}
 	
 	public DecoBlockStair(int id, Block parentBlock, String subType, int metadata)
@@ -22,7 +22,7 @@ public class DecoBlockStair  extends FCBlockStairs
 		if (subType.isEmpty())
 			this.setUnlocalizedName(parentBlock.getUnlocalizedName2() + ".stairs");
 		else
-			this.setUnlocalizedName(parentBlock.getUnlocalizedName2() + "." + subType + ".stairs");
+			this.setUnlocalizedName(parentBlock.getUnlocalizedName2() + ".stairs." + subType);
 		
 		this.setHardness(parentBlock.blockHardness);
         this.setResistance(parentBlock.blockResistance / 3.0F);

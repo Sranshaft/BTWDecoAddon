@@ -594,15 +594,16 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
         }
         
         /** ADDED BY DECO ADDON MOD */
-        this.updateZoom();
+        if (DecoAddonManager.getConfigOption("enableToolSpyglass"))
+        	this.updateZoom();
     }
     
     /** ADDED BY DECO ADDON MOD */
     public void updateZoom()
     {
-    	boolean holdingSpyglass = (this.isUsingItem() && this.getItemInUse().itemID == DecoModuleEquipment.decoSubModuleTools.decoItemSpyglassID);
+    	boolean isHoldingSpyglass = (this.isUsingItem() && this.getItemInUse().itemID == DecoModuleEquipment.decoSubModuleToolSpyglass.decoItemSpyglassID);
     		
-    	if (!holdingSpyglass)
+    	if (!isHoldingSpyglass)
     	{
     		EntityPlayerSP.zoomProgress = 1.0D;
     		EntityPlayerSP.prevZoomProgress = 1.0D;

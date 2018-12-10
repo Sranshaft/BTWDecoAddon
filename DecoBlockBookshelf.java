@@ -3,7 +3,7 @@ package net.minecraft.src;
 import java.util.List;
 import java.util.Random;
 
-public class DecoBlockBookshelf extends Block implements DecoIBlock
+public class DecoBlockBookshelf extends Block implements DecoIBlockWithMetadata
 {
 	private static String[] m_BookshelfSides = new String[] { "bookshelf", "bookshelf_spruce", "bookshelf_birch", "bookshelf_jungle", "bookshelf_bloodwood", "bookshelf_ebonwood", "bookshelf_ironwood" };
 	private Icon[] m_IconByMetadataArray;

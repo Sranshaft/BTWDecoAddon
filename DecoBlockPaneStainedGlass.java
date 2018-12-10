@@ -1,23 +1,38 @@
 package net.minecraft.src;
 
 import java.util.List;
+import java.util.Random;
 
-public class DecoBlockPaneStainedGlass extends FCBlockPane
+public class DecoBlockPaneStainedGlass extends DecoBlockPane
 {
-	public static final String[] COLOUR_TYPES = new String[] { "black", "red", "green", "brown", "blue", "purple", "cyan", "silver", "grey", "pink", "lime", "yellow", "lightBlue", "magenta", "orange", "white" };
-	public static final String[] COLOUR_NAMES = new String[] { "Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Silver", "Grey", "Pink", "Lime", "Yellow", "Light Blue", "Magenta", "Orange", "White" };
-	
-	private Icon[] m_IconByMetadataArray = new Icon[16];
-	
 	public DecoBlockPaneStainedGlass(int id)
 	{
-		super(id, "decoBlockPaneStainedGlass_face", "decoBlockPaneStainedGlass_side", Material.glass, false);
-		setUnlocalizedName("decoBlockPaneStainedGlass");
-		setHardness(0.3F);
-		setResistance(0.5F);
-		setStepSound(soundGlassFootstep);
+		super(id, Material.glass);
 		
-		DecoAddonManager.register(this, this.COLOUR_TYPES, this.COLOUR_NAMES, " Stained Glass Pane");
+		this.setUnlocalizedName("decoBlockPaneStainedGlass");
+		this.setHardness(0.3F);
+		this.setResistance(0.5F);
+		this.setStepSound(soundGlassFootstep);
+		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.canOverrideConnection = true;
+		
+		DecoAddonManager.register(this, DecoUtilsStrings.COLOUR_TAGS, DecoUtilsStrings.COLOUR_NAMES, " Stained Glass Pane");
+	}
+	
+	/**
+	 * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
+	 */
+	public int idPicked(World world, int x, int y, int z)
+	{
+		return world.getBlockId(x, y, z);
+	}
+
+	/**
+	 * Get the block's damage value (for use with pick block).
+	 */
+	public int getDamageValue(World world, int x, int y, int z)
+	{
+		return world.getBlockMetadata(x, y, z);
 	}
 	
 	public int damageDropped(int metadata)
@@ -25,9 +40,22 @@ public class DecoBlockPaneStainedGlass extends FCBlockPane
 		return metadata;
 	}
 	
-	public int getRenderBlockPass()
+	public int idDropped(int metadata, Random random, int fortune)
 	{
-		return 1;
+		if (!DecoAddonManager.getConfigOption("enableGlassShards")) return 0;
+		return DecoModuleTweaks.decoItemGlassShard.itemID;
+	}
+	
+	public int quantityDropped(Random random)
+	{
+		if (!DecoAddonManager.getConfigOption("enableGlassShards")) return 0;
+		return random.nextInt(3);
+	}
+	
+	public int quantityDroppedWithBonus(int fortune, Random random)
+	{
+		if (!DecoAddonManager.getConfigOption("enableGlassShards")) return 0;
+		return Math.min(4, this.quantityDropped(random) + random.nextInt(fortune + 1));
 	}
 	
 	//CLIENT ONLY
@@ -39,53 +67,29 @@ public class DecoBlockPaneStainedGlass extends FCBlockPane
 	 */
 	public void registerIcons(IconRegister register) 
 	{
-		super.registerIcons(register);
+		this.m_IconByMetadataArrayFaces = new Icon[DecoUtilsStrings.COLOUR_TAGS.length];
+		this.m_IconByMetadataArraySides = new Icon[DecoUtilsStrings.COLOUR_TAGS.length];
 		
-		for (int index = 0; index < this.COLOUR_TYPES.length; index++)
+		for (int index = 0; index < DecoUtilsStrings.COLOUR_TAGS.length; index++)
 		{
-			this.m_IconByMetadataArray[index] = register.registerIcon("decoBlockStainedGlass_" + this.COLOUR_TYPES[index]);
-		}
-		
-		if (this.COLOUR_TYPES.length < 16)
-		{
-			for (int index = this.COLOUR_TYPES.length; index < 16; index++)
-				this.m_IconByMetadataArray[index] = this.blockIcon;
+			this.m_IconByMetadataArrayFaces[index] = register.registerIcon("decoBlockPaneStainedGlass_" + DecoUtilsStrings.COLOUR_TAGS[index] + "_face");
+			this.m_IconByMetadataArraySides[index] = register.registerIcon("decoBlockPaneStainedGlass_" + DecoUtilsStrings.COLOUR_TAGS[index] + "_side");
 		}
 	}
-
+	
 	/**
-	 * From the specified side and block metadata retrieves the blocks texture.
-	 * Args: side, metadata
+	 * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
 	 */
-	public Icon getIcon(int side, int metadata)
+	public void getSubBlocks(int var1, CreativeTabs var2, List var3)
 	{
-		return this.m_IconByMetadataArray[metadata];
+		for (int index = 0; index < DecoUtilsStrings.COLOUR_TAGS.length; index++)
+		{
+			var3.add(new ItemStack(var1, 1, index));
+		}
 	}
 	
-	 /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-     */
-    public void getSubBlocks(int var1, CreativeTabs var2, List var3)
-    {
-    	for (int index = 0; index < this.COLOUR_TYPES.length; index++)
-    	{
-    		var3.add(new ItemStack(var1, 1, index));
-    	}
-    }
-	
-	/**
-     * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
-     */
-    public int idPicked(World World, int x, int y, int z)
-    {
-        return World.getBlockId(x, y, z);
-    }
-
-    /**
-     * Get the block's damage value (for use with pick block).
-     */
-    public int getDamageValue(World World, int x, int y, int z)
-    {
-        return World.getBlockMetadata(x, y, z);
-    }
+	public int getRenderBlockPass()
+	{
+		return 1;
+	}
 }

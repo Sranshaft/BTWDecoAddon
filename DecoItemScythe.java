@@ -3,7 +3,7 @@ package net.minecraft.src;
 public class DecoItemScythe extends ItemTool
 {
 	private static Block[] m_BlockEffectiveAgainst = new Block[] { Block.leaves, Block.tallGrass, Block.deadBush, Block.plantRed, Block.plantYellow, Block.vine, 
-			DecoSubModuleFlowers.decoBlockFlowerExtended, DecoSubModuleFlowers.decoBlockFlowerTulip, DecoModuleWorld.decoBlockFoliage, DecoModuleWorld.decoBlockWildgrass };
+			DecoSubModuleFlower.decoBlockFlowerExtended, DecoSubModuleFlower.decoBlockFlowerTulip, DecoModuleWorld.decoBlockFoliage, DecoModuleWorld.decoBlockWildgrass };
 	
 	public static Material[] m_MaterialEffectiveAgainst = new Material[] { Material.leaves, Material.plants, Material.vine };
 	

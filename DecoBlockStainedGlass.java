@@ -16,8 +16,6 @@ public class DecoBlockStainedGlass extends DecoBlockGlass
 		this.setResistance(0.5F);
 		this.setStepSound(Block.soundGlassFootstep);
 		this.setCreativeTab(CreativeTabs.tabBlock);
-		
-		this.blockMaterial = Material.glass;
 
 		DecoAddonManager.register(this, DecoUtilsStrings.COLOUR_TAGS, DecoUtilsStrings.COLOUR_NAMES, " Stained Glass");
 	}
@@ -36,17 +34,6 @@ public class DecoBlockStainedGlass extends DecoBlockGlass
 	public int getDamageValue(World world, int x, int y, int z)
 	{
 		return world.getBlockMetadata(x, y, z);
-	}
-
-	/**
-	 * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-	 */
-	public void getSubBlocks(int var1, CreativeTabs var2, List var3)
-	{
-		for (int index = 0; index < DecoUtilsStrings.COLOUR_TAGS.length; index++)
-		{
-			var3.add(new ItemStack(var1, 1, index));
-		}
 	}
 
 	/**
@@ -73,7 +60,7 @@ public class DecoBlockStainedGlass extends DecoBlockGlass
 	 */
 	public Icon getIcon(int side, int metadata) 
 	{
-		return this.m_IconByMetadataArray[metadata];
+		if (metadata > this.m_IconByMetadataArray.length) return this.m_IconByMetadataArray[0]; else return this.m_IconByMetadataArray[metadata];
 	}
 
 	/**
@@ -87,11 +74,16 @@ public class DecoBlockStainedGlass extends DecoBlockGlass
 		{
 			this.m_IconByMetadataArray[index] = register.registerIcon("decoBlockStainedGlass_" + DecoUtilsStrings.COLOUR_TAGS[index]);
 		}
+	}
 
-		if (DecoUtilsStrings.COLOUR_TAGS.length < 16)
+	/**
+	 * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+	 */
+	public void getSubBlocks(int var1, CreativeTabs var2, List var3)
+	{
+		for (int index = 0; index < DecoUtilsStrings.COLOUR_TAGS.length; index++)
 		{
-			for (int index = DecoUtilsStrings.COLOUR_TAGS.length; index < 16; index++)
-				this.m_IconByMetadataArray[index] = this.blockIcon;
+			var3.add(new ItemStack(var1, 1, index));
 		}
 	}
 }

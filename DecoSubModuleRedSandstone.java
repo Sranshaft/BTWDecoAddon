@@ -4,12 +4,15 @@ public class DecoSubModuleRedSandstone implements DecoISubModule
 {
 	public static Block decoBlockRedSand;
 	public static Block decoBlockRedSandstone;
-	public static Block decoBlockRedSandstoneSlab;
-	public static Block decoBlockRedSandstoneSlabTop;
+	public static DecoBlockSlab decoBlockRedSandstoneSlab;
+	public static DecoBlockSlab decoBlockRedSandstoneSlabTop;
 	public static Block decoBlockRedSandstoneStairs;
 	public static Block decoBlockRedSandstoneWall;
 	
 	public static Item decoItemPileRedSand;
+	
+	public static Item decoItemRedSandstoneSlab;
+	public static Item decoItemRedSandstoneSlabTop;
 	
 	public static final int decoBlockRedSandID = DecoAddonManager.getBlockID("decoBlockRedSandID");
 	public static final int decoBlockRedSandstoneID = DecoAddonManager.getBlockID("decoBlockRedSandstoneID");
@@ -27,13 +30,18 @@ public class DecoSubModuleRedSandstone implements DecoISubModule
 		this.decoBlockRedSand = new DecoBlockRedSand(this.decoBlockRedSandID);
 		this.decoBlockRedSandstone = new DecoBlockRedSandstone(this.decoBlockRedSandstoneID);
 		this.decoBlockRedSandstoneSlab = new DecoBlockSlab(this.decoBlockRedSandstoneSlabID, this.decoBlockRedSandstone, false, 
-				this.decoBlockRedSandstoneSlabID, this.decoBlockRedSandstoneSlabTopID);
+				this.decoBlockRedSandstoneSlab, this.decoBlockRedSandstoneSlabTop);
 		this.decoBlockRedSandstoneSlabTop = new DecoBlockSlab(this.decoBlockRedSandstoneSlabTopID, this.decoBlockRedSandstone, true, 
-				this.decoBlockRedSandstoneSlabID, this.decoBlockRedSandstoneSlabTopID);
+				this.decoBlockRedSandstoneSlab, this.decoBlockRedSandstoneSlabTop);
 		this.decoBlockRedSandstoneStairs = new DecoBlockStair(this.decoBlockRedSandstoneStairsID, this.decoBlockRedSandstone, 0);
 		this.decoBlockRedSandstoneWall = new DecoBlockWall(this.decoBlockRedSandstoneWallID, this.decoBlockRedSandstone);
 		
 		this.decoItemPileRedSand = new DecoItemPileRedSand(this.decoItemPileRedSandID);
+		
+		this.decoItemRedSandstoneSlab = new DecoItemSlab(this.decoBlockRedSandstoneSlabID - 256, 
+				this.decoBlockRedSandstoneSlab, this.decoBlockRedSandstoneSlabTop, false).setUnlocalizedName(this.decoBlockRedSandstone.getUnlocalizedName() + ".slab");
+		this.decoItemRedSandstoneSlabTop = new DecoItemSlab(this.decoBlockRedSandstoneSlabTopID - 256, 
+				this.decoBlockRedSandstoneSlab, this.decoBlockRedSandstoneSlabTop, true).setUnlocalizedName(this.decoBlockRedSandstone.getUnlocalizedName() + ".slab");
 		
 		this.registerBlocks();
 		this.addRecipes();
@@ -50,6 +58,9 @@ public class DecoSubModuleRedSandstone implements DecoISubModule
 		DecoAddonManager.register(this.decoBlockRedSandstoneWall, "Red Sandstone Wall");
 		
 		DecoAddonManager.register(this.decoItemPileRedSand, "Pile of Red Sand");
+		
+		DecoAddonManager.replaceItem(this.decoBlockRedSandstoneSlabID, decoItemRedSandstoneSlab);
+		DecoAddonManager.replaceItem(this.decoBlockRedSandstoneSlabTopID, decoItemRedSandstoneSlabTop);
 	}
 
 	public void addRecipes() 

@@ -5,29 +5,15 @@ public class DecoBlockThatch extends Block
 	private Icon m_IconSide;
 	private Icon m_IconTop;
 	
-	public DecoBlockThatch(int id, Material material)
+	public DecoBlockThatch(int id)
 	{
-		super(id, material);
-		setUnlocalizedName("decoBlockThatch");
-		setHardness(0.5F);
-		setResistance(0.2F);
-		setStepSound(Block.soundGrassFootstep);
-		setCreativeTab(CreativeTabs.tabBlock);
-	}
-	
-	public boolean isOpaqueCube()
-	{
-		return true;
-	}
-	
-	public boolean renderAsNormalBlock()
-	{
-		return true;
-	}
-	
-	public boolean canDropFromExplosion(Explosion var1)
-	{
-		return false;
+		super(id, Material.grass);
+		
+		this.setUnlocalizedName("decoBlockThatch");
+		this.setHardness(0.5F);
+		this.setResistance(0.2F);
+		this.setStepSound(Block.soundGrassFootstep);
+		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 	
 	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion exp)
@@ -51,9 +37,9 @@ public class DecoBlockThatch extends Block
 		return access.getBlockMetadata(x, y, z);
 	}
 	
-	public void SetFacing(World world, int x, int y, int z, int facing)
+	public void SetFacing(World world, int x, int y, int z, int metadata)
 	{
-		world.setBlockMetadataWithNotify(x, y, z, facing);
+		world.setBlockMetadataWithNotify(x, y, z, metadata);
 	}
 	
 	public int GetFacingFromMetadata(int metadata)
@@ -61,46 +47,46 @@ public class DecoBlockThatch extends Block
 		return metadata;
 	}
 	
-	public int SetFacingInMetadata(int var1, int var2)
+	public int SetFacingInMetadata(int side, int metadata)
 	{
-		return var2;
+		return metadata;
 	}
 	
-	public boolean CanRotateOnTurntable(IBlockAccess access, int x, int y, int z)
+	public boolean CanRotateOnTurntable(IBlockAccess bAccess, int x, int y, int z)
 	{
-		return access.getBlockMetadata(x, y, z) != 0;
+		return bAccess.getBlockMetadata(x, y, z) != 0;
 	}
 	
-	public boolean CanTransmitRotationHorizontallyOnTurntable(IBlockAccess access, int x, int y, int z)
+	public boolean CanTransmitRotationHorizontallyOnTurntable(IBlockAccess bAccess, int x, int y, int z)
 	{
 		return true;
 	}
 	
-	public boolean CanTransmitRotationVerticallyOnTurntable(IBlockAccess access, int x, int y, int z)
+	public boolean CanTransmitRotationVerticallyOnTurntable(IBlockAccess bAccess, int x, int y, int z)
 	{
 		return true;
 	}
 	
-	public boolean RotateAroundJAxis(World world, int x, int y, int z, boolean var5)
+	public boolean RotateAroundJAxis(World world, int x, int y, int z, boolean useOpposite)
 	{
-		return FCUtilsMisc.StandardRotateAroundJ(this, world, x, y, z, var5);
+		return FCUtilsMisc.StandardRotateAroundJ(this, world, x, y, z, useOpposite);
 	}
 	
-	public int RotateMetadataAroundJAxis(int var1, boolean var2)
+	public int RotateMetadataAroundJAxis(int metadata, boolean useOpposite)
 	{
-		return FCUtilsMisc.StandardRotateMetadataAroundJ(this, var1, var2);
+		return FCUtilsMisc.StandardRotateMetadataAroundJ(this, metadata, useOpposite);
 	}
 	
-	public boolean ToggleFacing(World world, int x, int y, int z, boolean var5)
+	public boolean ToggleFacing(World world, int x, int y, int z, boolean useOpposite)
 	{
-		this.RotateAroundJAxis(world, x, y, z, var5);
+		this.RotateAroundJAxis(world, x, y, z, useOpposite);
 		return true;
 	}
 	
-	public int onBlockPlaced(World var1, int var2, int var3, int var4, int var5, float var6, float var7, float var8, int var9)
+	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
 	{
-		if (var5 < 2) return 0;
-		else if (var5 < 4) return 1;
+		if (side < 2) return 0;
+		else if (side < 4) return 1;
 		else return 2;
 	}
 	

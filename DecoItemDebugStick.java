@@ -2,6 +2,8 @@ package net.minecraft.src;
 
 public class DecoItemDebugStick extends Item
 {
+	private static boolean hasUsed = false;
+	
 	public DecoItemDebugStick(int id)
 	{
 		super(id);
@@ -17,13 +19,18 @@ public class DecoItemDebugStick extends Item
      */
     public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
     {
-    	player.addChatMessage("======================================");
-        player.addChatMessage("Block ID: " + world.getBlockId(x, y, z));
-        player.addChatMessage("Metadata: " + world.getBlockMetadata(x, y, z));
-        player.addChatMessage("Side: " + side);
-        player.addChatMessage("Position: " + x + ", " + y + ", " + z);
-        player.addChatMessage("======================================");
-		
-		return true;
+    	if (!this.hasUsed)
+    	{
+    		this.hasUsed = true;
+    		
+	    	player.addChatMessage("=================================================");
+	        player.addChatMessage("Block ID: " + world.getBlockId(x, y, z) + " | Metadata: " + world.getBlockMetadata(x, y, z) + " | Side: " + side + " | Position: " + x + ", " + y + ", " + z);
+	        player.addChatMessage("=================================================");
+	        
+			return true;
+    	}
+    	else this.hasUsed = false;
+    	
+    	return false;
     }
 }

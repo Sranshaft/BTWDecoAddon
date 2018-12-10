@@ -2,8 +2,8 @@ package net.minecraft.src;
 
 public class DecoUtilsStrings 
 {
-	public static final String[] COLOUR_TAGS = new String[] { "black", "red", "green", "brown", "blue", "purple", "cyan", "silver", "grey", "pink", "lime", "yellow", "lightBlue", "magenta", "orange", "white" };
-	public static final String[] COLOUR_NAMES = new String[] { "Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Silver", "Grey", "Pink", "Lime", "Yellow", "Light Blue", "Magenta", "Orange", "White" };
+	public static final String[] COLOUR_TAGS = new String[] { "white", "orange", "magenta", "lightBlue", "yellow", "lime", "pink", "grey", "silver", "cyan", "purple", "blue", "brown", "green", "red", "black" };
+	public static final String[] COLOUR_NAMES = new String[] { "White", "Orange", "Magenta", "Light Blue", "Yellow", "Lime", "Pink", "Grey", "Silver", "Cyan", "Purple", "Blue", "Brown", "Green", "Red", "Black" };
 	
 	public static final String[] DIRT_TAGS = new String[] { "normal", "coarse", "dried", "sandy" };
 	public static final String[] DIRT_NAMES = new String[] { "", "Coarse", "Dried", "Sandy" };
@@ -13,6 +13,11 @@ public class DecoUtilsStrings
 	
 	public static final String[] FLOWER_TULIP_TAGS = new String[] { "red", "pink", "orange", "white", "blue" };
 	public static final String[] FLOWER_TULIP_NAMES = new String[] { "Red", "Pink", "Orange", "White", "Blue" };
+	
+	public static final String[] LEAF_TAGS = new String[] { "oak", "spruce", "birch", "jungle", "bloodwood", "ebonwood", "ironwood" };
+	public static final String[] LEAF_NAMES = new String[] { "Oak", "Spruce", "Birch", "Jungle", "Bloodwood", "Ebonwood", "Ironwood" };
+	public static final String[] LEAF_TEXTURE_PATHS = new String[] { "leaves", "leaves_spruce", "leaves_birch", "leaves_jungle", "fcBlockLeavesBloodWood", "leaves_ebonwood", "leaves_ironwood" };
+	public static final String[] LEAF_OPAQUE_TEXTURE_PATHS = new String[] { "leaves_opaque", "leaves_spruce_opaque", "leaves_birch_opaque", "leaves_jungle_opaque", "leaves_bloodwood_opaque", "leaves_ebonwood_opaque", "leaves_ironwood_opaque" };
 	
 	public static final String[] STONE_BRICK_TAGS = new String[] { "normal", "chiseled", "cracked", "mossy", "pillar", "polished", "tiled", "large" };
 	public static final String[] STONE_BRICK_NAMES = new String[] { "", "Chiseled", "Cracked", "Mossy", "Pillared", "Polished", "Tiled", "Large" };
@@ -44,8 +49,7 @@ public class DecoUtilsStrings
 	public static final String[] TRUNK_SIDE_TEXTURE_PATHS = new String[] {"fcBlockTrunkOak", "fcBlockTrunkSpruce", "fcBlockTrunkJungle", "fcBlockTrunkBirch", "decoBlockTrunkEbonwood", "decoBlockTrunkIronwood" };
 	public static final String[] TRUNK_TOP_TEXTURE_PATHS = new String[] {"fcBlockTrunkTop", "trunk_top_spruce", "trunk_top_jungle", "trunk_top_birch", "trunk_top_ebonwood", "trunk_top_ironwood" };
 	
-	public static final String[] WOOD_TEXTURE_PATHS = new String[] { "wood", "wood_spruce", "wood_birch", "wood_jungle", "wood_bloodwood", "wood_ebonwood", "wood_ironwood" };
-	
 	public static final String[] WOOD_TAGS = new String[] { "oak", "spruce", "birch", "jungle", "bloodwood", "ebonwood", "ironwood" };
 	public static final String[] WOOD_NAMES = new String[] { "Oak", "Spruce", "Birch", "Jungle", "Bloodwood", "Ebonwood", "Ironwood" };
+	public static final String[] WOOD_TEXTURE_PATHS = new String[] { "wood", "wood_spruce", "wood_birch", "wood_jungle", "fcBlockPlanks_blood", "wood_ebonwood", "wood_ironwood" };
 }

@@ -65,15 +65,20 @@ public class DecoUtilsPacketHandler
 	
 	public static GuiContainer getAssociatedGUI(EntityClientPlayerMP player, int containerID)
     {
-		if (containerID == DecoModuleMechanical.decoCompostBinContainerID)
+		if (containerID == DecoModuleMechanical.decoSubModuleCompostBin.decoContainerCompostBinID)
         {
             DecoTileEntityCompostBin entity = new DecoTileEntityCompostBin();
             return new DecoClientGuiCompostBin(player.inventory, entity);
         }
-        else if (containerID == DecoModuleDecoration.decoCrateContainerID)
+        else if (containerID == DecoModuleDecoration.decoSubModuleCrates.decoContainerCrateID)
         {
         	DecoTileEntityCrate entity = new DecoTileEntityCrate();
         	return new DecoClientGuiCrate(player.inventory, entity);
+        }
+        else if (containerID == DecoModuleDecoration.decoSubModuleSack.decoContainerSackID)
+        {
+        	DecoTileEntitySack entity = new DecoTileEntitySack();
+        	return new DecoClientGuiSack(player.inventory, entity);
         }
         else
         	return null;

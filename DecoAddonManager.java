@@ -17,7 +17,8 @@ import java.io.FileInputStream;
 
 public class DecoAddonManager extends FCAddOn
 {
-	private static final boolean DEBUG_ADDON_LOAD = false;
+	public static final boolean DEBUG_ADDON_LOAD = true;
+	public static final boolean DEBUG_ADDON_SHOWREGISTER = false;
 	
 	private static final String m_fcVersionString = "4.ABCEEFABc";
 	private static final String m_decoAddonVersionString = "2.A1 Bodacious Beaver";
@@ -36,16 +37,13 @@ public class DecoAddonManager extends FCAddOn
 		FCAddOnHandler.LogMessage("[INFO]: BTW Deco Addon Version " + this.m_decoAddonVersionString + " Initializing...");
 		FCAddOnHandler.LogMessage("[INFO]: This mod was built on " + this.m_fcVersionString + "! Any other BTW version might cause conflicts, glitches or unwanted outcomes...");
 		
-		//DecoUtils.CheatBlockIDs();
-		
 		DecoUtils.LoadMapIDFix();
 		
 		this.readModConfigFile();
 		
 		for (Map.Entry<String, Boolean> entry : this.m_ModModuleOptions.entrySet())
 		{	
-			if (entry.getValue())
-				this.loadModule(entry.getKey());
+			if (entry.getValue()) this.loadModule(entry.getKey());
 		}
 		
 		FCAddOnHandler.LogMessage("[INFO]: BTW Deco Addon Initialization Complete.");
@@ -168,7 +166,7 @@ public class DecoAddonManager extends FCAddOn
 		
 		if (target instanceof Block)
 		{
-			Item.itemsList[((Block)target).blockID] = new ItemBlock(((Block) target).blockID - 256);
+			Item.itemsList[((Block)target).blockID] = new ItemBlock(((Block)target).blockID - 256);
 			m_ModBlockList.put(target, localizedName.trim());
 		}
 		else if (target instanceof Item)
@@ -228,15 +226,30 @@ public class DecoAddonManager extends FCAddOn
 		Item.m_bSuppressConflictWarnings = false;
 	}
 	
+	public static int replaceItem(int target, Item value)
+	{
+		Item.m_bSuppressConflictWarnings = true;
+		Item.itemsList[target] = value;
+		Item.m_bSuppressConflictWarnings = false;
+		
+		return 0;
+	}
+	
 	public static int replaceBlockID(Block target)
 	{
+		Item.m_bSuppressConflictWarnings = true;
 		Block.blocksList[target.blockID] = null;
+		Item.m_bSuppressConflictWarnings = false;
+		
 		return target.blockID;
 	}
 	
 	public static int replaceItemID(Item target)
 	{
+		Item.m_bSuppressConflictWarnings = true;
 		Item.itemsList[target.itemID] = null;
+		Item.m_bSuppressConflictWarnings = false;
+		
 		return target.itemID;
 	}
 	
@@ -289,7 +302,7 @@ public class DecoAddonManager extends FCAddOn
 			String var4 = block.getUnlocalizedName() + ".name";
 			var1.GetTranslateTable().put(var4, name);
 			
-			if (DEBUG_ADDON_LOAD) FCAddOnHandler.LogMessage("[INFO]: Adding block - " + var4 + " : " + name);
+			if (DEBUG_ADDON_SHOWREGISTER) FCAddOnHandler.LogMessage("[INFO]: Adding block - " + var4 + " : " + name);
 		}
 		catch (Exception ex) 
 		{
@@ -305,7 +318,7 @@ public class DecoAddonManager extends FCAddOn
 			String var4 = item.getUnlocalizedName() + ".name";
 			var1.GetTranslateTable().put(var4, name);
 			
-			if (DEBUG_ADDON_LOAD) FCAddOnHandler.LogMessage("[INFO]: Adding item - " + var4 + " : " + name);
+			if (DEBUG_ADDON_SHOWREGISTER) FCAddOnHandler.LogMessage("[INFO]: Adding item - " + var4 + " : " + name);
 		}
 		catch (Exception ex) 
 		{
@@ -321,7 +334,7 @@ public class DecoAddonManager extends FCAddOn
 			String var4 = Item.itemsList[item.itemID].getUnlocalizedName(item) + ".name";
 			var1.GetTranslateTable().put(var4, name);
 			
-			if (DEBUG_ADDON_LOAD) FCAddOnHandler.LogMessage("[INFO]: Adding itemstack - " + var4 + " : " + name);
+			if (DEBUG_ADDON_SHOWREGISTER) FCAddOnHandler.LogMessage("[INFO]: Adding itemstack - " + var4 + " : " + name);
 		}
 		catch (Exception ex) 
 		{

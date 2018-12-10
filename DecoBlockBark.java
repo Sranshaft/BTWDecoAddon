@@ -3,7 +3,7 @@ package net.minecraft.src;
 import java.util.List;
 import java.util.Random;
 
-public class DecoBlockBark extends Block implements DecoIBlock
+public class DecoBlockBark extends Block implements DecoIBlockWithMetadata
 {
 	private Icon[] m_IconByMetadataArray = new Icon[7];
 

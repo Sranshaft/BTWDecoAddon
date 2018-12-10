@@ -44,20 +44,18 @@ public class DecoBlockCabinet extends Block
 		return metadata;
 	}
 
-	public int onBlockPlaced(World world, int x, int y, int z, int direction, float hitX, float hitY, float hitZ, int metadata)
+	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
 	{
-		if (direction < 2)
-			direction = 2;
-		else
-			direction = FCUtilsMisc.GetOppositeFacing(direction);
+		if (side < 2) side = 2;
+		else side = FCUtilsMisc.GetOppositeFacing(side);
 
-		return SetFacingInMetadata(metadata, direction);
+		return this.SetFacingInMetadata(metadata, side);
 	}
 
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entity, ItemStack itemStack)
 	{
-		int var7 = FCUtilsMisc.ConvertOrientationToFlatBlockFacingReversed(entity);
-		this.SetFacing(world, x, y, z, var7);
+		int metadata = FCUtilsMisc.ConvertOrientationToFlatBlockFacingReversed(entity);
+		this.SetFacing(world, x, y, z, metadata);
 
 	}
 
@@ -201,87 +199,48 @@ public class DecoBlockCabinet extends Block
 		this.setBlockBounds(rotatedMinX, 0.0F, rotatedMinZ, rotatedMaxX, 1.0F, rotatedMaxZ);
 	}
 
-	public void SetRenderBoundsRotatedAboutJToFacing(RenderBlocks render, float minX, float minY, float minZ, float maxX, float maxY, float maxZ, int direction)
-	{
-		float rotatedMinX;
-		float rotatedMinZ;
-		float rotatedMaxX;
-		float rotatedMaxZ;
-
-		if (direction == 4)
-		{
-			rotatedMinX = 1.0F - maxX;
-			rotatedMinZ = 1.0F - maxZ;
-			rotatedMaxX = 1.0F - minX;
-			rotatedMaxZ = 1.0F - minZ;
-		} 
-		else if (direction == 3)
-		{
-			rotatedMinX = minZ;
-			rotatedMinZ = minX;
-			rotatedMaxX = maxZ;
-			rotatedMaxZ = maxX;
-		} 
-		else if (direction == 2)
-		{
-			rotatedMinX = 1.0F - maxZ;
-			rotatedMinZ = 1.0F - maxX;
-			rotatedMaxX = 1.0F - minZ;
-			rotatedMaxZ = 1.0F - minX;
-		} 
-		else
-		{
-			rotatedMinX = minX;
-			rotatedMinZ = minZ;
-			rotatedMaxX = maxX;
-			rotatedMaxZ = maxZ;
-		}
-
-		render.setRenderBounds((double) rotatedMinX, (double) minY, (double) rotatedMinZ, (double) rotatedMaxX, (double) maxY, (double) rotatedMaxZ);
-	}
-
 	public boolean RenderBlock(RenderBlocks render, int x, int y, int z)
 	{
 		int direction = GetFacing(render.blockAccess, x, y, z);
 
 		// LEG: NW
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.025F, 0.0F, 0.025F, 0.15F, 0.85F, 0.15F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.025F, 0.0F, 0.025F, 0.15F, 0.85F, 0.15F, direction);
 		render.renderStandardBlock(this, x, y, z);
 
 		// LEG: NE
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.025F, 0.0F, 0.85F, 0.15F, 0.85F, 0.975F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.025F, 0.0F, 0.85F, 0.15F, 0.85F, 0.975F, direction);
 		render.renderStandardBlock(this, x, y, z);
 
 		// LEG: SW
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.85F, 0.0F, 0.025F, 0.975F, 0.85F, 0.15F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.85F, 0.0F, 0.025F, 0.975F, 0.85F, 0.15F, direction);
 		render.renderStandardBlock(this, x, y, z);
 
 		// LEG: SE
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.85F, 0F, 0.85F, 0.975F, 0.85F, 0.975F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.85F, 0F, 0.85F, 0.975F, 0.85F, 0.975F, direction);
 		render.renderStandardBlock(this, x, y, z);
 
 		// SHELF: BOTTOM
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.1F, 0.3F, 0.1F, 0.9F, 0.4F, 0.9F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.1F, 0.3F, 0.1F, 0.9F, 0.4F, 0.9F, direction);
 		render.renderStandardBlock(this, x, y, z);
 
 		// SHELF: TOP
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.1F, 0.5F, 0.1F, 0.9F, 0.6F, 0.9F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.1F, 0.5F, 0.1F, 0.9F, 0.6F, 0.9F, direction);
 		render.renderStandardBlock(this, x, y, z);
 
 		// SIDE: BACK
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.05F, 0.3F, 0.05F, 0.95F, 0.85F, 0.1F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.05F, 0.3F, 0.05F, 0.95F, 0.85F, 0.1F, direction);
 		render.renderStandardBlock(this, x, y, z);
 
 		// SIDE: LEFT
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.05F, 0.3F, 0.05F, 0.1F, 0.85F, 0.95F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.05F, 0.3F, 0.05F, 0.1F, 0.85F, 0.95F, direction);
 		render.renderStandardBlock(this, x, y, z);
 
 		// SIDE: RIGHT
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.05F, 0.3F, 0.9F, 0.95F, 0.85F, 0.95F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.05F, 0.3F, 0.9F, 0.95F, 0.85F, 0.95F, direction);
 		render.renderStandardBlock(this, x, y, z);
 		
 		// TOP
-		SetRenderBoundsRotatedAboutJToFacing(render, 0.0F, 0.85F, 0.0F, 1.0F, 1.0F, 1.0F, direction);
+		DecoUtilsRender.setRenderBoundsRotatedAboutJToFacing(render, 0.0F, 0.85F, 0.0F, 1.0F, 1.0F, 1.0F, direction);
 		render.renderStandardBlock(this, x, y, z);
 
 		return true;
